@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.cortos.test.persistence;
 
+
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import javax.inject.Inject;
