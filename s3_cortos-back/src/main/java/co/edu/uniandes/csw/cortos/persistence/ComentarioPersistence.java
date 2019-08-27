@@ -26,6 +26,8 @@ public class ComentarioPersistence {
     private static final Logger LOGGER  = Logger.getLogger(ComentarioPersistence.class.getName());
     @PersistenceContext (unitName= "cortosPU")
     protected EntityManager em;
+    
+    
     public ComentarioEntity create( ComentarioEntity comentario){
         LOGGER.log(Level.INFO,"Creando un comentario nuevo");
         em.persist(comentario);

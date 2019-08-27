@@ -24,7 +24,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Santiago Vargas 
  */
 @RunWith(Arquillian.class)
-public class ComentarioTest {
+public class ComentarioPersistenceTest {
    
     @PersistenceContext
     EntityManager em;
