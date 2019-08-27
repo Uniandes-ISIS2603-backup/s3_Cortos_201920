@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 
 
@@ -29,23 +30,23 @@ public class ComentarioPersistence {
     
     
     public ComentarioEntity create( ComentarioEntity comentario){
-        LOGGER.log(Level.INFO,"Creando un comentario nuevo");
+        //LOGGER.log(Level.INFO,"Creando un comentario nuevo");
         em.persist(comentario);
-        LOGGER.log(Level.INFO,"Comentario creado");
+       // LOGGER.log(Level.INFO,"Comentario creado");
         return comentario;
     }
     
     public List<ComentarioEntity> findAll()
     {
         LOGGER.log(Level.INFO, "Consultando todos los comentarios");
-        Query q = em.createQuery("select u from ComentarioEntity u");
+        TypedQuery q = em.createQuery("select u from ComentarioEntity u", ComentarioEntity.class);
         return q.getResultList();
     }
     
     
     public ComentarioEntity find(Long comentId)
     {
-        LOGGER.log(Level.INFO, "Consultando el comentario con Id{0}",comentId);
+       LOGGER.log(Level.INFO, "Consultando el comentario con Id{0}",comentId);
         return em.find(ComentarioEntity.class,comentId);
     }
     
