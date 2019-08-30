@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -23,17 +24,17 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private String correo;
     
     private String contrasenia;
-    
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-    private Collection<CalificacionEntity> calificaciones;
+//    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+//    @PodamExclude
+//    private Collection<CalificacionEntity> calificaciones;
 
-    public Collection<CalificacionEntity> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
+//    public Collection<CalificacionEntity> getCalificaciones() {
+//        return calificaciones;
+//    }
+//
+//    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
+//        this.calificaciones = calificaciones;
+//    }
     
     public String getNombre()
     {

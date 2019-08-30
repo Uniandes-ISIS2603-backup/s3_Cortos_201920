@@ -74,7 +74,7 @@ public class ComentarioPersistenceTest {
     
     private void clearData()
     {
-        em.createQuery("delete from BookEntity");
+        em.createQuery("delete from ComentarioEntity");
     }
     
     private void insertData()
@@ -100,7 +100,7 @@ public class ComentarioPersistenceTest {
         Assert.assertEquals(comentario.getComentario(),entity.getComentario());
     }
      @Test
-    public void createBookTest() {
+    public void createComentarioTest() {
         PodamFactory factory = new PodamFactoryImpl();
         ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
         ComentarioEntity result = comentarioPersistence.create(newEntity);

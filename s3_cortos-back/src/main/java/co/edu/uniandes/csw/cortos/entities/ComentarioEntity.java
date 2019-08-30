@@ -28,18 +28,18 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     private Date fecha;
     
     
-    @PodamExclude
-    @ManyToOne (fetch=FetchType.EAGER)
-    
-    private CortoEntity corto;
-    
-    @PodamExclude
-    @ManyToOne (fetch=FetchType.EAGER)
-    private ClienteEntity cliente;
-    
-    @PodamExclude
-    @OneToOne (mappedBy="comentario",fetch=FetchType.EAGER)
-    private ComentarioEntity siguiente;
+//    @PodamExclude
+//    @ManyToOne (fetch=FetchType.EAGER)
+//    
+//    private CortoEntity corto;
+//    
+//    @PodamExclude
+//    @ManyToOne (fetch=FetchType.EAGER)
+//    private ClienteEntity cliente;
+//    
+//    @PodamExclude
+//    @OneToOne (mappedBy="comentario",fetch=FetchType.EAGER)
+//    private ComentarioEntity siguiente;
     /**
      * @return the comentario
      */
