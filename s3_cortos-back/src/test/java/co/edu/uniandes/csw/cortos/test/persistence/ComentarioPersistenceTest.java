@@ -74,7 +74,7 @@ public class ComentarioPersistenceTest {
     
     private void clearData()
     {
-        em.createQuery("delete from ComentarioEntity");
+        em.createQuery("delete from ComentarioEntity").executeUpdate();
     }
     
     private void insertData()

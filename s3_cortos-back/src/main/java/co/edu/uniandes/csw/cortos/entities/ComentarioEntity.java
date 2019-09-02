@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.cortos.entities;
 
+import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -13,7 +14,9 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -24,7 +27,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class ComentarioEntity extends BaseEntity implements Serializable{
     private String comentario;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+   @Temporal(TemporalType.DATE)
+   @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
     
