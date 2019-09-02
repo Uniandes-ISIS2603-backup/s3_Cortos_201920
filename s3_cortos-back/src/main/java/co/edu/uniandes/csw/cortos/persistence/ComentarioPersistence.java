@@ -30,9 +30,9 @@ public class ComentarioPersistence {
     
     
     public ComentarioEntity create( ComentarioEntity comentario){
-        //LOGGER.log(Level.INFO,"Creando un comentario nuevo");
+        LOGGER.log(Level.INFO,"Creando un comentario nuevo");
         em.persist(comentario);
-       // LOGGER.log(Level.INFO,"Comentario creado");
+        LOGGER.log(Level.INFO,"Comentario creado");
         return comentario;
     }
     
