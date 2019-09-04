@@ -5,9 +5,13 @@
  */
 package co.edu.uniandes.csw.cortos.entities;
 
+import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 /**
  *
  * @author Ingrith Barbosa
@@ -15,17 +19,30 @@ import javax.persistence.Entity;
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable 
 {
-  private int idFactura;
+  private int numeroFactura;
   private Double costoTotal;
+  @Temporal(TemporalType.DATE)
+  @PodamStrategyValue(DateStrategy.class)
   private Date fecha;
+  
+  public FacturaEntity()
+  {
+      
+  }
+  public FacturaEntity(int pNumeroFactura, Double pCostoTotal, Date pFecha)
+  {
+      this.numeroFactura= pNumeroFactura;
+      this.costoTotal= pCostoTotal;
+      this.fecha= pFecha;
+  }
   
   public int getIdFactura()
   {
-      return idFactura;
+      return numeroFactura;
   }
   public void setIdFactura(int pId)
   {
-      this.idFactura= pId;
+      this.numeroFactura= pId;
   }
   public Double getCostoTotal()
   {
