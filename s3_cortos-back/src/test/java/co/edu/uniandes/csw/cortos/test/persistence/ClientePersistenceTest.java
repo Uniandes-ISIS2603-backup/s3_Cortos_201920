@@ -145,4 +145,6 @@ public class ClientePersistenceTest
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+    
+    
 }
