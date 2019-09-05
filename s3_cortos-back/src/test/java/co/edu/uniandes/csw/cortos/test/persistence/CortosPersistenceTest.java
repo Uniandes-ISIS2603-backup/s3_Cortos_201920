@@ -42,8 +42,8 @@ public class CortosPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(CortoEntity.class)
-                .addClass(CortoPersistence.class)
+                .addPackage(CortoEntity.class.getPackage())
+                .addPackage(CortoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
