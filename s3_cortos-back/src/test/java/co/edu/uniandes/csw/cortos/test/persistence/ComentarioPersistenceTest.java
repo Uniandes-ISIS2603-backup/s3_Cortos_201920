@@ -45,8 +45,8 @@ public class ComentarioPersistenceTest {
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(ComentarioEntity.class)
-                .addClass(ComentarioPersistence.class)
+                .addPackage(ComentarioEntity.class.getPackage())
+                .addPackage(ComentarioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
