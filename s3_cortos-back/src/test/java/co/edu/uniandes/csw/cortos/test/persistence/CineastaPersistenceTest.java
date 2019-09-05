@@ -119,6 +119,7 @@ public class CineastaPersistenceTest {
     public void getCineastaTest() {
         CineastaEntity entity = data.get(0);
         CineastaEntity newEntity = cp.find(entity.getId());
+        
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
     }
@@ -143,6 +144,26 @@ public class CineastaPersistenceTest {
         CineastaEntity entity = data.get(0);
         cp.delete(entity.getId());
         CineastaEntity deleted = em.find(CineastaEntity.class, entity.getId());
+        
         Assert.assertNull(deleted);
     }
+
+    @Test
+    public void getCineastaByNameTest() {
+        CineastaEntity entity = data.get(0);
+        CineastaEntity newEntity = cp.findByName(entity.getNombre());
+        
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+    }
+    
+     @Test
+    public void getCineastaByCorreoTest() {
+        CineastaEntity entity = data.get(0);
+        CineastaEntity newEntity = cp.findByCorreo(entity.getCorreo());
+        
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
+    }
+    
 }
