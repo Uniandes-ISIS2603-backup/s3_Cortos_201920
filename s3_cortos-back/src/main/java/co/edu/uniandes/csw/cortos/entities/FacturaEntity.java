@@ -36,11 +36,11 @@ public class FacturaEntity extends BaseEntity implements Serializable
       this.fecha= pFecha;
   }
   
-  public int getIdFactura()
+  public int getNumeroFactura()
   {
       return numeroFactura;
   }
-  public void setIdFactura(int pId)
+  public void setNumeroFactura(int pId)
   {
       this.numeroFactura= pId;
   }
