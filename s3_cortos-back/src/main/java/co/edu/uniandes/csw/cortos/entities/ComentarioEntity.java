@@ -35,7 +35,9 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
 //    @PodamExclude
 //    @ManyToOne (fetch=FetchType.EAGER)
 //    
-//    private CortoEntity corto;
+     @PodamExclude
+     @ManyToOne
+     private CortoEntity corto;
 //    
 //    @PodamExclude
 //    @ManyToOne (fetch=FetchType.EAGER)

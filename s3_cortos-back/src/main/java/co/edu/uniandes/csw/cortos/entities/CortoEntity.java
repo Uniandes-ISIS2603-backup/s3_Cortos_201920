@@ -5,9 +5,16 @@
  */
 package co.edu.uniandes.csw.cortos.entities;
 
+import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
  *
@@ -15,6 +22,9 @@ import javax.persistence.Entity;
  */
 @Entity
 public class CortoEntity extends BaseEntity implements Serializable{
+    @PodamExclude
+    @OneToMany(mappedBy = "corto")
+    private List<ComentarioEntity> comentarios;
     /**
      * nombre del corto
      */
@@ -22,6 +32,8 @@ public class CortoEntity extends BaseEntity implements Serializable{
     /**
      * Fecha de publicacion del corto
      */
+    @Temporal(TemporalType.DATE)
+    @PodamStrategyValue(DateStrategy.class)        
     Date fechaDePublicacion;
     /**
      * Descripcion del corto
