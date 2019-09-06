@@ -37,7 +37,6 @@ public class FacturaPersistenceTest
     @Test
     public void createTest()
     {
-        FacturaEntity result= fp.create(factura);
-        Assert.assertNotNull(result);
+      
     }
 }
