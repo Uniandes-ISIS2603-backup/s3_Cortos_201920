@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;  
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -24,7 +25,8 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 
 @Entity
 public class ComentarioEntity extends BaseEntity implements Serializable{
-    private String cuerpo;
+    
+    private String comentario;
     
    @Temporal(TemporalType.DATE)
    @PodamStrategyValue(DateStrategy.class)
@@ -48,15 +50,17 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     /**
      * @return the comentario
      */
+   
     public String getComentario() {
-        return cuerpo;
+        return comentario;
     }
 
     /**
      * @param comentario the comentario to set
      */
     public void setComentario(String comentario) {
-        this.cuerpo = comentario;
+        
+        this.comentario = comentario;
     }
 
     /**
@@ -114,4 +118,10 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     public void setSiguiente(ComentarioEntity siguiente) {
         this.siguiente = siguiente;
     }
+
+    @Override
+    public String toString() {
+        return "ComentarioEntity{" + "comentario=" + comentario + ", fecha=" + fecha + '}';
+    }
+    
 }

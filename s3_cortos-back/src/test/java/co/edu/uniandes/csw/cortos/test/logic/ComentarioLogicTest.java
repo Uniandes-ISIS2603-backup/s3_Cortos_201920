@@ -23,6 +23,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.DataProviderStrategy;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -32,6 +33,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ComentarioLogicTest {
+   
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject 
@@ -87,9 +89,11 @@ public class ComentarioLogicTest {
     }
     
     @Test
-    public void createBookTest() throws BusinessLogicException
+    public void createComentarioTest() throws BusinessLogicException
     {
-        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+        ComentarioEntity newEntity = factory.manufacturePojoWithFullData(ComentarioEntity.class);
+        System.out.println("SantiagoVargasVega");
+        System.out.print(newEntity);
         ComentarioEntity result = comentarioLogic.createComentario(newEntity);
         Assert.assertNotNull(result);
         ComentarioEntity entity= em.find(ComentarioEntity.class,result.getId());
