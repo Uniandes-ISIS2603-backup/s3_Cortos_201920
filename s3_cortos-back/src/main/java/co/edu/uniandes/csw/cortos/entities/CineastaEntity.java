@@ -8,9 +8,12 @@ package co.edu.uniandes.csw.cortos.entities;
 import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -29,6 +32,10 @@ public class CineastaEntity extends BaseEntity implements Serializable {
         PROFESIONAL
     }
        
+    @PodamExclude
+    @OneToMany
+    private List<TemaEntity> temas;
+    
      /**
      * nombre cineasta
      */
@@ -181,6 +188,20 @@ public class CineastaEntity extends BaseEntity implements Serializable {
      */
     public void setRol(Tipo rol) {
         this.rol = rol;
+    }
+
+    /**
+     * @return the temas
+     */
+    public List<TemaEntity> getTemas() {
+        return temas;
+    }
+
+    /**
+     * @param temas the temas to set
+     */
+    public void setTemas(List<TemaEntity> temas) {
+        this.temas = temas;
     }
 
 }

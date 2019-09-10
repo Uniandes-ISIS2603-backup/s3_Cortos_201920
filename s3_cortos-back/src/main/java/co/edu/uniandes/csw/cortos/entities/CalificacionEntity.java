@@ -18,13 +18,13 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
     
-//    @PodamExclude
-//    @ManyToOne (fetch=FetchType.EAGER)
-//    private ClienteEntity cliente;
-//    
-//    @PodamExclude
-//    @ManyToOne (fetch=FetchType.EAGER)
-//    private CortoEntity corto;
+    @PodamExclude
+    @ManyToOne (fetch=FetchType.EAGER)
+    private ClienteEntity cliente;
+    
+    @PodamExclude
+    @ManyToOne (fetch=FetchType.EAGER)
+    private CortoEntity corto;
     
     
     private Integer puntaje;
@@ -43,19 +43,33 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
         this.puntaje = puntaje;
     }
 
-//    /**
-//     * @return the cliente
-//     */
-//    public ClienteEntity getCliente() {
-//        return cliente;
-//    }
-//
-//    /**
-//     * @param cliente the cliente to set
-//     */
-//    public void setCliente(ClienteEntity cliente) {
-//        this.cliente = cliente;
-//    }
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the corto
+     */
+    public CortoEntity getCorto() {
+        return corto;
+    }
+
+    /**
+     * @param corto the corto to set
+     */
+    public void setCorto(CortoEntity corto) {
+        this.corto = corto;
+    }
 
    
 }

@@ -25,6 +25,14 @@ public class CortoEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @OneToMany(mappedBy = "corto")
     private List<ComentarioEntity> comentarios;
+    
+    @PodamExclude
+    @OneToMany(mappedBy="corto")
+    private List<CalificacionEntity> calificaciones;
+    
+    @PodamExclude
+    @OneToMany(mappedBy="corto")
+    private List<TemaEntity> temas;
     /**
      * nombre del corto
      */
@@ -111,5 +119,47 @@ public class CortoEntity extends BaseEntity implements Serializable{
      */
     public void setCalificacionPromedio(Double calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
+    }
+
+    /**
+     * @return the comentarios
+     */
+    public List<ComentarioEntity> getComentarios() {
+        return comentarios;
+    }
+
+    /**
+     * @param comentarios the comentarios to set
+     */
+    public void setComentarios(List<ComentarioEntity> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    /**
+     * @return the calificaciones
+     */
+    public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    /**
+     * @param calificaciones the calificaciones to set
+     */
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    /**
+     * @return the temas
+     */
+    public List<TemaEntity> getTemas() {
+        return temas;
+    }
+
+    /**
+     * @param temas the temas to set
+     */
+    public void setTemas(List<TemaEntity> temas) {
+        this.temas = temas;
     }
 }

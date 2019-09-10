@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.cortos.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -24,17 +25,21 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private String correo;
     
     private String contrasenia;
-//    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-//    @PodamExclude
-//    private Collection<CalificacionEntity> calificaciones;
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @PodamExclude
+    private Collection<CalificacionEntity> calificaciones;
 
-//    public Collection<CalificacionEntity> getCalificaciones() {
-//        return calificaciones;
-//    }
-//
-//    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
-//        this.calificaciones = calificaciones;
-//    }
+    public Collection<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+    
+    @OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
+    @PodamExclude
+    private List<ComentarioEntity> comentarios;
     
     public String getNombre()
     {
@@ -64,5 +69,19 @@ public class ClienteEntity extends BaseEntity implements Serializable
     public void setContrasenia(String pContrasenia)
     {
         this.contrasenia = pContrasenia;
+    }
+
+    /**
+     * @return the comentarios
+     */
+    public List<ComentarioEntity> getComentarios() {
+        return comentarios;
+    }
+
+    /**
+     * @param comentarios the comentarios to set
+     */
+    public void setComentarios(List<ComentarioEntity> comentarios) {
+        this.comentarios = comentarios;
     }
 }

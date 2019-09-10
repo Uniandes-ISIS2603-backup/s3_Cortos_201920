@@ -8,13 +8,12 @@ package co.edu.uniandes.csw.cortos.entities;
 import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
-import javax.ejb.Stateless;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.TemporalType;  
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -25,39 +24,39 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 
 @Entity
 public class ComentarioEntity extends BaseEntity implements Serializable{
-    private String comentario;
+    private String cuerpo;
     
    @Temporal(TemporalType.DATE)
    @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
     
-//    @PodamExclude
-//    @ManyToOne (fetch=FetchType.EAGER)
-//    
+    
+
      @PodamExclude
      @ManyToOne
      private CortoEntity corto;
-//    
-//    @PodamExclude
-//    @ManyToOne (fetch=FetchType.EAGER)
-//    private ClienteEntity cliente;
-//    
-//    @PodamExclude
-//    @OneToOne (mappedBy="comentario",fetch=FetchType.EAGER)
-//    private ComentarioEntity siguiente;
+
+    @PodamExclude
+    @ManyToOne (fetch=FetchType.EAGER)
+    private ClienteEntity cliente;
+ 
+    
+    @PodamExclude
+    @OneToOne 
+    private ComentarioEntity siguiente;
     /**
      * @return the comentario
      */
     public String getComentario() {
-        return comentario;
+        return cuerpo;
     }
 
     /**
      * @param comentario the comentario to set
      */
     public void setComentario(String comentario) {
-        this.comentario = comentario;
+        this.cuerpo = comentario;
     }
 
     /**
@@ -72,5 +71,47 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the corto
+     */
+    public CortoEntity getCorto() {
+        return corto;
+    }
+
+    /**
+     * @param corto the corto to set
+     */
+    public void setCorto(CortoEntity corto) {
+        this.corto = corto;
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the siguiente
+     */
+    public ComentarioEntity getSiguiente() {
+        return siguiente;
+    }
+
+    /**
+     * @param siguiente the siguiente to set
+     */
+    public void setSiguiente(ComentarioEntity siguiente) {
+        this.siguiente = siguiente;
     }
 }

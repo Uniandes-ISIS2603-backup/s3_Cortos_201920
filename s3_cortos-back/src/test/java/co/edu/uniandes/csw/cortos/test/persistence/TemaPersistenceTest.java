@@ -45,8 +45,8 @@ public class TemaPersistenceTest {
       public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(TemaEntity.class)
-                .addClass(TemaPersistence.class)
+                .addPackage(TemaEntity.class.getPackage())
+                .addPackage(TemaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
