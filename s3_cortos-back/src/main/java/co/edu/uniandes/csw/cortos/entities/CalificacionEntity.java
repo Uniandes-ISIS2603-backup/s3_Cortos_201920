@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
@@ -26,7 +27,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
     @ManyToOne (fetch=FetchType.EAGER)
     private CortoEntity corto;
     
-    
+    @PodamIntValue(minValue=0, maxValue=5)
     private Integer puntaje;
 
     /**
@@ -69,6 +70,11 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      */
     public void setCorto(CortoEntity corto) {
         this.corto = corto;
+    }
+
+    @Override
+    public String toString() {
+        return "CalificacionEntity{" + "puntaje=" + puntaje + '}';
     }
 
    

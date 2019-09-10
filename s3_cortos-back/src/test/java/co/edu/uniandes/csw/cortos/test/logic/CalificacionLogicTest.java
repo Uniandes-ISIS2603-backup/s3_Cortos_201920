@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.csw.cortos.test.logic;
 
+import co.edu.uniandes.csw.cortos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.cortos.ejb.ComentarioLogic;
+import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +18,14 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import junit.framework.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import uk.co.jemos.podam.api.DataProviderStrategy;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -31,34 +33,34 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author Santiago Vargas Vega
  */
+
 @RunWith(Arquillian.class)
-public class ComentarioLogicTest {
-   
+public class CalificacionLogicTest {
+    
     private PodamFactory factory = new PodamFactoryImpl();
     
-    @Inject 
-    private ComentarioLogic comentarioLogic;
+    @Inject
+    private CalificacionLogic  calificacionLogic;
     
     @PersistenceContext
     private EntityManager em;
     
-     @Inject
+    @Inject
     private UserTransaction utx;
     
-    private List<ComentarioEntity> data = new ArrayList<ComentarioEntity>();
+    private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
     
-    
-     @Deployment
+    @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(ComentarioEntity.class.getPackage())
-                .addPackage(ComentarioLogic.class.getPackage())
-                .addPackage(ComentarioPersistence.class.getPackage())
+                .addPackage(CalificacionEntity.class.getPackage())
+                .addPackage(CalificacionLogic.class.getPackage())
+                .addPackage(CalificacionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
-    @Before
+     @Before
     public void configTest() {
         try {
             utx.begin();
@@ -76,43 +78,36 @@ public class ComentarioLogicTest {
     }
     
     private void clearData(){
-        em.createQuery("delete from ComentarioEntity").executeUpdate();
+        em.createQuery("delete from CalificacionEntity").executeUpdate();
     }
     
     private void insertData(){
         for(int i =0;i<3;i++)
         {
-            ComentarioEntity comentario= factory.manufacturePojo(ComentarioEntity.class);
+            CalificacionEntity comentario= factory.manufacturePojo(CalificacionEntity.class);
             em.persist(comentario);
             data.add(comentario);
         }
     }
     
     @Test
-    public void createComentarioTest() throws BusinessLogicException
+    public void createCalificacionTest() throws BusinessLogicException
     {
-        ComentarioEntity newEntity = factory.manufacturePojoWithFullData(ComentarioEntity.class);
-        ComentarioEntity result = comentarioLogic.createComentario(newEntity);
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        CalificacionEntity result = calificacionLogic.createCalificacion(newEntity);
         Assert.assertNotNull(result);
-        ComentarioEntity entity= em.find(ComentarioEntity.class,result.getId());
-        Assert.assertEquals(entity.getId(), newEntity.getId());
-        Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
-        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+        CalificacionEntity entity= em.find(CalificacionEntity.class,result.getId());
+        Assert.assertEquals(entity.getId(),newEntity.getId());
+        Assert.assertEquals(entity.getPuntaje(),newEntity.getPuntaje());
+        
     }
     
     @Test(expected = BusinessLogicException.class)
-    public void comentarioInvalidoPorContenido() throws BusinessLogicException
+    public void calificacionInvalidaporPuntaje() throws BusinessLogicException
     {
-        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
-        newEntity.setComentario("Hola marica");
-        comentarioLogic.createComentario(newEntity);
-    }
-    
-    @Test(expected = BusinessLogicException.class)
-    public void comentarioVacio()throws BusinessLogicException
-    {
-        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
-        newEntity.setComentario("");
-        comentarioLogic.createComentario(newEntity);
+        
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setPuntaje(-11);
+        calificacionLogic.createCalificacion(newEntity);
     }
 }
