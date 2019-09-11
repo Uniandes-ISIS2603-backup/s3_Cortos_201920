@@ -51,4 +51,40 @@ public class ClientePersistence
         ClienteEntity clienteEntity = em.find(ClienteEntity.class, clienteId);
         em.remove(clienteEntity);
     }
+    
+    public ClienteEntity findByName(String name) {
+        TypedQuery<ClienteEntity> query = em.createQuery("select e from CineastaEntity e where e.nombre = :name ", ClienteEntity.class);
+        query = query.setParameter("name", name);
+
+        List<ClienteEntity> sameName = query.getResultList();
+        ClienteEntity result;
+
+        if (sameName == null) {
+            result = null;
+        } else if (sameName.isEmpty()) {
+            result = null;
+        } else {
+            result = sameName.get(0);
+        }
+
+        return result;
+    }
+    
+    public ClienteEntity findByCorreo(String correo) {
+        TypedQuery<ClienteEntity> query = em.createQuery("select e from ClienteEntity e where e.correo = :correo ", ClienteEntity.class);
+        query = query.setParameter("correo", correo);
+
+        List<ClienteEntity> encontrado = query.getResultList();
+        ClienteEntity result;
+
+        if (encontrado == null) {
+            result = null;
+        } else if (encontrado.isEmpty()) {
+            result = null;
+        } else {
+            result = encontrado.get(0);
+        }
+
+        return result;
+    }
 }

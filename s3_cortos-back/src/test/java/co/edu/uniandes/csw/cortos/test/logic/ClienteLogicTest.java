@@ -90,7 +90,39 @@ public class ClienteLogicTest
          newEntity.setNombre(null);
          ClienteEntity result = clienteLogic.createCliente(newEntity);
      }
+     @Test(expected = BusinessLogicException.class)
+     public void createClientContraseniaNull()throws BusinessLogicException
+     {
+         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+         newEntity.setContrasenia(null);
+         ClienteEntity result = clienteLogic.createCliente(newEntity);
+     }
      
+     @Test(expected = BusinessLogicException.class)
+     public void createCorreoNombreNull()throws BusinessLogicException
+     {
+         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+         newEntity.setCorreo(null);
+         ClienteEntity result = clienteLogic.createCliente(newEntity);
+     }
      
-    
+     @Test
+     public void createClienteNombreRep()throws BusinessLogicException
+     {
+         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+         ClienteEntity newEntity2 = factory.manufacturePojo(ClienteEntity.class);
+         ClienteEntity result = clienteLogic.createCliente(newEntity2);
+         newEntity.setNombre(newEntity2.getNombre());
+         ClienteEntity result2 = clienteLogic.createCliente(newEntity);
+     }
+     
+     @Test(expected = BusinessLogicException.class)
+     public void createClienteCorreoRep()throws BusinessLogicException
+     {
+         ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+         ClienteEntity newEntity2 = factory.manufacturePojo(ClienteEntity.class);
+         ClienteEntity result = clienteLogic.createCliente(newEntity2);
+         newEntity.setCorreo(newEntity2.getCorreo());
+         ClienteEntity result2 = clienteLogic.createCliente(newEntity);
+     }
 }

@@ -23,9 +23,20 @@ public class ClienteLogic
     
     public ClienteEntity createCliente(ClienteEntity cliente) throws BusinessLogicException
     {
-        if(cliente.getNombre() == null)
-        {
-            throw new BusinessLogicException("El nombre no puede ser nulo");
+         if (persistence.findByName(cliente.getNombre()) != null) {
+            throw new BusinessLogicException("Ya existe un cliente con el nombre \"" + cliente.getNombre() + "\"");
+        }
+        if (persistence.findByCorreo(cliente.getCorreo()) != null) {
+            throw new BusinessLogicException("Ya existe un cliente con el correo \"" + cliente.getCorreo() + "\"");
+        }
+        if (cliente.getNombre() == null || cliente.getNombre().equals("")) {
+            throw new BusinessLogicException("El nombre no puede ser null ni vacio \"");
+        }
+        if (cliente.getContrasenia() == null || cliente.getContrasenia().equals("")) {
+            throw new BusinessLogicException("La contraseña no puede ser null ni vacio \"");
+        }
+        if (cliente.getCorreo() == null || cliente.getCorreo().equals("")) {
+            throw new BusinessLogicException("El correo no puede ser null ni vacio \"");
         }
         cliente = persistence.create(cliente);
         return cliente;
