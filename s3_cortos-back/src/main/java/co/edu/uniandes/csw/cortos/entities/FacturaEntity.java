@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamDoubleValue;
+import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 /**
  *
@@ -19,8 +21,12 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable 
 {
-  private int numeroFactura;
+  @PodamIntValue(minValue=1, maxValue= Integer.MAX_VALUE)
+  private Integer numeroFactura;
+  
+  @PodamDoubleValue(minValue=0.0, maxValue=Double.MAX_VALUE)
   private Double costoTotal;
+  
   @Temporal(TemporalType.DATE)
   @PodamStrategyValue(DateStrategy.class)
   private Date fecha;
@@ -29,20 +35,20 @@ public class FacturaEntity extends BaseEntity implements Serializable
   {
       
   }
-  public FacturaEntity(int pNumeroFactura, Double pCostoTotal, Date pFecha)
+  public FacturaEntity(Integer pNumeroFactura, Double pCostoTotal, Date pFecha)
   {
       this.numeroFactura= pNumeroFactura;
       this.costoTotal= pCostoTotal;
       this.fecha= pFecha;
   }
   
-  public int getNumeroFactura()
+  public Integer getNumeroFactura()
   {
       return numeroFactura;
   }
-  public void setNumeroFactura(int pId)
+  public void setNumeroFactura(Integer pNumeroFactura)
   {
-      this.numeroFactura= pId;
+      this.numeroFactura= pNumeroFactura;
   }
   public Double getCostoTotal()
   {

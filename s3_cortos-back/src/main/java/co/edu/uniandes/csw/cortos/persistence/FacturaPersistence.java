@@ -25,7 +25,7 @@ public class FacturaPersistence {
     /**
      * Crea una factura en la base de datos
      *
-     * @param facturantity objeto factura que se creará en la base de datos
+     * @param facturaEntity objeto factura que se creará en la base de datos
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public FacturaEntity create(FacturaEntity factura)
@@ -75,5 +75,23 @@ public class FacturaPersistence {
     public void delete(Long facturaId) {
         FacturaEntity facturaEntity = em.find(FacturaEntity.class, facturaId);
         em.remove(facturaEntity);
+    }
+    
+    public FacturaEntity findByNumber(Integer pNumeroFactura)
+    {
+        TypedQuery<FacturaEntity> query = em.createQuery("select e from FacturaEntity e where e.numeroFactura = :pNumeroFactura ", FacturaEntity.class);
+        query = query.setParameter("pNumeroFactura", pNumeroFactura);
+
+        List<FacturaEntity> sameNumber = query.getResultList();
+        FacturaEntity result;
+
+        if (sameNumber == null) {
+            result = null;
+        } else if (sameNumber.isEmpty()) {
+            result = null;
+        } else {
+            result = sameNumber.get(0);
+        }
+        return result;
     }
 }
