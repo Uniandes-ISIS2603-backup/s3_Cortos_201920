@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.cortos.test.persistence;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.persistence.FacturaPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -107,6 +108,18 @@ public class FacturaPersistenceTest
         Assert.assertEquals(result.getNumeroFactura(), nueva.getNumeroFactura());
         Assert.assertEquals(result.getFecha(), nueva.getFecha());
         Assert.assertEquals(result.getCostoTotal(), nueva.getCostoTotal());
+    }
+    /**
+     * Prueba para crear una nueva factura
+     */
+    @Test
+    public void constructorFacturaTest()
+    {
+        Date fecha= new Date();
+        FacturaEntity factura= new FacturaEntity(123456, 350.99, fecha);
+        Assert.assertEquals(123456, factura.getNumeroFactura(), 0 );
+        Assert.assertEquals(350.99, factura.getCostoTotal(), 0);
+        Assert.assertEquals(fecha, factura.getFecha());
     }
     /**
      * Prueba para consultar una factura.

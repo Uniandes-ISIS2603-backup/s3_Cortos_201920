@@ -131,4 +131,5 @@ public class FacturaLogicTest {
         newEntity.setCostoTotal(-2000.6);
         FacturaEntity result = facturaLogic.createFactura(newEntity);
     }
+    
 }
