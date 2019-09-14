@@ -178,6 +178,7 @@ public class FacturaPersistenceTest
 
         FacturaEntity resp = em.find(FacturaEntity.class, entity.getId());
 
+        Assert.assertEquals(newEntity.getId(), resp.getId());
         Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
         Assert.assertEquals(newEntity.getCostoTotal(), resp.getCostoTotal());
         Assert.assertEquals(newEntity.getNumeroFactura(), resp.getNumeroFactura());

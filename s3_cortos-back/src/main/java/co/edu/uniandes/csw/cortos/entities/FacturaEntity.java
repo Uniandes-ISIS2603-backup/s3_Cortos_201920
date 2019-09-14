@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.cortos.entities;
 
-import co.edu.uniandes.csw.bookstore.podam.DateStrategy;
+import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class FacturaEntity extends BaseEntity implements Serializable
   
   public FacturaEntity()
   {
-      
+      //Constructor vacío por clase serializable
   }
   public FacturaEntity(Integer pNumeroFactura, Double pCostoTotal, Date pFecha)
   {
@@ -66,4 +66,28 @@ public class FacturaEntity extends BaseEntity implements Serializable
   {
       this.fecha=pFecha;
   }
+  /**
+     * Metodo no usado
+     *
+     * @param obj Object que se compara.
+     * @return despreciado.
+     * @deprecated (solo arregla code smell)
+     */
+    @Override
+    @Deprecated
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    /**
+     * Metodo no usado
+     *
+     * @return nada.
+     * @deprecated (solo arregla code smell)
+     */
+    @Override
+    @Deprecated
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
