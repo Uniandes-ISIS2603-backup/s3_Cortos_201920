@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -65,7 +66,39 @@ public class ComentarioLogic {
         persistence.delete(id);     
     }
     
+    public List<ComentarioEntity> getComentarios()
+    {
+        LOGGER.log(Level.INFO,"Inicia proceso de consultar todos los comentarios");
+        List<ComentarioEntity> comentarios = persistence.findAll();
+        LOGGER.log(Level.INFO,"Termina proceso de consultar todos los comentarios");
+        return comentarios;
+    }
     
+    public ComentarioEntity getComentario(Long id )
+    {
+        LOGGER.log(Level.INFO,"Inicia el proceso de consultar el comentario con id = {0}",id);
+        ComentarioEntity comentarioEntity= persistence.find(id);
+        if(comentarioEntity==null)
+        {
+            LOGGER.log(Level.INFO,"El comentario con id ={0} no existe",id);
+        }
+        LOGGER.log(Level.INFO,"Termina el proceso de consultar el libro con id = {0}", id );
+        return comentarioEntity;
+    }
+    
+    public ComentarioEntity updateComentario (Long id ,ComentarioEntity comentario) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO,"Inicia   proceso de actualizar el comentario con id = {0}",id);
+        ComentarioEntity newEntity = persistence.update(comentario);
+        LOGGER.log(Level.INFO,"Termina proceso de actaulizar el comentario con Id={0}", id);
+        return newEntity;
+    }
+    
+    public void deleteComentario(Long id ) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar el comentario con id = {0}", id );
+        persistence.delete(id);
+        LOGGER.log(Level.INFO,"Termine el proceso de borrar el comentario con id= {0}",id);
+    }
 }
 
 

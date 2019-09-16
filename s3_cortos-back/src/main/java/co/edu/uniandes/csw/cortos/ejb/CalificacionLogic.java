@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.cortos.ejb;
 import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -36,9 +37,37 @@ import javax.inject.Inject;
         return calificacionEntity;
     }
     
-    public void deleteCalificacion (Long id )throws BusinessLogicException
+    public List<CalificacionEntity > getCalificaciones()
     {
-        LOGGER.log(Level.INFO,"Inicia el proceso de eliminacion de una calificacion");
-        persistence.delete (id);
+        LOGGER.log(Level.INFO,"Inicia proceso de consultar todos los comentarios");
+        List<CalificacionEntity> calificaciones = persistence.findAll();
+        LOGGER.log(Level.INFO,"Termina proceso de consultar todos los comentarios");
+        return calificaciones;
     }
+    
+    public CalificacionEntity getCalificacion(Long id)
+    {
+        LOGGER.log(Level.INFO,"Inicia el proceso de consultar la calificacion con id = {0}", id);
+        CalificacionEntity calificacionEntity= persistence.find(id);
+        if(calificacionEntity==null)
+        {
+            LOGGER.log(Level.INFO,"El comentario con id ={0} no existe",id);
+        }
+        LOGGER.log(Level.INFO,"Termina el proceso con id={0}",id);
+        return calificacionEntity;
+    }
+    public CalificacionEntity updateCalificacion (Long id, CalificacionEntity calificacion)throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO,"Inicia proceso de acutalizar el calificacion con id ={0}",id);
+        CalificacionEntity newEntity = persistence.update(calificacion);
+        LOGGER.log(Level.INFO,"Termina proceso de actualizar el calificacion con id={0}", id);
+        return newEntity;
+    }
+    public void deleteCalificacion(Long id ) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO,"Inicia proceso de borrar la calificacion con id = {0}", id);
+        persistence.delete(id);
+        LOGGER.log(Level.INFO,"Termina el proceso de borrar la calificacion con id ={0} ", id );
+    }
+
 }
