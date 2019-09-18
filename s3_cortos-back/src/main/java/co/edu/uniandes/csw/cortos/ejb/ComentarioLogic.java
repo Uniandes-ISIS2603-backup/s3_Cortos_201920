@@ -59,13 +59,7 @@ public class ComentarioLogic {
         }
         return false;
     }
-    
-    public void deleteComent(Long id) throws BusinessLogicException
-    {
-        LOGGER.log(Level.INFO,"Inicia el proceso de eliminacion del comentario con id {0}",id);
-        persistence.delete(id);     
-    }
-    
+        
     public List<ComentarioEntity> getComentarios()
     {
         LOGGER.log(Level.INFO,"Inicia proceso de consultar todos los comentarios");

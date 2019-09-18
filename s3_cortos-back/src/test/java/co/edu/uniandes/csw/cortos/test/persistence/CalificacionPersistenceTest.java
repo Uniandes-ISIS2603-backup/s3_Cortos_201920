@@ -146,5 +146,10 @@ public class CalificacionPersistenceTest {
        
     }
     
-    
+    @Test
+    public void findCalificacionTest(){
+        CalificacionEntity c = data.get(0);
+        CalificacionEntity entity = calificacionPersistence.find(c.getId());
+        Assert.assertEquals(c.getPuntaje(), entity.getPuntaje());
+    }
 }

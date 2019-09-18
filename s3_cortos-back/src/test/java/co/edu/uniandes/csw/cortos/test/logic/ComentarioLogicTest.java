@@ -115,4 +115,62 @@ public class ComentarioLogicTest {
         newEntity.setComentario("");
         comentarioLogic.createComentario(newEntity);
     }
+    @Test(expected = BusinessLogicException.class)
+    public void comentarioNulo()throws BusinessLogicException
+    {
+        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+        newEntity.setComentario(null);
+        comentarioLogic.createComentario(newEntity);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void comentarioIdNulo()throws BusinessLogicException
+    {
+        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+        newEntity.setId(null);
+        comentarioLogic.createComentario(newEntity);
+    }
+    @Test 
+    public void deleteTest()throws BusinessLogicException{
+        ComentarioEntity c = data.get(0);
+        comentarioLogic.deleteComentario(c.getId());
+        ComentarioEntity deleted = em.find(ComentarioEntity.class, c.getId());
+        Assert.assertNull(deleted);
+    }
+    @Test
+    public void getComentariosTest() {
+       List<ComentarioEntity> list = comentarioLogic.getComentarios();
+        Assert.assertEquals(data.size(), list.size());
+        for (ComentarioEntity ent : list) {
+            boolean found = false;
+            for (ComentarioEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    @Test
+    public void getComentarioTest() {
+        ComentarioEntity entity = data.get(0);
+        ComentarioEntity newEntity = comentarioLogic.getComentario(entity.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getComentario(), newEntity.getComentario());
+        Assert.assertEquals(entity.getFecha(), newEntity.getFecha());
+    }
+    @Test
+    public void updateComentarioTest() throws BusinessLogicException {
+        ComentarioEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        ComentarioEntity newEntity = factory.manufacturePojo(ComentarioEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        comentarioLogic.updateComentario(entity.getId(),newEntity);
+
+        ComentarioEntity resp = em.find(ComentarioEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getComentario(), resp.getComentario());
+        Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
+       
+    }    
 }

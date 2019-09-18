@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -109,5 +109,62 @@ public class CalificacionLogicTest {
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
         newEntity.setPuntaje(-11);
         calificacionLogic.createCalificacion(newEntity);
+    }
+        @Test(expected = BusinessLogicException.class)
+    public void calificacionInvalidaporPuntajeMayor5() throws BusinessLogicException
+    {
+        
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setPuntaje(7);
+        calificacionLogic.createCalificacion(newEntity);
+    }
+        @Test(expected = BusinessLogicException.class)
+    public void calificacionInvalidaPorId() throws BusinessLogicException
+    {
+        
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setId(null);
+        calificacionLogic.createCalificacion(newEntity);
+    }
+     @Test
+    public void getCalificacionesTest() {
+       List<CalificacionEntity> list = calificacionLogic.getCalificaciones();
+        Assert.assertEquals(data.size(), list.size());
+        for (CalificacionEntity ent : list) {
+            boolean found = false;
+            for (CalificacionEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    @Test
+    public void deleteCalificacionTest() throws BusinessLogicException{
+        CalificacionEntity entity = data.get(0);
+        calificacionLogic.deleteCalificacion(entity.getId());
+        CalificacionEntity deleted = em.find(CalificacionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    @Test
+    public void updateCalificacionTest() throws BusinessLogicException{
+        CalificacionEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        calificacionLogic.updateCalificacion(entity.getId(),newEntity);
+
+        CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
+       Assert.assertEquals(newEntity.getId(), resp.getId());
+       
+    }
+     @Test
+    public void findCalificacionTest(){
+        CalificacionEntity c = data.get(0);
+        CalificacionEntity entity = calificacionLogic.getCalificacion(c.getId());
+        Assert.assertEquals(c.getPuntaje(), entity.getPuntaje());
     }
 }
