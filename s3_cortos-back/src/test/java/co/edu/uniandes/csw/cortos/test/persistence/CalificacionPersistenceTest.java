@@ -108,6 +108,7 @@ public class CalificacionPersistenceTest {
         CalificacionEntity entity = em.find(CalificacionEntity.class, result.getId());
 
       Assert.assertEquals(entity.getId(), newEntity.getId());
+      Assert.assertEquals(entity.toString(), newEntity.toString());
     }
      @Test
     public void getCalificacionesTest() {
