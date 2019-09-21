@@ -53,7 +53,7 @@ public class ClientePersistence
     }
     
     public ClienteEntity findByName(String name) {
-        TypedQuery<ClienteEntity> query = em.createQuery("select e from CineastaEntity e where e.nombre = :name ", ClienteEntity.class);
+        TypedQuery<ClienteEntity> query = em.createQuery("select e from ClienteEntity e where e.nombre = :name ", ClienteEntity.class);
         query = query.setParameter("name", name);
 
         List<ClienteEntity> sameName = query.getResultList();

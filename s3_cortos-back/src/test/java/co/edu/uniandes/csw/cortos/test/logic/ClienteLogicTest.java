@@ -106,13 +106,13 @@ public class ClienteLogicTest
          ClienteEntity result = clienteLogic.createCliente(newEntity);
      }
      
-     @Test
+     @Test(expected = BusinessLogicException.class)
      public void createClienteNombreRep()throws BusinessLogicException
      {
          ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
          ClienteEntity newEntity2 = factory.manufacturePojo(ClienteEntity.class);
          ClienteEntity result = clienteLogic.createCliente(newEntity2);
-         newEntity.setNombre(newEntity2.getNombre());
+         newEntity.setNombre(result.getNombre());
          ClienteEntity result2 = clienteLogic.createCliente(newEntity);
      }
      
