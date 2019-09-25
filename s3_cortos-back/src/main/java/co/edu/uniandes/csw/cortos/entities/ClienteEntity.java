@@ -28,18 +28,12 @@ public class ClienteEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @PodamExclude
     private Collection<CalificacionEntity> calificaciones;
-
-    public Collection<CalificacionEntity> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
     
     @OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
     @PodamExclude
     private List<ComentarioEntity> comentarios;
+    
+    
     
     public String getNombre()
     {
@@ -69,6 +63,14 @@ public class ClienteEntity extends BaseEntity implements Serializable
     public void setContrasenia(String pContrasenia)
     {
         this.contrasenia = pContrasenia;
+    }
+    
+    public Collection<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
     }
 
     /**
