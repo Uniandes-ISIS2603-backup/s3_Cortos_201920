@@ -7,8 +7,11 @@ package co.edu.uniandes.csw.cortos.test.logic;
 
 import co.edu.uniandes.csw.cortos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
+import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.ClientePersistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,12 +45,15 @@ public class ClienteLogicTest
     @Inject
     UserTransaction utx;
     
+    private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
+    
     @Before
     public void configTest() {
         try {
             utx.begin();
             em.joinTransaction();
             clearData();
+            insertData();
             utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,6 +67,15 @@ public class ClienteLogicTest
 
     private void clearData() {
         em.createQuery("delete from ClienteEntity").executeUpdate();
+    }
+    
+    private void insertData(){
+        for(int i =0;i<3;i++)
+        {
+            ClienteEntity comentario= factory.manufacturePojo(ClienteEntity.class);
+            em.persist(comentario);
+            data.add(comentario);
+        }
     }
     
     @Deployment
@@ -125,4 +140,49 @@ public class ClienteLogicTest
          newEntity.setCorreo(newEntity2.getCorreo());
          ClienteEntity result2 = clienteLogic.createCliente(newEntity);
      }
+     
+     @Test 
+    public void deleteTest()throws BusinessLogicException{
+        ClienteEntity c = data.get(0);
+        clienteLogic.deleteCliente(c.getId());
+        ClienteEntity deleted = em.find(ClienteEntity.class, c.getId());
+        org.junit.Assert.assertNull(deleted);
+    }
+    @Test
+    public void getClientesTest() {
+       List<ClienteEntity> list = clienteLogic.getClientes();
+        org.junit.Assert.assertEquals(data.size(), list.size());
+        for (ClienteEntity ent : list) {
+            boolean found = false;
+            for (ClienteEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            org.junit.Assert.assertTrue(found);
+        }
+    }
+    @Test
+    public void getClienteTest() {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = clienteLogic.getCliente(entity.getId());
+        org.junit.Assert.assertNotNull(newEntity);
+        org.junit.Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        org.junit.Assert.assertEquals(entity.getId(), newEntity.getId());
+    }
+    @Test
+    public void updateClienteTest() throws BusinessLogicException {
+        ClienteEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+
+        newEntity.setId(entity.getId());
+
+        clienteLogic.updateCliente(entity.getId(),newEntity);
+
+        ClienteEntity resp = em.find(ClienteEntity.class, entity.getId());
+        org.junit.Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        org.junit.Assert.assertEquals(newEntity.getId(), resp.getId());
+       
+    }
 }
