@@ -59,7 +59,7 @@ public class CineastaLogic {
             throw new BusinessLogicException("La fecha de nacimiento no puede ser null \"");
         }
         if (getEdad(cineasta.getFechaNacimiento()) < 13 || getEdad(cineasta.getFechaNacimiento()) > 120) {
-            throw new BusinessLogicException("El cineasta tiene la edad suficiente para realizar el registro \"");
+            throw new BusinessLogicException("El cineasta no tiene la edad suficiente para realizar el registro  \"") ;
         }
         if (cineasta.getTelefono().equals("") || cineasta.getTelefono() == null) {
             throw new BusinessLogicException("El telefono no puede ser vacio ni null \"");
