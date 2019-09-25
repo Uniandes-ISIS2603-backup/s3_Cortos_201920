@@ -9,7 +9,10 @@ import co.edu.uniandes.csw.cortos.dtos.FormaDePagoDTO;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
@@ -31,6 +34,22 @@ public class FormaDePagoResource {
        return formaDePago; 
     }
     
+    @GET
+    public FormaDePagoDTO getFormaDePago(FormaDePagoDTO formaDePago)
+    {
+        return formaDePago;
+    }
     
+    @PUT
+    public FormaDePagoDTO putFormaDePago(FormaDePagoDTO formaDePago)
+    {
+        return formaDePago;
+    }
+    
+    @DELETE
+    public FormaDePagoDTO DeleteFormaDePago(FormaDePagoDTO formaDePago)
+    {
+        return formaDePago;
+    }
     
 }
