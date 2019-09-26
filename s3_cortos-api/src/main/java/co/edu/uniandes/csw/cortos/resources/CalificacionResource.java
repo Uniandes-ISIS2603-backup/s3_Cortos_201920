@@ -70,7 +70,7 @@ public class CalificacionResource {
     
     @PUT
     @Path("{calificacionId:\\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("calificacioId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
+    public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
         LOGGER.log(Level.INFO,"CalificacionResource updateCalificacion:input:id:{0},calificacion:{1}",new Object[]{id,calificacion});
         calificacion.setId(id);
         if(calificacionLogic.getCalificacion(id)==null)
@@ -85,7 +85,7 @@ public class CalificacionResource {
     @Path("{calificacionId:\\d+}")
     public void deleteComentario(@PathParam("calificacionId") Long id ) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO,"ComentariOResource deleteComentario :input:{0}",id);
+        LOGGER.log(Level.INFO,"ComentarioResource deleteComentario :input:{0}",id);
         CalificacionEntity entity = calificacionLogic.getCalificacion(id);
         if(entity ==null)
         {

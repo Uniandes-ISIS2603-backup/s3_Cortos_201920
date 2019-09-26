@@ -10,7 +10,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -22,57 +25,74 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class CineastaEntity extends BaseEntity implements Serializable {
-    
+
     /**
-     * enumeracion que modela el tipo de cineasta{aficionado,profesional}
+     * enumeracion que modela el tipo de cineasta{aficionado,profesional}.
      */
-    public enum Tipo
-    {
+    public enum Tipo {
         AFICIONADO,
         PROFESIONAL
     }
-       
+
+    /**
+     * Asociación con la claseTemaEntity, que describe los temas de interes del cineasta.
+     */
     @PodamExclude
     @OneToMany
     private List<TemaEntity> temas;
+
+    /**
+     * Asociación con la clase CortosEntity, que describe el corto producido por el cineasta.
+     */
+    @PodamExclude
+    @OneToOne(mappedBy = "productor",
+            fetch = FetchType.LAZY)
+    private CortoEntity corto;
     
      /**
+     * Asociación con la clase CineastaEntity, describe el corto asociado a los cineastas "directores".
+     */
+    @PodamExclude
+    @ManyToOne
+    private CortoEntity cortoCineastas;
+    
+    /**
      * nombre cineasta
      */
     private String nombre;
-    
-     /**
-     *  correo asociado al cineasta
+
+    /**
+     * correo asociado al cineasta
      */
     private String correo;
-    
-     /**
+
+    /**
      * contrasenia del correo del cineasta
      */
     private String contrasenia;
-    
-     /**
+
+    /**
      * fecha de nacimiento del cineasta
      */
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaNacimiento;
-    
-     /**
+
+    /**
      * telefono del cineasta
      */
     private String telefono;
-    
+
     /**
      * direccion del domicilio del cineasta
      */
     private String direccion;
-    
-     /**
+
+    /**
      * genero del cineasta
      */
     private Boolean genero;
-    
+
     /**
      * tipo de cineasta {aficionado,profesional}
      */
@@ -163,7 +183,7 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return genero 
+     * @return genero
      */
     public Boolean getGenero() {
         return genero;
@@ -202,6 +222,34 @@ public class CineastaEntity extends BaseEntity implements Serializable {
      */
     public void setTemas(List<TemaEntity> temas) {
         this.temas = temas;
+    }
+
+    /**
+     * @return the corto
+     */
+    public CortoEntity getCorto() {
+        return corto;
+    }
+
+    /**
+     * @param corto the corto to set
+     */
+    public void setCorto(CortoEntity corto) {
+        this.corto = corto;
+    }
+
+    /**
+     * @return the cortoCineastas
+     */
+    public CortoEntity getCortoCineastas() {
+        return cortoCineastas;
+    }
+
+    /**
+     * @param cortoCineastas the cortoCineastas to set
+     */
+    public void setCortoCineastas(CortoEntity cortoCineastas) {
+        this.cortoCineastas = cortoCineastas;
     }
 
 }
