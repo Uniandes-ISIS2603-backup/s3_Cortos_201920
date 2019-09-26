@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
@@ -27,19 +28,24 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private String contrasenia;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @PodamExclude
-    private Collection<CalificacionEntity> calificaciones;
+    private Collection<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+    @PodamExclude
+    private List<ComentarioEntity> comentarios = new ArrayList<ComentarioEntity>();
 
     public Collection<CalificacionEntity> getCalificaciones() {
         return calificaciones;
     }
-
+    public void addComentario(ComentarioEntity comentario)
+    {
+        comentarios.add(comentario);
+    }
+    
     public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
-    @OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
-    @PodamExclude
-    private List<ComentarioEntity> comentarios;
+
     
     public String getNombre()
     {
@@ -82,6 +88,9 @@ public class ClienteEntity extends BaseEntity implements Serializable
      * @param comentarios the comentarios to set
      */
     public void setComentarios(List<ComentarioEntity> comentarios) {
-        this.comentarios = comentarios;
+        this.setComentarios(comentarios);
     }
+
+  
+    
 }

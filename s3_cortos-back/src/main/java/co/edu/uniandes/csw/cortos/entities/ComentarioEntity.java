@@ -33,7 +33,6 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     private Date fecha;
     
     
-    
 
      @PodamExclude
      @ManyToOne
