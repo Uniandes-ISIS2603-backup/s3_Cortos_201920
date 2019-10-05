@@ -20,6 +20,7 @@ public class CortoDetailDTO extends CortoDTO implements Serializable {
 
     private List<CalificacionDTO> calificaciones;
     private List<ComentarioDTO> comentarios;
+    //private List<TemaDTO> temas;
 
     public CortoDetailDTO() {
         super();

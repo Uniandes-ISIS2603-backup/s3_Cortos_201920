@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -34,7 +35,7 @@ public class CortoEntity extends BaseEntity implements Serializable {
     private List<CalificacionEntity> calificaciones;
 
     @PodamExclude
-    @OneToMany(mappedBy = "corto")
+    @ManyToMany
     private List<TemaEntity> temas;
 
     /**
@@ -51,7 +52,7 @@ public class CortoEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @OneToMany(mappedBy = "cortoCineastas")
-    private List<CineastaEntity> cineasta = new ArrayList<CineastaEntity>();
+    private List<CineastaEntity> cineasta;
 
     /**
      * nombre del corto

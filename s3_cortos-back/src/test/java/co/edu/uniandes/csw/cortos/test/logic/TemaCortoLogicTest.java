@@ -33,79 +33,79 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class TemaCortoLogicTest {
-//    private PodamFactory factory = new PodamFactoryImpl();
-//    
-//    @Inject
-//    private TemaCortoLogic temaCortoLogic; 
-//    
-//    @Inject 
-//    private CortoLogic cortoLogic;
-//    
-//    @PersistenceContext
-//    private EntityManager em;
-//
-//    @Inject
-//    private UserTransaction utx;
-//    
-//    private List<TemaEntity> data = new ArrayList<>();
-//    
-//    private CortoEntity corto = new CortoEntity();
-//    
-//    @Deployment
-//    public static JavaArchive createDeployment() {
-//        return ShrinkWrap.create(JavaArchive.class)
-//                .addPackage(TemaEntity.class.getPackage())
-//                .addPackage(CortoEntity.class.getPackage())
-//                .addPackage(TemaCortoLogic.class.getPackage())
-//                .addPackage(TemaPersistence.class.getPackage())
-//                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
-//                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
-//    }
-//    
-//    @Before
-//    public void configTest() {
-//        try {
-//            utx.begin();
-//            clearData();
-//            insertData();
-//            utx.commit();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            try {
-//                utx.rollback();
-//            } catch (Exception e1) {
-//                e1.printStackTrace();
-//            }
-//        }
-//    }
-//    
-//    private void clearData() {
-//        em.createQuery("delete from CorttoEntity").executeUpdate();
-//        em.createQuery("delete from TemaEntity").executeUpdate();
-//    }
-//
-//    private void insertData() {
-//        corto = factory.manufacturePojo(CortoEntity.class);
-//        corto.setId(1L);
-//        corto.setTemas(new ArrayList<>());
-//        em.persist(corto);
-//
-//        for (int i = 0; i < 3; i++) {
-//            TemaEntity entity = factory.manufacturePojo(TemaEntity.class);
-//            entity.setCortos(new ArrayList<>());
-//            entity.getCortos().add(corto);
-//            em.persist(entity);
-//            data.add(entity);
-//            corto.getTemas().add(entity);
-//        }
-//    }
-//    
-//    @Test
-//    public void addCortoTest() throws BusinessLogicException
-//    {
-//        CortoEntity newCorto = factory.manufacturePojo(CortoEntity.class);
-//        cortoLogic.createCorto(corto);
-//        
-//        CortoEntity cortoEntity = temaCortoLogic.addCorto(, corto.getId())
-//    }
+    private PodamFactory factory = new PodamFactoryImpl();
+    
+    @Inject
+    private TemaCortoLogic temaCortoLogic; 
+    
+    @Inject 
+    private CortoLogic cortoLogic;
+    
+    @PersistenceContext
+    private EntityManager em;
+
+    @Inject
+    private UserTransaction utx;
+    
+    private List<TemaEntity> data = new ArrayList<>();
+    
+    private CortoEntity corto = new CortoEntity();
+    
+    @Deployment
+    public static JavaArchive createDeployment() {
+        return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(TemaEntity.class.getPackage())
+                .addPackage(CortoEntity.class.getPackage())
+                .addPackage(TemaCortoLogic.class.getPackage())
+                .addPackage(TemaPersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+    }
+    
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    private void clearData() {
+        em.createQuery("delete from CorttoEntity").executeUpdate();
+        em.createQuery("delete from TemaEntity").executeUpdate();
+    }
+
+    private void insertData() {
+        corto = factory.manufacturePojo(CortoEntity.class);
+        corto.setId(1L);
+        corto.setTemas(new ArrayList<>());
+        em.persist(corto);
+
+        for (int i = 0; i < 3; i++) {
+            TemaEntity entity = factory.manufacturePojo(TemaEntity.class);
+            entity.setCortos(new ArrayList<>());
+            entity.getCortos().add(corto);
+            em.persist(entity);
+            data.add(entity);
+            corto.getTemas().add(entity);
+        }
+    }
+    
+    @Test
+    public void addCortoTest() throws BusinessLogicException
+    {
+        //CortoEntity newCorto = factory.manufacturePojo(CortoEntity.class);
+        //cortoLogic.createCorto(corto);
+        
+        //CortoEntity cortoEntity = temaCortoLogic.addCorto(, corto.getId())
+    }
 }

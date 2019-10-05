@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.cortos.ejb.CineastaLogic;
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CineastaPersistence;
+import java.text.DateFormat;
 import java.util.Date;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -77,9 +78,11 @@ public class CineastaLogicTest {
     @Test
     public void createCineasta() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
         Assert.assertNotNull(result);
-
+        
         CineastaEntity entity = em.find(CineastaEntity.class, result.getId());
         Assert.assertEquals(entity.getNombre(), result.getNombre());
     }

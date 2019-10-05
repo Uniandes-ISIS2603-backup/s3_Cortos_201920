@@ -141,7 +141,7 @@ public class CortosPersistenceTest {
         Assert.assertNull(deleted);
     }
         @Test
-    public void updateBookTest() {
+    public void updateCortoTest() {
         CortoEntity c = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         CortoEntity corto = factory.manufacturePojo(CortoEntity.class);

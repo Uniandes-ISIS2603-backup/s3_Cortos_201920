@@ -9,7 +9,7 @@ import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
