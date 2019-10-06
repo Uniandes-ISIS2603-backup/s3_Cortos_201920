@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.cortos.ejb;
 
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
+import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CineastaPersistence;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -131,4 +133,58 @@ public class CineastaLogic {
         return cineasta;
     }
 
+      /**
+     * Obtiene la lista de los registros de Cineasta.
+     *
+     * @return Colección de objetos de CineastaEntity.
+     */
+    public List<CineastaEntity> getCineastas() {
+      
+        List<CineastaEntity> lista = persistence.findAll();
+       
+        return lista;
+    }
+
+    /**
+     * Obtiene los datos de una instancia de Cineasta a partir de su ID.
+     *
+     * @param cineastaId Identificador de la instancia a consultar
+     * @return Instancia de CineastaEntity con los datos del Cineasta consultado.
+     */
+    public CineastaEntity getCineasta(Long cineastaId) {
+       
+        CineastaEntity cineastaEntity = persistence.find(cineastaId);
+
+        return cineastaEntity;
+    }
+
+    /**
+     * Actualiza la información de una instancia de Cineasta.
+     *
+     * @param cineastaId Identificador de la instancia a actualizar
+     * @param cineastaEntity Instancia de AuthorEntity con los nuevos datos.
+     * @return Instancia de CineastaEntity con los datos actualizados.
+     */
+    public CineastaEntity updateCineasta(Long cineastaId, CineastaEntity cineastaEntity) {
+       
+        CineastaEntity newCineastaEntity = persistence.update(cineastaEntity);
+ 
+        return newCineastaEntity;
+    }
+
+    /**
+     * Elimina una instancia de Cineasta de la base de datos.
+     *
+     * @param cineastaId Identificador de la instancia a eliminar.
+     * @throws BusinessLogicException si el cineasta tiene cortos asociados.
+     */
+    public void deleteCineasta(Long cineastaId) throws BusinessLogicException {
+      
+        List<CortoEntity> cortos = getCineasta(cineastaId).getCortos();
+        if (cortos != null && !cortos.isEmpty()) {
+            throw new BusinessLogicException("No se puede borrar el cineasta con id = " + cineastaId + " porque tiene cortos asociados");
+        }
+        persistence.delete(cineastaId);//pregunta sobre la asociacion de cineastacorto
+      
+    }
 }
