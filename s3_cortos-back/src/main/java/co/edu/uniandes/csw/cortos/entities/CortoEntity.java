@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -43,12 +44,12 @@ public class CortoEntity extends BaseEntity implements Serializable {
      * del corto.
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private CineastaEntity productor;
 
     /**
-     * Asociación con la clase CineastaEntity,que describe los cineastas asociados 
-     * del corto.
+     * Asociación con la clase CineastaEntity,que describe los cineastas
+     * asociados del corto.
      */
     @PodamExclude
     @OneToMany(mappedBy = "cortoCineastas")
@@ -229,6 +230,5 @@ public class CortoEntity extends BaseEntity implements Serializable {
     public void setCineasta(List<CineastaEntity> cineasta) {
         this.cineasta = cineasta;
     }
-    
-    
+
 }

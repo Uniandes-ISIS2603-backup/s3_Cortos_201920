@@ -7,8 +7,10 @@ package co.edu.uniandes.csw.cortos.entities;
 
 import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -35,27 +37,34 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * Asociación con la claseTemaEntity, que describe los temas de interes del cineasta.
+     * Asociación con la claseTemaEntity, que describe los temas de interes del
+     * cineasta.
      */
     @PodamExclude
     @OneToMany
     private List<TemaEntity> temas;
 
     /**
-     * Asociación con la clase CortosEntity, que describe el corto producido por el cineasta.
+     * Asociación con la clase CortosEntity, que describe el corto producido por
+     * el cineasta.
      */
     @PodamExclude
-    @OneToOne(mappedBy = "productor",
-            fetch = FetchType.LAZY)
-    private CortoEntity corto;
-    
-     /**
-     * Asociación con la clase CineastaEntity, describe el corto asociado a los cineastas "directores".
+    @OneToMany(
+            mappedBy = "productor",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
+    private List<CortoEntity> cortos = new ArrayList<CortoEntity>();
+
+    /**
+     * Asociación con la clase CineastaEntity, describe el corto asociado a los
+     * cineastas "directores".
      */
     @PodamExclude
     @ManyToOne
     private CortoEntity cortoCineastas;
-    
+
     /**
      * nombre cineasta
      */
@@ -225,20 +234,6 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the corto
-     */
-    public CortoEntity getCorto() {
-        return corto;
-    }
-
-    /**
-     * @param corto the corto to set
-     */
-    public void setCorto(CortoEntity corto) {
-        this.corto = corto;
-    }
-
-    /**
      * @return the cortoCineastas
      */
     public CortoEntity getCortoCineastas() {
@@ -250,6 +245,20 @@ public class CineastaEntity extends BaseEntity implements Serializable {
      */
     public void setCortoCineastas(CortoEntity cortoCineastas) {
         this.cortoCineastas = cortoCineastas;
+    }
+
+    /**
+     * @return the cortos
+     */
+    public List<CortoEntity> getCortos() {
+        return cortos;
+    }
+
+    /**
+     * @param cortos the cortos to set
+     */
+    public void setCortos(List<CortoEntity> cortos) {
+        this.cortos = cortos;
     }
 
 }
