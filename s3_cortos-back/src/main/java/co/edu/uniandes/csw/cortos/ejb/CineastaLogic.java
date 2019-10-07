@@ -45,8 +45,7 @@ public class CineastaLogic {
       long currentTime = System.currentTimeMillis();
       Calendar now = Calendar.getInstance();
       now.setTimeInMillis(currentTime);
-       System.out.println(now.get(Calendar.YEAR));
-       System.out.println(birthDay.get(Calendar.YEAR));
+       
       //Get difference between years
       years = now.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
       int currMonth = now.get(Calendar.MONTH) + 1;

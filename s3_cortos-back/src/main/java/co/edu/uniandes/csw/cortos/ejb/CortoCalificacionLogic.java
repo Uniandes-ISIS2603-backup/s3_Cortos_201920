@@ -5,10 +5,10 @@
  */
 package co.edu.uniandes.csw.cortos.ejb;
 
-import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
+import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
+import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import java.util.List;
 
@@ -16,28 +16,27 @@ import java.util.List;
  *
  * @author Juan Sebastian Gomez
  */
-public class CortoComentarioLogic {
+public class CortoCalificacionLogic {
     private CortoPersistence cp;
-    private ComentarioPersistence comentP;
+    private CalificacionPersistence comentP;
     
-    public ComentarioEntity addComentario(long comId, long cortoId){
-        ComentarioEntity agregar = comentP.find(comId);
+    public CalificacionEntity addCalificacion(long comId, long cortoId){
+        CalificacionEntity agregar = comentP.find(comId);
         CortoEntity agregue = cp.find(cortoId);
         agregar.setCorto(agregue);
         return agregar;
     }
     
-    public List<ComentarioEntity> getComentarios(long cortoId){
-        return cp.find(cortoId).getComentarios();
+    public List<CalificacionEntity> getCalificaciones(long cortoId){
+        return cp.find(cortoId).getCalificaciones();
     }
-    public ComentarioEntity getComentario(long comentId, long cortoId) throws BusinessLogicException{
-        List<ComentarioEntity> comentarios =getComentarios(cortoId);
-        ComentarioEntity comentario = comentP.find(comentId);
+    public CalificacionEntity getCalificacion(long comentId, long cortoId) throws BusinessLogicException{
+        List<CalificacionEntity> comentarios =getCalificaciones(cortoId);
+        CalificacionEntity comentario = comentP.find(comentId);
         int index = comentarios.indexOf(comentario);
         if(index >= 0){
             return comentario;
         }
         throw new BusinessLogicException("No se encuentra el comentario en este corto");
     }
-    
 }
