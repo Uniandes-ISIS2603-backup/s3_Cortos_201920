@@ -6,12 +6,13 @@
 package co.edu.uniandes.csw.cortos.dtos;
 
 import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author Santiago Vargas Vega
  */
-public class CalificacionDTO {
+public class CalificacionDTO implements Serializable{
     private Long id;
     
     private Integer puntaje;

@@ -11,11 +11,13 @@ import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author Juan Sebastian Gomez
  */
+@Stateless
 public class CortoComentarioLogic {
     private CortoPersistence cp;
     private ComentarioPersistence comentP;

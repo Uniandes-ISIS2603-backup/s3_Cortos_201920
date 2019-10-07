@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.ClienteDTO;
+import co.edu.uniandes.csw.cortos.dtos.ClienteDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.ClienteLogic;
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
@@ -53,17 +54,17 @@ public class ClienteResource
     }
     
     @GET
-    public List<ClienteDTO> getClientes()
+    public List<ClienteDetailDTO> getClientes()
     {
         LOGGER.info("ClienteResource getClientes :input : void");
-        List<ClienteDTO> listaClientes = listEntity2DTO(clienteLogic.getClientes());
+        List<ClienteDetailDTO> listaClientes = listEntity2DTO(clienteLogic.getClientes());
         LOGGER.log(Level.INFO,"ComentarioResource getCalificaciones :output{0}", listaClientes);
         return listaClientes;
     }
     
     @GET
     @Path("{clienteId:\\d+}")
-    public ClienteDTO getCliente(@PathParam("clienteId") long id )
+    public ClienteDetailDTO getCliente(@PathParam("clienteId") long id )
     {
         LOGGER.log(Level.INFO,"ClienteReosurce getClient :input : {0}",id);
         ClienteEntity clienteEntity = clienteLogic.getCliente(id);
@@ -71,7 +72,7 @@ public class ClienteResource
         {
             throw new WebApplicationException("El recurso /cliente/"+ id+"no existe.", 404);
         }
-        ClienteDTO clienteDTO = new ClienteDTO(clienteEntity);
+        ClienteDetailDTO clienteDTO = new ClienteDetailDTO(clienteEntity);
         return clienteDTO;
     }
     
@@ -103,11 +104,11 @@ public class ClienteResource
         LOGGER.info("ClienteResorce deleteCliente:output:void");
     }
     
-    private List<ClienteDTO> listEntity2DTO(List<ClienteEntity> entityList)
+    private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList)
     {
-        List<ClienteDTO> list = new ArrayList<>();
+        List<ClienteDetailDTO> list = new ArrayList<>();
         for(ClienteEntity entity:entityList){
-            list.add(new ClienteDTO(entity));
+            list.add(new ClienteDetailDTO(entity));
         }
         return list;
     }

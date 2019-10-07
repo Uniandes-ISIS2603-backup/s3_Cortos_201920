@@ -8,12 +8,14 @@ package co.edu.uniandes.csw.cortos.ejb;
 import co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.FormaDePagoPersistance;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Juan Felipe Mejia
  */
+@Stateless
 public class FormaDePagoLogic {
     
     @Inject 

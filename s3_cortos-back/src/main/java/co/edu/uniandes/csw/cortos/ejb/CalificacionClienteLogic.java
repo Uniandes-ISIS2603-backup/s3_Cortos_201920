@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.cortos.persistence.ClientePersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Santiago Vargas Vega
  */
+@Stateless
 public class CalificacionClienteLogic {
     private static final  Logger LOGGER = Logger.getLogger(CalificacionClienteLogic.class.getName());
     @Inject 

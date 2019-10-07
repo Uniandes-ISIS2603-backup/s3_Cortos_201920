@@ -16,7 +16,7 @@ import java.util.Date;
 public class FormaDePagoDTO implements Serializable {
     
     private Long numero;
-    private int ccv;
+    private Integer ccv;
     private Date fechaDeVencimiento;
     
     public FormaDePagoDTO()
@@ -59,7 +59,7 @@ public class FormaDePagoDTO implements Serializable {
     /**
      * @return the ccv
      */
-    public int getCcv() {
+    public Integer getCcv() {
         return ccv;
     }
 

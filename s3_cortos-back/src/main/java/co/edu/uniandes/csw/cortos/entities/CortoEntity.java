@@ -29,15 +29,15 @@ public class CortoEntity extends BaseEntity implements Serializable {
 
     @PodamExclude
     @OneToMany(mappedBy = "corto")
-    private List<ComentarioEntity> comentarios;
+    private List<ComentarioEntity> comentarios = new ArrayList<>() ;
 
     @PodamExclude
     @OneToMany(mappedBy = "corto")
-    private List<CalificacionEntity> calificaciones;
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
 
     @PodamExclude
     @ManyToMany
-    private List<TemaEntity> temas;
+    private List<TemaEntity> temas = new ArrayList<>();
 
     /**
      * Asociación con la clase CineastaEntity,que describe el cineasta productor

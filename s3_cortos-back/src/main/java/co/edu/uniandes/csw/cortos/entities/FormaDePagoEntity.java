@@ -31,7 +31,7 @@ public class FormaDePagoEntity extends BaseEntity implements Serializable {
     private Date fechaDeVencimiento;
     
     @PodamIntValue(minValue=100, maxValue=999)
-    private int ccv;
+    private Integer ccv;
     
     public FormaDePagoEntity()
     {
@@ -55,7 +55,7 @@ public class FormaDePagoEntity extends BaseEntity implements Serializable {
         return numero;
     }
     
-    public int getCcv()
+    public Integer getCcv()
     {
         return ccv;
     }

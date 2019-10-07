@@ -13,12 +13,14 @@ import co.edu.uniandes.csw.cortos.persistence.TemaPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Santiago Vargas Vega 
  */
+@Stateless
 public class TemaCortoLogic {
        private static final Logger LOGGER = Logger.getLogger(TemaCineastaLogic.class.getName());
     @Inject

@@ -12,12 +12,14 @@ import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Santiago Vargas Vega
  */
+@Stateless
 public class CalificacionCortoLogic {
     private static final  Logger LOGGER = Logger.getLogger(CalificacionCortoLogic.class.getName());
    @Inject
