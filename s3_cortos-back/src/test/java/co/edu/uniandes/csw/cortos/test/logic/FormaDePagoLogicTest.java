@@ -86,6 +86,9 @@ public class FormaDePagoLogicTest {
     public void createFormaDePago()throws BusinessLogicException
      {
          FormaDePagoEntity newEntity = factory.manufacturePojo(FormaDePagoEntity.class);
+         newEntity.setFechaDeVencimiento(new Date(122, 11, 21));
+         newEntity.setCcv(150);
+         newEntity.setNumero(9999999999999998L);
          FormaDePagoEntity result = formaDePagoLogic.createFormaDePago(newEntity);
          Assert.assertNotNull(result); 
          
