@@ -26,11 +26,15 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class CortoEntity extends BaseEntity implements Serializable {
-
+    /**
+     * Relacion entre comentarios y corto
+     */
     @PodamExclude
     @OneToMany(mappedBy = "corto")
     private List<ComentarioEntity> comentarios = new ArrayList<>() ;
-
+    /**
+     * Relacion entre calificaciones y cortos
+     */
     @PodamExclude
     @OneToMany(mappedBy = "corto")
     private List<CalificacionEntity> calificaciones = new ArrayList<>();

@@ -19,22 +19,44 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class CortoCalificacionLogic {
+    /**
+     * Referencia a la persistencia de cortos
+     */
     private CortoPersistence cp;
-    private CalificacionPersistence comentP;
-    
-    public CalificacionEntity addCalificacion(long comId, long cortoId){
-        CalificacionEntity agregar = comentP.find(comId);
+    /**
+     * Referencia a la persistencia de Calificacion
+     */
+    private CalificacionPersistence califP;
+    /**
+     * Aniade una calificacion a un corto especifico
+     * @param caliId id de la calificacion
+     * @param cortoId id del corto
+     * @return calificacion aniadida
+     */
+    public CalificacionEntity addCalificacion(long caliId, long cortoId){
+        CalificacionEntity agregar = califP.find(caliId);
         CortoEntity agregue = cp.find(cortoId);
         agregar.setCorto(agregue);
         return agregar;
     }
-    
+    /**
+     * Retorna todas las calificaciones de un corto
+     * @param cortoId id del corto
+     * @return calificaciones de un corto
+     */
     public List<CalificacionEntity> getCalificaciones(long cortoId){
         return cp.find(cortoId).getCalificaciones();
     }
-    public CalificacionEntity getCalificacion(long comentId, long cortoId) throws BusinessLogicException{
+    /**
+     * Retorna la calificacion especifica de un corto especifico
+     * @param calificacionId identificacion de la califiacion
+     * @param cortoId id del corto
+     * @return calificacion especifica del corto
+     * @throws BusinessLogicException si la calificacion no se encuentra dentro de las calificaciones del corto
+     */
+    public CalificacionEntity getCalificacion(long calificacionId, long cortoId) throws BusinessLogicException{
         List<CalificacionEntity> comentarios =getCalificaciones(cortoId);
-        CalificacionEntity comentario = comentP.find(comentId);
+        CalificacionEntity comentario = califP.find(calificacionId);
         int index = comentarios.indexOf(comentario);
         if(index >= 0){
             return comentario;

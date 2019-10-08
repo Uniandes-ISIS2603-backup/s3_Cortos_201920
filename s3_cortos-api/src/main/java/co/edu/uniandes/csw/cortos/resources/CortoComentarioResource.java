@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.cortos.dtos.ComentarioDTO;
 import co.edu.uniandes.csw.cortos.ejb.ComentarioLogic;
 import co.edu.uniandes.csw.cortos.ejb.CortoComentarioLogic;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
+import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -53,5 +54,14 @@ public class CortoComentarioResource {
             list.add(new ComentarioDTO(c));
         }
         return list;
+    }
+    
+    @GET
+    @Path("comentarioId: \\d+")
+    public ComentarioDTO getComentario(@PathParam("cortosId")Long cortoId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
+        if((comentLogic.getComentario(comentarioId))== null)
+            throw new WebApplicationException("El recurso /cortos/"+ cortoId+"/comentarios/"+comentarioId+" no existe", 404);
+        ComentarioDTO comentario = new ComentarioDTO(cortoComenLogic.getComentario(comentarioId, cortoId));
+        return comentario;
     }
 }
