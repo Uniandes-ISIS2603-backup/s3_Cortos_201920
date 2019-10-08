@@ -35,5 +35,5 @@ public class CortoCalificacionResource {
         CalificacionDTO c = new CalificacionDTO(cortoComenLogic.addCalificacion(comentarioId, cortoId));
         return c;
     }
-    //Get no lo puedo hacer sin el CalificacionDetailDTO
+    
 }

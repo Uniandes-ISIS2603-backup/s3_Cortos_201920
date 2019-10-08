@@ -8,8 +8,12 @@ package co.edu.uniandes.csw.cortos.resources;
 import co.edu.uniandes.csw.cortos.dtos.ComentarioDTO;
 import co.edu.uniandes.csw.cortos.ejb.ComentarioLogic;
 import co.edu.uniandes.csw.cortos.ejb.CortoComentarioLogic;
+import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -39,5 +43,15 @@ public class CortoComentarioResource {
         ComentarioDTO c = new ComentarioDTO(cortoComenLogic.addComentario(comentarioId, cortoId));
         return c;
     }
-    //Get no lo puedo hacer sin el ComentarioDetailDTO
+    @GET
+    public List<ComentarioDTO> getComentarios(@PathParam("cortosId") Long cortoId){
+        return null;
+    }
+    public List<ComentarioDTO> comentariosListEntity2DTO(List<ComentarioEntity> lista){
+        List<ComentarioDTO> list= new ArrayList<>();
+        for(ComentarioEntity c : lista){
+            list.add(new ComentarioDTO(c));
+        }
+        return list;
+    }
 }

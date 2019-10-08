@@ -37,7 +37,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class CascaraDTO implements Serializable {
     public CascaraDTO(){
-        
     }
 
     @Override
