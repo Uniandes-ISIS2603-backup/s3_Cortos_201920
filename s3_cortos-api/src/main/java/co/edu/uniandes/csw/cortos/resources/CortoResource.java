@@ -32,21 +32,36 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class CortoResource {
+    /**
+     * Referencia de logica de corto
+     */
     @Inject
     private CortoLogic cl;
-    
+    /**
+     * Crea un corto
+     * @param c DTO de corto
+     * @return corto que se debe crear
+     * @throws BusinessLogicException no se cumplen reglas de negocio
+     */
     @POST
     public CortoDTO createCorto(CortoDTO c) throws BusinessLogicException{
         CortoDTO nuevo = new CortoDTO(cl.createCorto(c.toEntity()));
         return nuevo;
     }
-    
+    /**
+     * lista de todos los cortos
+     * @return lista de cortos
+     */
     @GET
     public List<CortoDetailDTO> getCortos(){
         List<CortoDetailDTO> lista = listEntity2Entity(cl.getCortos());
         return lista;
     }
-    
+    /**
+     * Corto con el id por parametro
+     * @param cortoId identificacion del corto
+     * @return corto con identificacion por paramtero 
+     */
     @GET
     @Path("{cortosId: \\d+}")
     public CortoDetailDTO getCorto(@PathParam("cortosId") Long cortoId){
@@ -56,7 +71,13 @@ public class CortoResource {
         CortoDetailDTO n = new CortoDetailDTO(c);
         return n;
     }
-    
+    /**
+     * Modifica el corto con id por parametro
+     * @param cortoId identificacion del corto
+     * @param c corto con info para modificar el anterior
+     * @return corto modificado
+     * @throws BusinessLogicException se incumple regla de negocio
+     */
     @PUT
     @Path("{cortosId: \\d+}")
     public CortoDetailDTO updateCorto(@PathParam("cortosId") Long cortoId, CortoDetailDTO c) throws BusinessLogicException{
@@ -68,7 +89,11 @@ public class CortoResource {
     }
     
     
-            
+    /**
+     * convertir entidades en DTO
+     * @param l lista entidades
+     * @return lista de dtos. 
+     */
     public List<CortoDetailDTO> listEntity2Entity(List<CortoEntity> l){
         List<CortoDetailDTO> lista = new ArrayList<>();
         for(CortoEntity c : l)

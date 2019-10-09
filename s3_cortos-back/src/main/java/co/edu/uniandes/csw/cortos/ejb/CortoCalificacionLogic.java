@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -22,10 +23,12 @@ public class CortoCalificacionLogic {
     /**
      * Referencia a la persistencia de cortos
      */
+    @Inject
     private CortoPersistence cp;
     /**
      * Referencia a la persistencia de Calificacion
      */
+    @Inject
     private CalificacionPersistence califP;
     /**
      * Aniade una calificacion a un corto especifico

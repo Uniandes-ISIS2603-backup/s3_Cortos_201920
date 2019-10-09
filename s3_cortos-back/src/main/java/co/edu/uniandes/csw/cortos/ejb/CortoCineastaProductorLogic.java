@@ -18,18 +18,33 @@ import javax.inject.Inject;
  */
 @Stateless
 public class CortoCineastaProductorLogic {
+    /**
+     * Referencia a la persistencia del corto
+     */
     @Inject
     private CortoPersistence cp;
+    /**
+     * Referencia a la persistencia del cineasta que sera el productor
+     */
     @Inject
     private CineastaPersistence cineP;
-    
+    /**
+     * Modifica al productor de un corto
+     * @param cortoId identificacion del corto
+     * @param CineastaId identificacion del cineasta con el que se modificara el productor
+     * @return retorna el cineasta que sera el nuevo productor
+     */
     public CineastaEntity replaceProductor(Long cortoId, Long CineastaId){
         CineastaEntity agregueme = cineP.find(CineastaId);
         CortoEntity metalo = cp.find(cortoId);
         metalo.setProductor(agregueme);
         return agregueme;
     }
-    
+    /**
+     * quita al productor del corto
+     * @param cineastaId quitar este cineasta de productor
+     * @param cortoId  identificador del corto al que se le quitara el productor
+     */
     public void removeProductor(Long cineastaId, Long cortoId){
         CortoEntity quitemelo = cp.find(cortoId);
         CineastaEntity puesMeVoy = cineP.find(cineastaId);

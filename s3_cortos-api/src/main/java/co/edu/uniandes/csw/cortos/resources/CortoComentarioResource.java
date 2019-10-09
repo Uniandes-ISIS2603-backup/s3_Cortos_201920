@@ -29,12 +29,23 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CortoComentarioResource {
+    /**
+     * Referencia de la logica de la relacion entre corto y comentario
+     */
     @Inject
     private CortoComentarioLogic cortoComenLogic;
+    /**
+     * Referencia de la logica del comentario
+     */
     @Inject
     private ComentarioLogic comentLogic;
     
-    
+    /**
+     * Servicio RESFTUL de aniadir un comentario a un corto
+     * @param cortoId identificacion del corto
+     * @param comentarioId identificacion del comentario
+     * @return comentario que se aniade
+     */
     @POST
     @Path("{comentarioId : \\d+}")
     public ComentarioDTO addComentario(@PathParam("cortoId") Long cortoId, @PathParam("comentarioId") Long comentarioId){
@@ -44,10 +55,20 @@ public class CortoComentarioResource {
         ComentarioDTO c = new ComentarioDTO(cortoComenLogic.addComentario(comentarioId, cortoId));
         return c;
     }
+    /**
+     * Lista de comentarios de un corto
+     * @param cortoId identificacion del corto
+     * @return Lista de comentarios de un corto
+     */
     @GET
     public List<ComentarioDTO> getComentarios(@PathParam("cortosId") Long cortoId){
         return null;
     }
+    /**
+     *Metodo auxiliar para transformar entidades a dtos
+     * @param lista lista de entidades de comentarios
+     * @return lista de comentario dto
+     */
     public List<ComentarioDTO> comentariosListEntity2DTO(List<ComentarioEntity> lista){
         List<ComentarioDTO> list= new ArrayList<>();
         for(ComentarioEntity c : lista){
@@ -55,7 +76,13 @@ public class CortoComentarioResource {
         }
         return list;
     }
-    
+    /**
+     * Comentario particular de un corto
+     * @param cortoId identificacion de corto
+     * @param comentarioId identificacion de comentarios
+     * @return comentario de un corto
+     * @throws BusinessLogicException el comentario no pertenece al corto
+     */
     @GET
     @Path("comentarioId: \\d+")
     public ComentarioDTO getComentario(@PathParam("cortosId")Long cortoId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
