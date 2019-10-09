@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.cortos.ejb;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.FacturaPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -39,5 +40,34 @@ public class FacturaLogic {
         }
         factura= persistence.create(factura);
         return factura;
+    }
+    public FacturaEntity updateFactura (Long id, FacturaEntity factura) throws BusinessLogicException
+    {
+        if(factura.getFecha()== null)
+        {
+           throw new BusinessLogicException("La fecha de creación de la factura no puede ser null.");
+        }   
+        if(factura.getCostoTotal()==null || factura.getCostoTotal()<0.0)
+        {
+           throw new BusinessLogicException("El costo de la factura debe ser mayor o igual a 0 y no puede ser null.");
+        }
+        if(factura.getNumeroFactura()==null || factura.getNumeroFactura()<=0)
+        {
+           throw new BusinessLogicException("El número que identifica a la factura debe ser mayor a 0 y no puede ser null.");
+        }
+        if(persistence.findByNumber(factura.getNumeroFactura())!=null)
+        {
+           throw new BusinessLogicException("Ya existe una factura con el número "+factura.getNumeroFactura());
+        }
+        factura= persistence.update(factura);
+        return factura;
+    }
+    public List<FacturaEntity> getFacturas()
+    {
+        return persistence.findAll();
+    }
+    public FacturaEntity getFactura(Long id)
+    {
+        return persistence.find(id);
     }
 }

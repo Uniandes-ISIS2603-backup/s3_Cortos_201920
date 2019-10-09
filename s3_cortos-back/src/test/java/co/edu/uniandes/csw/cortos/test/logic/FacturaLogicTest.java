@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.FacturaPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -99,7 +100,7 @@ public class FacturaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createFacturaFechaNull()throws BusinessLogicException
     {
-        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+        FacturaEntity newEntity = data.get(0);
         newEntity.setFecha(null);
         FacturaEntity result = facturaLogic.createFactura(newEntity);
     }
@@ -107,8 +108,8 @@ public class FacturaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createFacturaNumeroRep()throws BusinessLogicException
     {
-        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
-        FacturaEntity newEntity2 = factory.manufacturePojo(FacturaEntity.class);
+        FacturaEntity newEntity = data.get(0);
+        FacturaEntity newEntity2 = data.get(1);
         FacturaEntity result = facturaLogic.createFactura(newEntity2);
         newEntity.setNumeroFactura(newEntity2.getNumeroFactura());
         FacturaEntity result2 = facturaLogic.createFactura(newEntity);
@@ -119,7 +120,7 @@ public class FacturaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createFacturaNumeroNeg()throws BusinessLogicException
     {
-        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+        FacturaEntity newEntity = data.get(0);
         newEntity.setNumeroFactura(-500);
         FacturaEntity result = facturaLogic.createFactura(newEntity);
     }
@@ -127,9 +128,66 @@ public class FacturaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createFacturaCostoNeg()throws BusinessLogicException
     {
-        FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+        FacturaEntity newEntity = data.get(0);
         newEntity.setCostoTotal(-2000.6);
         FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaCostoNull()throws BusinessLogicException
+    {
+        FacturaEntity newEntity = data.get(0);
+        newEntity.setCostoTotal(null);
+        FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void createFacturaNumeroNull()throws BusinessLogicException
+    {
+        FacturaEntity newEntity = data.get(0);
+        newEntity.setNumeroFactura(null);
+        FacturaEntity result = facturaLogic.createFactura(newEntity);
+    }
+     @Test(expected = BusinessLogicException.class)
+    public void updateFacturaFechaNull()throws BusinessLogicException
+    {
+        FacturaEntity factura= data.get(0);
+        factura.setFecha(null);
+        FacturaEntity result =facturaLogic.updateFactura(factura.getId(),factura);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateFacturaNumeroRep()throws BusinessLogicException
+    {
+        FacturaEntity factura1=data.get(0);
+        FacturaEntity factura2=data.get(1);
+        factura1.setNumeroFactura(factura2.getNumeroFactura());
+        FacturaEntity result =facturaLogic.updateFactura(factura1.getId(), factura1);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateFacturaNumeroNeg()throws BusinessLogicException
+    {
+        FacturaEntity factura=data.get(0);
+        factura.setNumeroFactura(-500);
+        FacturaEntity result =facturaLogic.updateFactura(factura.getId(), factura);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateFacturaCostoNeg()throws BusinessLogicException
+    {
+        FacturaEntity factura= data.get(0);
+        factura.setCostoTotal(-350.99);
+        FacturaEntity result = facturaLogic.updateFactura(factura.getId(), factura);
+    }
+     @Test(expected = BusinessLogicException.class)
+    public void updateFacturaCostoNull()throws BusinessLogicException
+    {
+        FacturaEntity factura = data.get(0);
+        factura.setCostoTotal(null);
+        FacturaEntity result =facturaLogic.updateFactura(factura.getId(), factura);
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateFacturaNumeroNull()throws BusinessLogicException
+    {
+        FacturaEntity factura = data.get(0);
+        factura.setNumeroFactura(null);
+        FacturaEntity result =facturaLogic.updateFactura(factura.getId(), factura);
     }
     
 }

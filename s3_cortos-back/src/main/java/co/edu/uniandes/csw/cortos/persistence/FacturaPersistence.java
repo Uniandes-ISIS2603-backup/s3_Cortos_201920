@@ -66,16 +66,6 @@ public class FacturaPersistence {
     {
         return em.merge(facturaEntity);
     }
-    /**
-     * Borra una factura de la base de datos recibiendo como argumento el id de
-     * la factura
-     *
-     * @param facturaId: id correspondiente a la factura a borrar.
-     */
-    public void delete(Long facturaId) {
-        FacturaEntity facturaEntity = em.find(FacturaEntity.class, facturaId);
-        em.remove(facturaEntity);
-    }
     
     public FacturaEntity findByNumber(Integer pNumeroFactura)
     {

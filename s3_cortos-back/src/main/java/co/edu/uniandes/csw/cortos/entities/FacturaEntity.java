@@ -8,10 +8,13 @@ package co.edu.uniandes.csw.cortos.entities;
 import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamDoubleValue;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 /**
@@ -21,6 +24,10 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable 
 {
+  @PodamExclude
+  @OneToMany(mappedBy = "factura")
+  private List<CortoEntity> cortos;
+  
   @PodamIntValue(minValue=1, maxValue= Integer.MAX_VALUE)
   private Integer numeroFactura;
   

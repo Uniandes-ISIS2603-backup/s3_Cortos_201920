@@ -10,10 +10,7 @@
     <packaging>pom</packaging>
     <name>s3_cortos</name>
  
-    <modules>
-        <module>s3_cortos-back</module>
-        <module>s3_cortos-api</module>
-    </modules>
+    <modules></modules>
     
     <repositories>
         <repository>
