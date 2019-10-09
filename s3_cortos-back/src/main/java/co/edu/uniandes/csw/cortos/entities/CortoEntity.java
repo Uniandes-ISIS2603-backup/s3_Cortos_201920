@@ -38,7 +38,11 @@ public class CortoEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "corto")
     private List<CalificacionEntity> calificaciones = new ArrayList<>();
-
+    
+    @PodamExclude
+    @ManyToOne
+    private FacturaEntity factura;
+    
     @PodamExclude
     @ManyToMany
     private List<TemaEntity> temas = new ArrayList<>();
@@ -235,4 +239,12 @@ public class CortoEntity extends BaseEntity implements Serializable {
         this.cineasta = cineasta;
     }
 
+    public FacturaEntity getFactura() {
+        return factura;
+    }
+
+    public void setFactura(FacturaEntity factura) {
+        this.factura = factura;
+    }
+    
 }

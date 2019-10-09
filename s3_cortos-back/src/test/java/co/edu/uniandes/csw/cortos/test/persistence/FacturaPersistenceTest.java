@@ -32,6 +32,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class FacturaPersistenceTest 
 { 
+    @Inject
+    FacturaPersistence fp;
+    
     @PersistenceContext
     private EntityManager em;
 
@@ -94,8 +97,7 @@ public class FacturaPersistenceTest
             data.add(entity);
         }
     }
-    @Inject
-    FacturaPersistence fp;
+    
     @Test
     public void createTest()
     {

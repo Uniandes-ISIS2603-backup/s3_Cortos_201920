@@ -38,8 +38,8 @@ public class FormaDePagoPersistanceTest {
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(FormaDePagoEntity.class)
-                .addClass(FormaDePagoPersistance.class)
+                .addPackage(FormaDePagoEntity.class.getPackage())
+                .addPackage(FormaDePagoPersistance.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
