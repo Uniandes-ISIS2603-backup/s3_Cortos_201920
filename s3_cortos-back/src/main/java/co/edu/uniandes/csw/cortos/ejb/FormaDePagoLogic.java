@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.cortos.ejb;
 import co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.FormaDePagoPersistance;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -42,4 +43,26 @@ public class FormaDePagoLogic {
         return formaDePago;
     }
     
+    public List<FormaDePagoEntity > getFormasDePago()
+    {
+        List<FormaDePagoEntity> formasDePago = persistence.findAll();
+        return formasDePago;
+    }
+    
+    public FormaDePagoEntity getFormaDePago(Long numero)
+    {
+        FormaDePagoEntity formaDePagoEntity= persistence.find(numero);
+        return formaDePagoEntity;
+    }
+    
+     public FormaDePagoEntity updateFormaDePago (Long id, FormaDePagoEntity formaDePago)throws BusinessLogicException
+    {
+        FormaDePagoEntity newEntity = persistence.update(formaDePago);
+        return newEntity;
+    }
+     
+     public void deleteFormaDePago(Long numero ) throws BusinessLogicException
+    {
+        persistence.delete(numero);
+    }
 }

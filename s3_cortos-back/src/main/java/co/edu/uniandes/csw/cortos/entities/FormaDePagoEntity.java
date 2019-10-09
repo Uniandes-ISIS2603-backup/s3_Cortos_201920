@@ -9,9 +9,11 @@ import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamDoubleValue;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamLongValue;
 import uk.co.jemos.podam.common.PodamStrategyValue;
@@ -22,6 +24,13 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class FormaDePagoEntity extends BaseEntity implements Serializable {
+    
+    /**
+     * Relacion entre FormaDePago y Cliente
+     */
+    @PodamExclude
+    @ManyToOne
+    private ClienteEntity cliente;
     
     @PodamLongValue(minValue=1000000000000000L, maxValue= 9999999999999999L)
     private Long numero;
@@ -73,6 +82,16 @@ public class FormaDePagoEntity extends BaseEntity implements Serializable {
     public void setCcv(int pCcv)
     {
         this.ccv = pCcv;
+    }
+    
+    public ClienteEntity getCliente()
+    {
+        return cliente;
+    }
+    
+    public void setCliente(ClienteEntity pCliente)
+    {
+        this.cliente = pCliente;
     }
     
 }
