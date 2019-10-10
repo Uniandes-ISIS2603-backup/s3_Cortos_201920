@@ -30,7 +30,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Santiago Vargas Vega
  */
-@Path("comentario")
+@Path("comentarios")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped  
@@ -57,7 +57,7 @@ public class ComentarioResource {
     }
     
     @GET
-    @Path("{comentarioId: \\d+}")
+    @Path("{comentariosId: \\d+}")
     public ComentarioDTO getComentario(@PathParam("comentarioId") Long id)
     {
         LOGGER.log(Level.INFO,"ComentarioResource getComentario :input:{0}", id);
@@ -71,7 +71,7 @@ public class ComentarioResource {
     }
     
     @PUT
-    @Path("{comentarioId:\\d+}")
+    @Path("{comentariosId:\\d+}")
     public ComentarioDTO updateComentario(@PathParam("comentarioId") Long id,ComentarioDTO comentario)throws BusinessLogicException{
         LOGGER.log(Level.INFO,"ComentarioResource updateComentario:input:id:{0},comentario:{1}",new Object[]{id,comentario});
         comentario.setId(id);
@@ -85,7 +85,7 @@ public class ComentarioResource {
     }
     
     @DELETE
-    @Path("{comentarioId:\\d+}")
+    @Path("{comentariosId:\\d+}")
     public void deleteComentario(@PathParam("comentarioId") Long id) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"ComentarioResource deleteComentario:input:{0}", id);
