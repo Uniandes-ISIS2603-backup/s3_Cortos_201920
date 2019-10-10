@@ -110,5 +110,13 @@ public class FacturaEntity extends BaseEntity implements Serializable
     public void setCortos(List<CortoEntity> cortos) {
         this.cortos = cortos;
     }
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
     
 }

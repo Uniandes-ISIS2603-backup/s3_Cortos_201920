@@ -162,7 +162,7 @@ public class ClienteResource
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la editorial.
      */
-    @Path("{clienteId: \\d+}/comentarios")
+    @Path("{clienteId: \\d+}/facturas")
     public Class<ClienteFacturaResource> getClienteFacturaResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
             throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
@@ -184,7 +184,7 @@ public class ClienteResource
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la editorial.
      */
-    @Path("{clienteId: \\d+}/comentarios")
+    @Path("{clienteId: \\d+}/formasDePago")
     public Class<ClienteFormaPagoResource> getClienteFormaPagoResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
             throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
