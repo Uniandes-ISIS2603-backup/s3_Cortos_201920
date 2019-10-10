@@ -32,13 +32,30 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CortosPersistenceTest {
+    /**
+     * Referencia a la persistencia cortos
+     */
     @Inject
     CortoPersistence cp;
+    /**
+     * Transacciones
+     */
     @Inject
     UserTransaction utx;
+    /**
+     * Contexto de persistencia
+     */
     @PersistenceContext
     EntityManager em;
+    /**
+     * Lista de cortos utilizada para los test
+     */
     private List<CortoEntity> data = new ArrayList<>();
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
     @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
@@ -86,6 +103,9 @@ public class CortosPersistenceTest {
             data.add(entity);
         }
     }
+    /**
+     * Prueba que crea un corto
+     */
     @Test
     public void createCortoTest(){
         PodamFactory factory = new PodamFactoryImpl();
@@ -130,7 +150,7 @@ public class CortosPersistenceTest {
         Assert.assertEquals(c.getFechaDePublicacion(), corto.getFechaDePublicacion());
         Assert.assertEquals(c.getDescripcion(), corto.getDescripcion());
     }
-       /**
+     /**
      * Prueba para eliminar un Book.
      */
     @Test
@@ -140,7 +160,10 @@ public class CortosPersistenceTest {
         CortoEntity deleted = em.find(CortoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-        @Test
+    /**
+     * Prueba de actualizar la info de un corto
+     */
+    @Test
     public void updateCortoTest() {
         CortoEntity c = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
