@@ -66,7 +66,11 @@ public class FacturaPersistence {
     {
         return em.merge(facturaEntity);
     }
-    
+    public FacturaEntity delete(FacturaEntity facturaEntity)
+    {
+        em.remove(facturaEntity);
+        return facturaEntity;
+    }
     public FacturaEntity findByNumber(Integer pNumeroFactura)
     {
         TypedQuery<FacturaEntity> query = em.createQuery("select e from FacturaEntity e where e.numeroFactura = :pNumeroFactura ", FacturaEntity.class);

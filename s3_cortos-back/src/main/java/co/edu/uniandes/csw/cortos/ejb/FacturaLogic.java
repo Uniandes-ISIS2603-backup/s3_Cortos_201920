@@ -70,4 +70,25 @@ public class FacturaLogic {
     {
         return persistence.find(id);
     }
+    public FacturaEntity deleteFactura (Long id, FacturaEntity factura) throws BusinessLogicException
+    {
+        if(factura.getFecha()== null)
+        {
+           throw new BusinessLogicException("La fecha de creación de la factura no puede ser null.");
+        }   
+        if(factura.getCostoTotal()==null || factura.getCostoTotal()<0.0)
+        {
+           throw new BusinessLogicException("El costo de la factura debe ser mayor o igual a 0 y no puede ser null.");
+        }
+        if(factura.getNumeroFactura()==null || factura.getNumeroFactura()<=0)
+        {
+           throw new BusinessLogicException("El número que identifica a la factura debe ser mayor a 0 y no puede ser null.");
+        }
+        if(persistence.findByNumber(factura.getNumeroFactura())!=null)
+        {
+           throw new BusinessLogicException("Ya existe una factura con el número "+factura.getNumeroFactura());
+        }
+        factura= persistence.delete(factura);
+        return factura;
+    }
 }
