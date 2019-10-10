@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.cortos.tests.postman;
 
-import co.edu.uniandes.csw.cortos.dtos.CascaraDTO;
 import co.edu.uniandes.csw.cortos.dtos.ClienteDTO;
 import co.edu.uniandes.csw.cortos.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.cortos.resources.ClienteResource;

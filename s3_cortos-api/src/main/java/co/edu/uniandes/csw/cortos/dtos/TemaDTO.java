@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Estudiante
  */
-public class TemaDTO extends CascaraDTO implements Serializable{
+public class TemaDTO implements Serializable{
     
     private Long id;
     

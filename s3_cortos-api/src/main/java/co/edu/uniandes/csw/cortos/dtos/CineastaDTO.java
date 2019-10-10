@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *
  * @author Pedro Callejas
  */
-public class CineastaDTO extends CascaraDTO implements Serializable {
+public class CineastaDTO implements Serializable {
 
     /**
      * id cineasta
