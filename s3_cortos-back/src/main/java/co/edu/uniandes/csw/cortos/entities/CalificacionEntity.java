@@ -19,14 +19,22 @@ import uk.co.jemos.podam.common.PodamIntValue;
 @Entity
 public class CalificacionEntity extends BaseEntity implements Serializable{
     
+    
+    /**
+     * Relacion con la entidad cliente
+     */
     @PodamExclude
     @ManyToOne (fetch=FetchType.EAGER)
     private ClienteEntity cliente;
-    
+    /**
+     * Relacion con la entidad corto 
+     */
     @PodamExclude
     @ManyToOne (fetch=FetchType.EAGER)
     private CortoEntity corto;
-    
+    /**
+     * Variable que representa el puntaje 
+     */
     @PodamIntValue(minValue=0, maxValue=5)
     private Integer puntaje;
 
