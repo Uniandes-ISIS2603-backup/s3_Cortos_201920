@@ -10,7 +10,6 @@ import co.edu.uniandes.csw.cortos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 import java.util.ArrayList;
 
@@ -99,14 +98,12 @@ public class FacturaResource
     @Path("{facturaId:\\d+}")
     public void deleteFactura(@PathParam("facturaId") Long id ) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO,"FacturaResource deleteFactura :input:{0}",id);
         FacturaEntity entity = facturaLogic.getFactura(id);
         if(entity ==null)
         {
             throw new WebApplicationException("El recurso /factura/"+id+"no existe.",404);
         }
         facturaLogic.deleteFactura(id, entity);
-        LOGGER.info("FacturaResorce deleteFactura:output:void");
     }
     
     /**
