@@ -10,14 +10,17 @@ import co.edu.uniandes.csw.cortos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -92,7 +95,19 @@ public class FacturaResource
         FacturaDetailDTO n = new FacturaDetailDTO(facturaLogic.updateFactura(facturaId, c.toEntity()));
         return n;
     }
-    
+    @DELETE
+    @Path("{facturaId:\\d+}")
+    public void deleteFactura(@PathParam("facturaId") Long id ) throws BusinessLogicException
+    {
+        LOGGER.log(Level.INFO,"FacturaResource deleteFactura :input:{0}",id);
+        FacturaEntity entity = facturaLogic.getFactura(id);
+        if(entity ==null)
+        {
+            throw new WebApplicationException("El recurso /factura/"+id+"no existe.",404);
+        }
+        facturaLogic.deleteFactura(id, entity);
+        LOGGER.info("FacturaResorce deleteFactura:output:void");
+    }
     
     /**
      * convertir entidades en DTO
