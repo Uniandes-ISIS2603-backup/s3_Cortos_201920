@@ -79,6 +79,22 @@ public class FacturaEntity extends BaseEntity implements Serializable
       this.fecha=pFecha;
   }
   /**
+   * Obtiene la colección de cortos.
+   *
+   * @return colección cortos.
+   */
+  public List<CortoEntity> getCortos() {
+      return cortos;
+  }
+  /**    
+   * Establece el valor de la colección de cortos.
+   *
+   * @param cortos nuevo valor de la colección.
+   */
+  public void setCortos(List<CortoEntity> cortos) {
+      this.cortos = cortos;
+  }
+    /**
      * Metodo no usado
      *
      * @param obj Object que se compara.
@@ -103,13 +119,6 @@ public class FacturaEntity extends BaseEntity implements Serializable
         return super.hashCode();
     }
 
-    public List<CortoEntity> getCortos() {
-        return cortos;
-    }
-
-    public void setCortos(List<CortoEntity> cortos) {
-        this.cortos = cortos;
-    }
 
     public ClienteEntity getCliente() {
         return cliente;

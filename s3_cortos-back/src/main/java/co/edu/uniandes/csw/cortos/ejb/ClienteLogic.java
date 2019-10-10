@@ -43,6 +43,9 @@ public class ClienteLogic
         if (cliente.getCorreo() == null || cliente.getCorreo().equals("")) {
             throw new BusinessLogicException("El correo no puede ser null ni vacio \"");
         }
+        if (persistence.findByCorreo(cliente.getCorreo())!= null) {
+            throw new BusinessLogicException("El correo ya existe \"");
+        }
         cliente = persistence.create(cliente);
         return cliente;
     }

@@ -26,14 +26,14 @@ public class CalificacionClienteLogic {
     @Inject
     private ClientePersistence clientePersistence; 
     
-    public CalificacionEntity addCliente(Long calificacionId, Long clienteId)
+    public ClienteEntity addCliente(Long calificacionId, Long clienteId)
     {
         LOGGER.log(Level.INFO, "Se inicia proceso de asosiacion de la  calificacion con id ={0} con el cliente con id = "+ clienteId,calificacionId);
         ClienteEntity cliente = clientePersistence.find(clienteId);
         CalificacionEntity calificacion = calificacionPersistence.find(calificacionId);
         calificacion.setCliente(cliente);
         LOGGER.log(Level.INFO, "Se termina proceso de asociacion");
-        return calificacionPersistence.find(calificacionId);
+        return clientePersistence.find(clienteId);
         
     }
     

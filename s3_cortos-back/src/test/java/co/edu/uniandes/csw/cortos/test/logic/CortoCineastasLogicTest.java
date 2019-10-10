@@ -93,6 +93,7 @@ public class CortoCineastasLogicTest {
             data.add(c);
             if(i == 0)
                 cineastas.get(i).setCortoCineastas(c);
+            
         }
     }
     
