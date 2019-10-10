@@ -27,14 +27,14 @@ public class CalificacionCortoLogic {
   @Inject
   private CalificacionPersistence calificacionPersistence ; 
   
-  public CalificacionEntity replaceCorto (Long cortoId, Long calificacionId)
+  public CortoEntity addCorto (Long cortoId, Long calificacionId)
   {
        LOGGER.log(Level.INFO, "Se inicia proceso de asosiacion de la  calificacion con id ={0} con el corto con id = "+ cortoId,calificacionId);
         CortoEntity corto = cortoPersistence.find(cortoId);
         CalificacionEntity calificacion = calificacionPersistence.find(calificacionId);
         calificacion.setCorto(corto);
         LOGGER.log(Level.INFO, "Se termina proceso de asociacion");
-        return calificacion;
+        return cortoPersistence.find(cortoId);
   }
   
   
