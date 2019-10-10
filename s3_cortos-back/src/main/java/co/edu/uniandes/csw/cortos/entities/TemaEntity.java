@@ -27,7 +27,7 @@ public class TemaEntity extends BaseEntity implements Serializable{
      * relacion con los cortos que tienen temas de este tipo
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany (mappedBy = "temas")
     private ArrayList<CortoEntity> cortos = new ArrayList<CortoEntity> ();
     /**
      * Relacion con los cineastas que tengan 
