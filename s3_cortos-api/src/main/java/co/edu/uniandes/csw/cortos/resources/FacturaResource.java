@@ -96,17 +96,17 @@ public class FacturaResource
         return n;
     }
     @DELETE
-    @Path("{cineastaId:\\d+}")
-    public void deleteCliente(@PathParam("facturaId") Long id ) throws BusinessLogicException
+    @Path("{facturaId:\\d+}")
+    public void deleteFactura(@PathParam("facturaId") Long id ) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"FacturaResource deleteFactura :input:{0}",id);
         FacturaEntity entity = facturaLogic.getFactura(id);
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+id+"no existe.",404);
+            throw new WebApplicationException("El recurso /factura/"+id+"no existe.",404);
         }
         facturaLogic.deleteFactura(id, entity);
-        LOGGER.info("CineastaResorce deleteCineasta:output:void");
+        LOGGER.info("FacturaResorce deleteFactura:output:void");
     }
     
     /**
