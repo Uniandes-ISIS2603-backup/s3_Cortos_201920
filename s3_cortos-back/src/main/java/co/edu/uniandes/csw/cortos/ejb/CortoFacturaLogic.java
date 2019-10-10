@@ -45,9 +45,9 @@ public class CortoFacturaLogic {
      * @param facturaId identificacion factura
      * @param cortoId  identificador del corto al que se le quitara el productor
      */
-    public void removeFactura(Long facturaId, Long cortoId){
+    public void removeFactura(Long cortoId){
         CortoEntity quitemelo = cp.find(cortoId);
-        FacturaEntity puesMeVoy = fp.find(facturaId);
+        FacturaEntity puesMeVoy = fp.find(quitemelo.getFactura().getId());
         quitemelo.setFactura(null);
         puesMeVoy.getCortos().remove(quitemelo);
     }

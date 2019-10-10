@@ -45,9 +45,9 @@ public class CortoCineastaProductorLogic {
      * @param cineastaId quitar este cineasta de productor
      * @param cortoId  identificador del corto al que se le quitara el productor
      */
-    public void removeProductor(Long cineastaId, Long cortoId){
+    public void removeProductor(Long cortoId){
         CortoEntity quitemelo = cp.find(cortoId);
-        CineastaEntity puesMeVoy = cineP.find(cineastaId);
+        CineastaEntity puesMeVoy = cineP.find(quitemelo.getProductor().getId());
         quitemelo.setProductor(null);
         puesMeVoy.getCortos().remove(quitemelo);
     }

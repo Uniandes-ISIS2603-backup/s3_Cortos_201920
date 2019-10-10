@@ -50,11 +50,7 @@ public class CineastaEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @OneToMany(
-            mappedBy = "productor",
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
-    )
+            mappedBy = "productor")
     private List<CortoEntity> cortos = new ArrayList<CortoEntity>();
 
     /**
