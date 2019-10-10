@@ -24,42 +24,43 @@ import org.junit.Test;
  * @author Santiago Vargas Vega 
  */
 public class ComentarioIT {
-//    private static final String COLLECTION = "ComentarioResourceTest.postman_collection";
-//    
-//    @Deployment(testable =true)
-//    public static WebArchive createDeplyment()
-//    {
-//        return ShrinkWrap.create(WebArchive.class, "s3_cortos-api-1.0.war")//War del modulo api
-//                // Se agrega las dependencias
-//                .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
-//                        .importRuntimeDependencies().resolve()
-//                        .withTransitivity().asFile())
-//                // Se agregan los compilados de los paquetes de servicios
-//                .addPackage(ComentarioResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
-//                .addPackage(ComentarioDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
-//                .addPackage(BusinessLogicExceptionMapper.class.getPackage())
-//                // El archivo que contiene la configuracion a la base de datos.
-//                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-//                // El archivo beans.xml es necesario para injeccion de dependencias.
-//                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
-//                // El archivo web.xml es necesario para el despliegue de los servlets
-//                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-//                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/glassfish-resources.xml"));
-//    }
-//    
-//    
-//    @Test
-//    @RunAsClient
-//    public void postman() throws IOException {
-//        PostmanTestBuilder tp = new PostmanTestBuilder();
-//        tp.setTestWithoutLogin(COLLECTION, "Entorno-IT.postman_environment");
-//        String desiredResult = "0";
-//        Assert.assertEquals("Error en Iterations de: " + COLLECTION, desiredResult, tp.getIterations_failed());
-//
-//        Assert.assertEquals("Error en Requests de: " + COLLECTION, desiredResult, tp.getRequests_failed());
-//
-//        Assert.assertEquals("Error en Test-Scripts de: " + COLLECTION, desiredResult, tp.getTest_scripts_failed());
-//
-//        Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
-//    }
+    private static final String COLLECTION = "ComentarioResourceTest.postman_collection";
+    
+    @Deployment(testable =true)
+    public static WebArchive createDeplyment()
+    {
+        return ShrinkWrap.create(WebArchive.class, "s3_cortos-api-1.0.war")//War del modulo api
+                // Se agrega las dependencias
+                .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
+                        .importRuntimeDependencies().resolve()
+                        .withTransitivity().asFile())
+                // Se agregan los compilados de los paquetes de servicios
+                .addPackage(ComentarioResource.class.getPackage()) //No importa cual recurso usar, lo importante es agregar el paquet
+                .addPackage(ComentarioDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(BusinessLogicExceptionMapper.class.getPackage())
+                // El archivo que contiene la configuracion a la base de datos.
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                // El archivo beans.xml es necesario para injeccion de dependencias.
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/beans.xml"))
+                // El archivo web.xml es necesario para el despliegue de los servlets
+                .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+                .addAsWebInfResource(new File("src/main/webapp/WEB-INF/glassfish-resources.xml"));
+    }
+    
+    
+    @Test
+    @RunAsClient
+    public void postman() throws IOException {
+        PostmanTestBuilder tp = new PostmanTestBuilder();
+        tp.setTestWithoutLogin(COLLECTION, "Entorno-IT.postman_environment");
+        String desiredResult = "0";
+        if (tp.getIterations_failed()!= null)
+        Assert.assertEquals("Error en Iterations de: " + COLLECTION, desiredResult, tp.getIterations_failed());
+        if(tp.getRequests_failed()!=null)
+        Assert.assertEquals("Error en Requests de: " + COLLECTION, desiredResult, tp.getRequests_failed());
+        if(tp.getRequests_failed()!=null)
+        Assert.assertEquals("Error en Test-Scripts de: " + COLLECTION, desiredResult, tp.getTest_scripts_failed());
+        if(tp.getAssertions_failed()!=null)
+        Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
+    }
 }
