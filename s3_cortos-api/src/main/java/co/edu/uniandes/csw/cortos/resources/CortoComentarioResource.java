@@ -62,7 +62,7 @@ public class CortoComentarioResource {
      */
     @GET
     public List<ComentarioDTO> getComentarios(@PathParam("cortosId") Long cortoId){
-        return null;
+        return comentariosListEntity2DTO(cortoComenLogic.getComentarios(cortoId));
     }
     /**
      *Metodo auxiliar para transformar entidades a dtos
