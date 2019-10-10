@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.cortos.dtos;
 import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
+import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
+import co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,10 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     private List<CalificacionDTO> calificaciones;
     
     private List<ComentarioDTO> comentarios;
+    
+    private List<FormaDePagoDTO> formasDePago;
+    
+    private List<FormaDePagoDTO> facturas;
     
     public ClienteDetailDTO()
     {
@@ -41,6 +47,18 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
                 comentarios.add(new ComentarioDTO(comm));
             }
         }
+        if (c.getFormasPago() != null) {
+            formasDePago = new ArrayList<>();
+            for (FormaDePagoEntity comm : c.getFormasPago()) {
+                formasDePago.add(new FormaDePagoDTO(comm));
+            }
+        }
+        if (c.getFacturas() != null) {
+            facturas = new ArrayList<>();
+            for (FacturaEntity comm : c.getFacturas()) {
+               // facturas.add(new FacturaDTO(comm));
+            }
+        }
     }
 
     @Override
@@ -57,6 +75,18 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
             for( CalificacionDTO calif : getCalificaciones() )
                 califEnt.add(calif.toEntity());
             c.setCalificaciones(califEnt);
+        }
+        if(formasDePago!=null){
+            List<FormaDePagoEntity> formEnt = new ArrayList<>();
+            for( FormaDePagoDTO form : getFormasDePago())
+                formEnt.add(form.toEntity());
+            c.setFormasPago(formEnt);
+        }
+        if(facturas!=null){
+            List<FacturaEntity> factEnt = new ArrayList<>();
+            for( FormaDePagoDTO form : getFacturas())
+                //factEnt.add(form.toEntity());
+            c.setFacturas(factEnt);
         }
         return c;
     }
@@ -76,5 +106,20 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     public void setComentarios(List<ComentarioDTO> comentarios) {
         this.comentarios = comentarios;
     }
-            
+
+    public List<FormaDePagoDTO> getFormasDePago() {
+        return formasDePago;
+    }
+
+    public void setFormasDePago(List<FormaDePagoDTO> formasDePago) {
+        this.formasDePago = formasDePago;
+    }
+
+    public List<FormaDePagoDTO> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List<FormaDePagoDTO> facturas) {
+        this.facturas = facturas;
+    }       
 }

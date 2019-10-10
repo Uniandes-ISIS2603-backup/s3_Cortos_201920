@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +25,10 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable 
 {
+  @PodamExclude
+  @ManyToOne
+  private ClienteEntity cliente;
+    
   @PodamExclude
   @OneToMany(mappedBy = "factura")
   private List<CortoEntity> cortos;
@@ -113,4 +118,14 @@ public class FacturaEntity extends BaseEntity implements Serializable
     public int hashCode() {
         return super.hashCode();
     }
+
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
+    
 }

@@ -27,22 +27,30 @@ import uk.co.jemos.podam.common.PodamStringValue;
 public class ComentarioEntity extends BaseEntity implements Serializable{
     
     private String comentario;
-    
+    /**
+     * Fecha de creacion del comentario 
+     */
    @Temporal(TemporalType.DATE)
    @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
     
     
-
+   /**
+    * Relacion con corto
+    */
      @PodamExclude
      @ManyToOne
      private CortoEntity corto;
-
+     /**
+      * Relacion con cliente
+      */
     @PodamExclude
     @ManyToOne (fetch=FetchType.EAGER)
     private ClienteEntity cliente;
  
-    
+    /**
+     * Comentario encadenados
+     */
     @PodamExclude
     @OneToOne 
     private ComentarioEntity siguiente;

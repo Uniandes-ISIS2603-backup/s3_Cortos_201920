@@ -104,6 +104,94 @@ public class ClienteResource
         LOGGER.info("ClienteResorce deleteCliente:output:void");
     }
     
+     /**
+     * Conexión con el servicio de libros para una editorial.
+     * {@link EditorialBooksResource}
+     *
+     * Este método conecta la ruta de /editorials con las rutas de /books que
+     * dependen de la editorial, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una editorial.
+     *
+     * @param clienteId El ID de la editorial con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta editorial en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @Path("{clienteId: \\d+}/calificaciones")
+    public Class<ClienteCalificacionResource> getClienteCalificacionResource(@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+        }
+        return ClienteCalificacionResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de libros para una editorial.
+     * {@link EditorialBooksResource}
+     *
+     * Este método conecta la ruta de /editorials con las rutas de /books que
+     * dependen de la editorial, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una editorial.
+     *
+     * @param clienteId El ID de la editorial con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta editorial en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @Path("{clienteId: \\d+}/comentarios")
+    public Class<ClienteComentarioResource> getClienteComentarioResource(@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+        }
+        return ClienteComentarioResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de libros para una editorial.
+     * {@link EditorialBooksResource}
+     *
+     * Este método conecta la ruta de /editorials con las rutas de /books que
+     * dependen de la editorial, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una editorial.
+     *
+     * @param clienteId El ID de la editorial con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta editorial en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @Path("{clienteId: \\d+}/facturas")
+    public Class<ClienteFacturaResource> getClienteFacturaResource(@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+        }
+        return ClienteFacturaResource.class;
+    }
+    
+    /**
+     * Conexión con el servicio de libros para una editorial.
+     * {@link EditorialBooksResource}
+     *
+     * Este método conecta la ruta de /editorials con las rutas de /books que
+     * dependen de la editorial, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una editorial.
+     *
+     * @param clienteId El ID de la editorial con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta editorial en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @Path("{clienteId: \\d+}/formasDePago")
+    public Class<ClienteFormaPagoResource> getClienteFormaPagoResource(@PathParam("clienteId") Long clienteId) {
+        if (clienteLogic.getCliente(clienteId) == null) {
+            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+        }
+        return ClienteFormaPagoResource.class;
+    }
+    
     private List<ClienteDetailDTO> listEntity2DTO(List<ClienteEntity> entityList)
     {
         List<ClienteDetailDTO> list = new ArrayList<>();
@@ -112,4 +200,5 @@ public class ClienteResource
         }
         return list;
     }
+    
 }

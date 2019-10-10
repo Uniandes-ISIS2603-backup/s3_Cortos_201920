@@ -31,64 +31,49 @@ public class CineastaLogic {
         return arregloCorreo.length == 2;
     }
 
- private int getEdad(Date birthDate)
-   {
-      int years = 0;
-      int months = 0;
-      int days = 0;
- 
-      //create calendar object for birth day
-      Calendar birthDay = Calendar.getInstance();
-      birthDay.setTimeInMillis(birthDate.getTime());
- 
-      //create calendar object for current day
-      long currentTime = System.currentTimeMillis();
-      Calendar now = Calendar.getInstance();
-      now.setTimeInMillis(currentTime);
-       
-      //Get difference between years
-      years = now.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
-      int currMonth = now.get(Calendar.MONTH) + 1;
-      int birthMonth = birthDay.get(Calendar.MONTH) + 1;
- 
-      //Get difference between months
-      months = currMonth - birthMonth;
- 
-      //if month difference is in negative then reduce years by one
-      //and calculate the number of months.
-      if (months < 0)
-      {
-         years--;
-         months = 12 - birthMonth + currMonth;
-         if (now.get(Calendar.DATE) < birthDay.get(Calendar.DATE))
-            months--;
-      } else if (months == 0 && now.get(Calendar.DATE) < birthDay.get(Calendar.DATE))
-      {
-         years--;
-         months = 11;
-      }
- 
-      //Calculate the days
-      if (now.get(Calendar.DATE) > birthDay.get(Calendar.DATE))
-         days = now.get(Calendar.DATE) - birthDay.get(Calendar.DATE);
-      else if (now.get(Calendar.DATE) < birthDay.get(Calendar.DATE))
-      {
-         int today = now.get(Calendar.DAY_OF_MONTH);
-         now.add(Calendar.MONTH, -1);
-         days = now.getActualMaximum(Calendar.DAY_OF_MONTH) - birthDay.get(Calendar.DAY_OF_MONTH) + today;
-      }
-      else
-      {
-         days = 0;
-         if (months == 12)
-         {
+    private int getEdad(Date birthDate) {
+        int years;
+        int months;
+
+        //create calendar object for birth day
+        Calendar birthDay = Calendar.getInstance();
+        birthDay.setTimeInMillis(birthDate.getTime());
+
+        //create calendar object for current day
+        long currentTime = System.currentTimeMillis();
+        Calendar now = Calendar.getInstance();
+        now.setTimeInMillis(currentTime);
+
+        //Get difference between years
+        years = now.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
+        int currMonth = now.get(Calendar.MONTH) + 1;
+        int birthMonth = birthDay.get(Calendar.MONTH) + 1;
+
+        //Get difference between months
+        months = currMonth - birthMonth;
+
+        //if month difference is in negative then reduce years by one
+        //and calculate the number of months.
+        if (months < 0) {
+            years--;
+            months = 12 - birthMonth + currMonth;
+            if (now.get(Calendar.DATE) < birthDay.get(Calendar.DATE)) {
+                months--;
+            }
+        } else if (months == 0 && now.get(Calendar.DATE) < birthDay.get(Calendar.DATE)) {
+            years--;
+            months = 11;
+        }
+
+        //Calculate the days
+        if (now.get(Calendar.DATE) < birthDay.get(Calendar.DATE)) {
+            int today = now.get(Calendar.DAY_OF_MONTH);
+            now.add(Calendar.MONTH, -1);
+        } else if (months == 12) {
             years++;
-            months = 0;
-         }
-      }
-       System.out.println(years);
-      return years;
-   }
+        }
+        return years;
+    }
 
     public CineastaEntity createCineasta(CineastaEntity cineasta) throws BusinessLogicException {
 
@@ -114,7 +99,7 @@ public class CineastaLogic {
             throw new BusinessLogicException("La fecha de nacimiento no puede ser null \"");
         }
         if (getEdad(cineasta.getFechaNacimiento()) < 13 || getEdad(cineasta.getFechaNacimiento()) > 120) {
-            throw new BusinessLogicException("El cineasta no tiene la edad suficiente para realizar el registro  \"") ;
+            throw new BusinessLogicException("El cineasta no tiene la edad suficiente para realizar el registro  \"");
         }
         if (cineasta.getTelefono().equals("") || cineasta.getTelefono() == null) {
             throw new BusinessLogicException("El telefono no puede ser vacio ni null \"");
@@ -132,29 +117,27 @@ public class CineastaLogic {
         return cineasta;
     }
 
-      /**
+    /**
      * Obtiene la lista de los registros de Cineasta.
      *
      * @return Colección de objetos de CineastaEntity.
      */
     public List<CineastaEntity> getCineastas() {
-      
-        List<CineastaEntity> lista = persistence.findAll();
-       
-        return lista;
+
+        return persistence.findAll();
+
     }
 
     /**
      * Obtiene los datos de una instancia de Cineasta a partir de su ID.
      *
      * @param cineastaId Identificador de la instancia a consultar
-     * @return Instancia de CineastaEntity con los datos del Cineasta consultado.
+     * @return Instancia de CineastaEntity con los datos del Cineasta
+     * consultado.
      */
     public CineastaEntity getCineasta(Long cineastaId) {
-       
-        CineastaEntity cineastaEntity = persistence.find(cineastaId);
 
-        return cineastaEntity;
+        return persistence.find(cineastaId);
     }
 
     /**
@@ -165,9 +148,9 @@ public class CineastaLogic {
      * @return Instancia de CineastaEntity con los datos actualizados.
      */
     public CineastaEntity updateCineasta(Long cineastaId, CineastaEntity cineastaEntity) {
-       
+
         CineastaEntity newCineastaEntity = persistence.update(cineastaEntity);
- 
+
         return newCineastaEntity;
     }
 
@@ -178,12 +161,12 @@ public class CineastaLogic {
      * @throws BusinessLogicException si el cineasta tiene cortos asociados.
      */
     public void deleteCineasta(Long cineastaId) throws BusinessLogicException {
-      
+
         List<CortoEntity> cortos = getCineasta(cineastaId).getCortos();
         if (cortos != null && !cortos.isEmpty()) {
             throw new BusinessLogicException("No se puede borrar el cineasta con id = " + cineastaId + " porque tiene cortos asociados");
         }
         persistence.delete(cineastaId);//pregunta sobre la asociacion de cineastacorto
-      
+
     }
 }

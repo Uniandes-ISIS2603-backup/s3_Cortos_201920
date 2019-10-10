@@ -29,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Santiago Vargas Vega
  */
-@Path("calificacion")
+@Path("calificaciones")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -55,7 +55,7 @@ public class CalificacionResource {
     }
     
     @GET
-    @Path("{calificacionId:\\d+}")
+    @Path("{calificacionesId:\\d+}")
     public CalificacionDTO getCalificacion(@PathParam("calificacionId") long id )
     {
         LOGGER.log(Level.INFO,"CalificacionReosurce getCalificacion :input : {0}",id);
@@ -69,7 +69,7 @@ public class CalificacionResource {
     }
     
     @PUT
-    @Path("{calificacionId:\\d+}")
+    @Path("{calificacionesId:\\d+}")
     public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
         LOGGER.log(Level.INFO,"CalificacionResource updateCalificacion:input:id:{0},calificacion:{1}",new Object[]{id,calificacion});
         calificacion.setId(id);
@@ -82,7 +82,7 @@ public class CalificacionResource {
         return calificacionDTO;
     }   
     @DELETE
-    @Path("{calificacionId:\\d+}")
+    @Path("{calificacionesId:\\d+}")
     public void deleteComentario(@PathParam("calificacionId") Long id ) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"ComentarioResource deleteComentario :input:{0}",id);

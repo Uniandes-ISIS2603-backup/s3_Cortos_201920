@@ -10,10 +10,11 @@ import co.edu.uniandes.csw.cortos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+
 import java.util.ArrayList;
+
 import java.util.List;
-import java.util.logging.Level;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -25,13 +26,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
+
+
 /**
  *
  * @author Ingrith Barbosa
  */
 @Path("factura")
-@Produces("application/json")
+
 @Consumes("application/json")
+@Produces("application/json")
 @RequestScoped
 public class FacturaResource 
 {

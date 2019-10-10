@@ -30,7 +30,7 @@ import javax.ws.rs.WebApplicationException;
  * @author Santiago Vargas Vega
  */
 
-@Path("tema")
+@Path("temas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

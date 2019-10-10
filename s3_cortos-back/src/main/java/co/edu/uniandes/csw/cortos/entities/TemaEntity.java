@@ -18,12 +18,20 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class TemaEntity extends BaseEntity implements Serializable{
+    
+    /**
+     * Nombre del tema
+     */
     private String nombre;
-    
+    /**
+     * relacion con los cortos que tienen temas de este tipo
+     */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany (mappedBy = "temas")
     private ArrayList<CortoEntity> cortos = new ArrayList<CortoEntity> ();
-    
+    /**
+     * Relacion con los cineastas que tengan 
+     */
     @PodamExclude
     @ManyToMany
     private ArrayList<CineastaEntity> cineasta = new ArrayList<CineastaEntity>();

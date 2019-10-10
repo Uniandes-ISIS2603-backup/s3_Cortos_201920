@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.cortos.ejb;
 
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
+import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CineastaPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import java.util.List;
@@ -55,14 +56,14 @@ public class CortoCineastasLogic {
      * @param cineastaId identificacion del cineasta
      * @return el cineasta con la identificacion recibida por parametro
      */
-    public CineastaEntity getCineasta(Long cortoId, Long cineastaId){
+    public CineastaEntity getCineasta(Long cortoId, Long cineastaId) throws BusinessLogicException{
         List<CineastaEntity> lista = getCineastas(cortoId);
         CineastaEntity estara = cineP.find(cineastaId);
         int index = lista.indexOf(estara);
         if(index >= 0){
             return lista.get(index);
         }
-        return null;
+        throw new BusinessLogicException("No existe el cineasta en el corto");
     }
     /**
      * Remueve un cineasta especifico de la lista de cineastas de un corto

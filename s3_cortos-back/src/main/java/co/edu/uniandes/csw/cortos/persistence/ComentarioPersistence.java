@@ -28,14 +28,21 @@ public class ComentarioPersistence {
     @PersistenceContext (unitName= "cortosPU")
     protected EntityManager em;
     
-    
+    /**
+     * Crear un nuevo comentaro en la base de Datos 
+     * @param comentario
+     * @return 
+     */
     public ComentarioEntity create( ComentarioEntity comentario){
         LOGGER.log(Level.INFO,"Creando un comentario nuevo");
         em.persist(comentario);
         LOGGER.log(Level.INFO,"Comentario creado");
         return comentario;
     }
-    
+    /**
+     * Busca todos los comentarios en la base de datos
+     * @return 
+     */
     public List<ComentarioEntity> findAll()
     {
         LOGGER.log(Level.INFO, "Consultando todos los comentarios");
@@ -43,19 +50,30 @@ public class ComentarioPersistence {
         return q.getResultList();
     }
     
-    
+    /**
+     * Busca un comentario dado su ID
+     * @param comentId
+     * @return 
+     */
     public ComentarioEntity find(Long comentId)
     {
        LOGGER.log(Level.INFO, "Consultando el comentario con Id{0}",comentId);
         return em.find(ComentarioEntity.class,comentId);
     }
-    
+    /**
+     * Actualuiza un comentario 
+     * @param comentEntity
+     * @return 
+     */
     public ComentarioEntity update(ComentarioEntity comentEntity)
     {
         LOGGER.log(Level.INFO,"Actualizando el comentario con id {0}", comentEntity.getId());
         return em.merge(comentEntity);
     }
-    
+    /**
+     * Elimina un comentario dado su id
+     * @param comentId 
+     */
     public void delete (Long comentId){
         LOGGER.log(Level.INFO, "Borrando el comentario con Id{0}", comentId);
         ComentarioEntity comentEntity = em.find(ComentarioEntity.class,comentId);

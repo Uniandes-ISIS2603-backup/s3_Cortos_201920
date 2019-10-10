@@ -24,12 +24,12 @@ import org.junit.Test;
  * @author Santiago Vargas Vega 
  */
 public class ComentarioIT {
-//    private static final String COLLECTION = "Comentario-Test-Paso5.postman_collection";
+//    private static final String COLLECTION = "ComentarioResourceTest.postman_collection";
 //    
 //    @Deployment(testable =true)
 //    public static WebArchive createDeplyment()
 //    {
-//        return ShrinkWrap.create(WebArchive.class, "frontstepbystep-api.war")//War del modulo api
+//        return ShrinkWrap.create(WebArchive.class, "s3_cortos-api-1.0.war")//War del modulo api
 //                // Se agrega las dependencias
 //                .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
 //                        .importRuntimeDependencies().resolve()
