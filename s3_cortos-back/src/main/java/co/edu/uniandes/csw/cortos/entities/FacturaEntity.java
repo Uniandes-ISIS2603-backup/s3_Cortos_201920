@@ -97,4 +97,13 @@ public class FacturaEntity extends BaseEntity implements Serializable
     public int hashCode() {
         return super.hashCode();
     }
+
+    public List<CortoEntity> getCortos() {
+        return cortos;
+    }
+
+    public void setCortos(List<CortoEntity> cortos) {
+        this.cortos = cortos;
+    }
+    
 }
