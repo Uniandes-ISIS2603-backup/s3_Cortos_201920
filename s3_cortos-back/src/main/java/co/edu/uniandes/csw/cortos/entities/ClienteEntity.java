@@ -28,24 +28,11 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private String contrasenia;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @PodamExclude
-    private Collection<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @PodamExclude
     private List<ComentarioEntity> comentarios = new ArrayList<ComentarioEntity>();
 
-    public Collection<CalificacionEntity> getCalificaciones() {
-        return calificaciones;
-    }
-    public void addComentario(ComentarioEntity comentario)
-    {
-        comentarios.add(comentario);
-    }
-    
-    public void setCalificaciones(Collection<CalificacionEntity> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
-
-   /*
     @OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
     @PodamExclude
     private List<FacturaEntity> facturas;
@@ -69,7 +56,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     public void setFormasPago(List<FormaDePagoEntity> formasPago) {
         this.formasPago = formasPago;
     }
-    */
+    
     public String getNombre()
     {
         return nombre;
@@ -114,6 +101,16 @@ public class ClienteEntity extends BaseEntity implements Serializable
         this.setComentarios(comentarios);
     }
 
-  
+     public List<CalificacionEntity> getCalificaciones() {
+        return calificaciones;
+    }
+    public void addComentario(ComentarioEntity comentario)
+    {
+        comentarios.add(comentario);
+    }
+    
+    public void setCalificaciones(List<CalificacionEntity> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
     
 }
