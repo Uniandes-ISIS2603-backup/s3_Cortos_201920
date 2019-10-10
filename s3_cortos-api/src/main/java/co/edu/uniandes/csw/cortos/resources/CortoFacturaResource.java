@@ -16,6 +16,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -34,6 +35,11 @@ public class CortoFacturaResource {
     
     @PUT
     public CortoDetailDTO replaceFactura(@PathParam("cortosId")Long cortosId, FacturaDTO factura){
-        return null;
+        if(cl.getCorto(cortosId)==null)
+            throw new WebApplicationException("El recurso corto con id "+cortosId, 404);
+        if(fl.getFactura(factura.getId())==null)
+            throw new WebApplicationException("El recurso factura con id "+factura.getId());
+        CortoDetailDTO c = new CortoDetailDTO(cfl.replaceFactura(cortosId, factura.getId()));
+        return c;
     }
 }
