@@ -43,7 +43,7 @@ public class ClienteFacturasLogic
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle una calificacion al cliente con id = {0}", clienteId);
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);
         FacturaEntity facturaEntity = facturasPersistence.find(factId);
-        //facturaEntity.setCliente(clienteEntity);
+        facturaEntity.setCliente(clienteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle una calificacion al cliente con id = {0}", clienteId);
         return facturaEntity;
     }
@@ -92,11 +92,11 @@ public class ClienteFacturasLogic
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);
         List<FacturaEntity> factList = facturasPersistence.findAll();
         for (FacturaEntity fact : factList) {
-            /*if (facts.contains(fact)) {
+            if (facts.contains(fact)) {
                 fact.setCliente(clienteEntity);
             } else if (fact.getCliente()!= null && fact.getCliente().equals(clienteEntity)) {
                 fact.setCliente(null);
-            }*/
+            }
         }
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la editorial con id = {0}", clienteId);
         return facts;

@@ -6,12 +6,13 @@
 package co.edu.uniandes.csw.cortos.test.logic;
 
 import co.edu.uniandes.csw.cortos.ejb.CalificacionLogic;
-import co.edu.uniandes.csw.cortos.ejb.ClienteCalificacionLogic;
 import co.edu.uniandes.csw.cortos.ejb.ClienteComentarioLogic;
+import co.edu.uniandes.csw.cortos.ejb.ClienteFacturasLogic;
 import co.edu.uniandes.csw.cortos.ejb.ComentarioLogic;
-import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.cortos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
+import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import java.util.ArrayList;
@@ -36,15 +37,15 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Estudiante
  */
 @RunWith(Arquillian.class)
-public class ClienteComentarioLogicTest 
+public class ClienteFacturaLogicTest 
 {
     private PodamFactory fabrica = new PodamFactoryImpl();
     
     @Inject
-    private ComentarioLogic cl;
+    private FacturaLogic fl;
     
     @Inject
-    private ClienteComentarioLogic ccl;
+    private ClienteFacturasLogic cfl;
     
     @PersistenceContext
     EntityManager em;
@@ -54,7 +55,7 @@ public class ClienteComentarioLogicTest
     
     private List<ClienteEntity> data = new ArrayList<>();
     
-    private List<ComentarioEntity> comentarios = new ArrayList<>();
+    private List<FacturaEntity> facturas = new ArrayList<>();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -75,8 +76,8 @@ public class ClienteComentarioLogicTest
      * Limpia las tablas que estan en la prueba
      */
     private void clearData(){
-        em.createQuery("delete from ComentarioEntity").executeUpdate();
-        em.createQuery("delete from ComentarioEntity").executeUpdate();
+        em.createQuery("delete from FacturaEntity").executeUpdate();
+        em.createQuery("delete from FacturaEntity").executeUpdate();
     }
     
     /**
@@ -84,17 +85,17 @@ public class ClienteComentarioLogicTest
      */
     private void insertData(){
         for(int i = 0; i < 3; ++i){
-            ComentarioEntity c = fabrica.manufacturePojo(ComentarioEntity.class);
-            c.setComentario("comnet" + i);
+            FacturaEntity c = fabrica.manufacturePojo(FacturaEntity.class);
+            c.setNumeroFactura(i);
             em.persist(c);
-            comentarios.add(c);
+            facturas.add(c);
         }
         for(int i = 0 ; i < 3 ; ++ i){
             ClienteEntity c = fabrica.manufacturePojo(ClienteEntity.class);
             em.persist(c);
             data.add(c);
             if(i == 0)
-                comentarios.get(i).setCliente(c);
+                facturas.get(i).setCliente(c);
         }
     }
     
@@ -122,21 +123,21 @@ public class ClienteComentarioLogicTest
      * Prueba asociar Comentario con Corto
      */
     @Test
-    public void addComentarioTest(){
+    public void addFacturaTest(){
         ClienteEntity c = data.get(0);
-        ComentarioEntity coment = comentarios.get(1);
-        coment.setCliente(c);
-        ComentarioEntity resp = ccl.addComentario(coment.getId(), coment.getCliente().getId());
+        FacturaEntity fact = facturas.get(1);
+        fact.setCliente(c);
+        FacturaEntity resp = cfl.addfactura(fact.getId(), fact.getCliente().getId());
         Assert.assertNotNull(resp);
-        Assert.assertEquals(resp.getCliente(), coment.getCliente());
+        Assert.assertEquals(resp.getCliente(), fact.getCliente());
     }
     
     /**
      * Prueba para obtener toda la lista de comentarios de un corto
      */
     @Test
-    public void getComentariosTest(){
-        List<ComentarioEntity> lista = ccl.getComentarios(data.get(0).getId());
+    public void getFacturasTest(){
+        List<FacturaEntity> lista = cfl.getFacturas(data.get(0).getId());
         
         Assert.assertEquals(1,lista.size());
     }
@@ -145,13 +146,13 @@ public class ClienteComentarioLogicTest
      * @throws BusinessLogicException 
      */
     @Test
-    public void getComentarioTest() throws BusinessLogicException{
+    public void getfacturaTest() throws BusinessLogicException{
         ClienteEntity c = data.get(0);
-        ComentarioEntity coment = comentarios.get(0);
-        ComentarioEntity resp = ccl.getComentario(c.getId(),coment.getId());
+        FacturaEntity fact = facturas.get(0);
+        FacturaEntity resp = cfl.getFactura(c.getId(),fact.getId());
         Assert.assertNotNull(resp);
-        Assert.assertEquals(resp.getCliente(), coment.getCliente());
-        Assert.assertEquals(resp.getId(), coment.getId());
+        Assert.assertEquals(resp.getCliente(), fact.getCliente());
+        Assert.assertEquals(resp.getId(), fact.getId());
     }
     
     /**
@@ -159,9 +160,9 @@ public class ClienteComentarioLogicTest
      * @throws BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
-    public void getComentarioNoExisteTest()throws BusinessLogicException{
+    public void getFacturaNoExisteTest()throws BusinessLogicException{
         ClienteEntity c = data.get(0);
-        ComentarioEntity coment = comentarios.get(1);
-        ComentarioEntity resp = ccl.getComentario(c.getId(),coment.getId());
+        FacturaEntity fact = facturas.get(1);
+        FacturaEntity resp = cfl.getFactura(c.getId(),fact.getId());
     }
 }
