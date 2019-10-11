@@ -35,7 +35,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Estudiante
+ * @author Arturo Rubio
  */
 @RunWith(Arquillian.class)
 public class ClienteCalificacionLogicTest 

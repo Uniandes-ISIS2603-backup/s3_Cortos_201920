@@ -26,7 +26,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
     
     private List<FormaDePagoDTO> formasDePago;
     
-    private List<FormaDePagoDTO> facturas;
+    private List<FacturaDTO> facturas;
     
     public ClienteDetailDTO()
     {
@@ -56,7 +56,7 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
         if (c.getFacturas() != null) {
             facturas = new ArrayList<>();
             for (FacturaEntity comm : c.getFacturas()) {
-               // facturas.add(new FacturaDTO(comm));
+                facturas.add(new FacturaDTO(comm));
             }
         }
     }
@@ -84,8 +84,8 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
         }
         if(facturas!=null){
             List<FacturaEntity> factEnt = new ArrayList<>();
-            for( FormaDePagoDTO form : getFacturas())
-                //factEnt.add(form.toEntity());
+            for( FacturaDTO form : getFacturas())
+                factEnt.add(form.toEntity());
             c.setFacturas(factEnt);
         }
         return c;
@@ -115,11 +115,11 @@ public class ClienteDetailDTO extends ClienteDTO implements Serializable
         this.formasDePago = formasDePago;
     }
 
-    public List<FormaDePagoDTO> getFacturas() {
+    public List<FacturaDTO> getFacturas() {
         return facturas;
     }
 
-    public void setFacturas(List<FormaDePagoDTO> facturas) {
+    public void setFacturas(List<FacturaDTO> facturas) {
         this.facturas = facturas;
     }       
 }

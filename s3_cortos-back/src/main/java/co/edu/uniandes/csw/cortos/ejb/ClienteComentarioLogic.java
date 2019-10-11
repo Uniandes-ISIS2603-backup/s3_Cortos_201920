@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author Estudiante
+ * @author Arturo Rubio
  */
 @Stateless
 public class ClienteComentarioLogic 
