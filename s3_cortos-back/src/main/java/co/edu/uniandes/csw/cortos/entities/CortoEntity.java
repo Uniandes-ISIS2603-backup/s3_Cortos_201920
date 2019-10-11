@@ -44,7 +44,7 @@ public class CortoEntity extends BaseEntity implements Serializable {
     private FacturaEntity factura;
     
     @PodamExclude
-    @ManyToMany
+    @ManyToMany 
     private List<TemaEntity> temas = new ArrayList<>();
 
     /**

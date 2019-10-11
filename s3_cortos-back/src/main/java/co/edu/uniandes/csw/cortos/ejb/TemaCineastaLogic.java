@@ -28,7 +28,7 @@ public class TemaCineastaLogic {
     @Inject
     private CineastaPersistence cineastaPersistence;  
     
-    public TemaEntity addCineasta (Long temaId, Long cineastaId)
+    public CineastaEntity addCineasta (Long temaId, Long cineastaId)
     {
         LOGGER.log(Level.INFO, "Se inicia el proceso de asociacion del tema con id ={0} con "
                 + "el cineasta con id = "+ cineastaId, temaId  );
@@ -37,7 +37,7 @@ public class TemaCineastaLogic {
         TemaEntity tema = temaPersistence.find(temaId);
         tema.getCineasta().add(cineasta);
         LOGGER.log(Level.INFO,"Se termina el proceso de asociacion");
-        return temaPersistence.find(temaId);
+        return cineastaPersistence.find(cineastaId);
         
     }
     

@@ -28,7 +28,7 @@ public class TemaCortoLogic {
     @Inject
     private CortoPersistence cortoPersistence;  
     
-    public TemaEntity addCorto (Long temaId, Long cortoId)
+    public CortoEntity addCorto (Long temaId, Long cortoId)
     {
         LOGGER.log(Level.INFO, "Se inicia el proceso de asociacion del tema con id ={0} con "
                 + "el corto con id = "+ cortoId, temaId  );
@@ -37,7 +37,7 @@ public class TemaCortoLogic {
         TemaEntity tema = temaPersistence.find(temaId);
         tema.getCortos().add(corto);
         LOGGER.log(Level.INFO,"Se termina el proceso de asociacion");
-        return temaPersistence.find(temaId);
+        return cortoPersistence.find(cortoId);
         
     }
     
