@@ -15,12 +15,14 @@ import co.edu.uniandes.csw.cortos.persistence.FormaDePagoPersistance;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Arturo Rubio
  */
+@Stateless
 public class ClienteFormaPagoLogic
 {
     private static final Logger LOGGER = Logger.getLogger(ClienteFormaPagoLogic.class.getName());

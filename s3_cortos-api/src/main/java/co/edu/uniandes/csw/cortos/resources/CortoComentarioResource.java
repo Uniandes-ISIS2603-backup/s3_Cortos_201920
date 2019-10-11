@@ -69,7 +69,7 @@ public class CortoComentarioResource {
      * @param lista lista de entidades de comentarios
      * @return lista de comentario dto
      */
-    public List<ComentarioDTO> comentariosListEntity2DTO(List<ComentarioEntity> lista){
+    private List<ComentarioDTO> comentariosListEntity2DTO(List<ComentarioEntity> lista){
         List<ComentarioDTO> list= new ArrayList<>();
         for(ComentarioEntity c : lista){
             list.add(new ComentarioDTO(c));

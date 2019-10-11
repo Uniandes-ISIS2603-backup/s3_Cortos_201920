@@ -26,13 +26,30 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CortoFacturaResource {
+    /**
+     * Referencia a la logica del corto
+     */
     @Inject
     private CortoLogic cl;
+    
+    /**
+     * Referencia a la relacion corto y factura
+     */
     @Inject
     private CortoFacturaLogic cfl;
+    
+    /**
+     * Referencia a la logica de factura
+     */
     @Inject
     private FacturaLogic fl;
     
+    /**
+     * Actualizo la factura de un corto 
+     * @param cortosId identificacion corto
+     * @param factura factura nuevo
+     * @return corto con factura actualizada
+     */
     @PUT
     public CortoDetailDTO replaceFactura(@PathParam("cortosId")Long cortosId, FacturaDTO factura){
         if(cl.getCorto(cortosId)==null)
