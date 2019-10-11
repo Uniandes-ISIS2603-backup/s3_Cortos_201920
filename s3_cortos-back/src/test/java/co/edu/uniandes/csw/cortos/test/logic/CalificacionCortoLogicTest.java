@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.cortos.test.logic;
 
 import co.edu.uniandes.csw.cortos.ejb.CalificacionClienteLogic;
+import co.edu.uniandes.csw.cortos.ejb.CalificacionCortoLogic;
 import co.edu.uniandes.csw.cortos.ejb.CalificacionLogic;
 import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
+import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,15 +34,14 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Santiago Vargas Vega
  */
 @RunWith(Arquillian.class)
-public class CalificacionClienteLogicTest {
-   
+public class CalificacionCortoLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
     private CalificacionLogic calificacionLogic;
     
     @Inject
-    private CalificacionClienteLogic calificacionClienteLogic;
+    private CalificacionCortoLogic calificacionCortoLogic;
 
     @PersistenceContext
     EntityManager em;
@@ -51,7 +52,7 @@ public class CalificacionClienteLogicTest {
     
     private List<CalificacionEntity > data = new ArrayList<>();
     
-    private List<ClienteEntity> clientes = new ArrayList<>();
+    private List<CortoEntity> cortos = new ArrayList<>();
     
      @Deployment
     public static JavaArchive createDeployment(){
@@ -68,8 +69,7 @@ public class CalificacionClienteLogicTest {
      */
     private void clearData(){
         em.createQuery("delete from CalificacionEntity").executeUpdate();
-        em.createQuery("delete from ClienteEntity").executeUpdate();
-      
+        em.createQuery("delete from CortoEntity").executeUpdate(); 
     }
     
     private void insertData()
@@ -82,14 +82,15 @@ public class CalificacionClienteLogicTest {
         }
         
          for (int i = 0; i < 3; i++) {
-            ClienteEntity c= factory.manufacturePojoWithFullData(ClienteEntity.class);
+            CortoEntity c= factory.manufacturePojoWithFullData(CortoEntity.class);
             c.setCalificaciones(new ArrayList<>());
             c.getCalificaciones().add(data.get(0));
             em.persist(c);
-            clientes.add(c);
+            cortos.add(c);
         }
     }
-         /**
+    
+          /**
      * Configuracion inicial de la prueba
      */
     @Before
@@ -108,29 +109,27 @@ public class CalificacionClienteLogicTest {
             }
         }
     }
-        
+    
     @Test
-    public void addCalificacionClienteTest()
+    public void addCalificacionCortoTest()
     {
-        
         CalificacionEntity calificacion = data.get(0);
-        ClienteEntity cliente = clientes.get(1);
-        ClienteEntity  resp = calificacionClienteLogic.addCliente(calificacion.getId(), cliente.getId());
+        CortoEntity corto = cortos.get(1);
+        CortoEntity resp = calificacionCortoLogic.addCorto(corto.getId(), calificacion.getId());
         Assert.assertNotNull(resp);
-        Assert.assertEquals(resp.getId(),cliente.getId());
-        Assert.assertEquals(resp.getCorreo(),cliente.getCorreo());
-        Assert.assertEquals(resp.getContrasenia(),cliente.getContrasenia());
-        Assert.assertEquals(resp.getNombre(),cliente.getNombre());
+        Assert.assertEquals(resp.getId(),corto.getId());
+        Assert.assertEquals(resp.getDescripcion() ,corto.getDescripcion());
+        Assert.assertEquals(resp.getPrecio(),corto.getPrecio());
+        Assert.assertEquals(resp.getNombre(),corto.getNombre());
     }
     
     @Test
-    public void getClienteTest()
+    public void getCortoTest()
     {
-        CalificacionEntity calificacion = data.get(0);
-        ClienteEntity cliente = clientes.get(1);
-        ClienteEntity  resp = calificacionClienteLogic.addCliente(calificacion.getId(), cliente.getId());
-        ClienteEntity prueba = calificacionClienteLogic.getCliente(data.get(0).getId());
+        CalificacionEntity calificacion= data.get(0);
+        CortoEntity corto = cortos.get(1);
+        CortoEntity resp = calificacionCortoLogic.addCorto(corto.getId(), calificacion.getId());
+        CortoEntity prueba = calificacionCortoLogic.getCorto(data.get(0).getId());
         Assert.assertNotNull(prueba);
     }
-    
 }
