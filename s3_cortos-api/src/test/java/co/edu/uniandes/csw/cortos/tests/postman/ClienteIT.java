@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author Estudiante
+ * @author Arturo Rubio
  */
 @RunWith(Arquillian.class)
 public class ClienteIT 
