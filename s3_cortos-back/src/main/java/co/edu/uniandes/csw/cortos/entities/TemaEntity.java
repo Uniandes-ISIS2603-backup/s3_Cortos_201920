@@ -7,9 +7,9 @@ package co.edu.uniandes.csw.cortos.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -33,7 +33,8 @@ public class TemaEntity extends BaseEntity implements Serializable{
      * Relacion con los cineastas que tengan 
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(mappedBy = "temas")
+
     private ArrayList<CineastaEntity> cineasta = new ArrayList<CineastaEntity>();
      /**
      * @return the nombre
