@@ -34,11 +34,11 @@ public class CortoFacturaLogic {
      * @param facturaId identificacion factura
      * @return retorna el cineasta que sera el nuevo productor
      */
-    public FacturaEntity replaceFactura(Long cortoId, Long facturaId){
+    public CortoEntity replaceFactura(Long cortoId, Long facturaId){
         FacturaEntity agregueme = fp.find(facturaId);
         CortoEntity metalo = cp.find(cortoId);
         metalo.setFactura(agregueme);
-        return agregueme;
+        return metalo;
     }
     /**
      * quita la factura del corto

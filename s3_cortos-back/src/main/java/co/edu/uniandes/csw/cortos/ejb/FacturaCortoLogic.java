@@ -37,8 +37,8 @@ public class FacturaCortoLogic
      * @return corto agregado
      */
     public CortoEntity addCorto(Long facturaId, Long cortoId){
-        CortoEntity agregar = cortoP.find(facturaId);
-        FacturaEntity agreguemeCosas = facturaP.find(cortoId);
+        CortoEntity agregar = cortoP.find(cortoId);
+        FacturaEntity agreguemeCosas = facturaP.find(facturaId);
         agreguemeCosas.getCortos().add(agregar);
         return agregar;
     }

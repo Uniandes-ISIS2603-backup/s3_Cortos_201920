@@ -94,6 +94,7 @@ public class FacturaEntity extends BaseEntity implements Serializable
   public void setCortos(List<CortoEntity> cortos) {
       this.cortos = cortos;
   }
+  
     /**
      * Metodo no usado
      *
