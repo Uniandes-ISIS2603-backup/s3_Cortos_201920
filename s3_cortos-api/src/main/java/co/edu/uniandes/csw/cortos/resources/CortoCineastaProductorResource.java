@@ -25,13 +25,29 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CortoCineastaProductorResource {
+    /**
+     * Referencia a la logica de corto
+     */
     @Inject
     private CortoLogic cl;
+    
+    /**
+     * Referencia a la logica de relacion entre productor y corto 
+     */
     @Inject
     private CortoCineastaProductorLogic ccl;
+    
+    /**
+     * Referencia a la logica de cineasta
+     */
     @Inject
     private CineastaLogic cineLogic;
-    
+    /**
+     * Actualiza el productor de un corto
+     * @param cortoId identificacion de un corto
+     * @param cineasta dto de un cineasta
+     * @return corto con productor actualizado
+     */
     @PUT
     public CortoDetailDTO replaceProductor(@PathParam("cortosId") Long cortoId, CineastaDetailDTO cineasta){
         if(cl.getCorto(cortoId) == null )

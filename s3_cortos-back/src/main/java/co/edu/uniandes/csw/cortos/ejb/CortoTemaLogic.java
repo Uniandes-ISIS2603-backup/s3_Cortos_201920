@@ -11,12 +11,14 @@ import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import co.edu.uniandes.csw.cortos.persistence.TemaPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Juan Sebastian Gomez
  */
+@Stateless
 public class CortoTemaLogic {
     /**
      * Referencia a la persistencia de corto
@@ -35,7 +37,7 @@ public class CortoTemaLogic {
      * @return tema aniadido
      */
     public TemaEntity addTema(long temaId, long cortoId){
-        System.out.println(cortoId);
+        //System.out.println(cortoId);
         TemaEntity agregar = tp.find(temaId);
         CortoEntity agregue = cp.find(cortoId);
         agregue.getTemas().add(agregar);

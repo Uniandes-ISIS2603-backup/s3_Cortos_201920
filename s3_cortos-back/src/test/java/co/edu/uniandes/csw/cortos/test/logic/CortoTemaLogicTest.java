@@ -75,7 +75,7 @@ public class CortoTemaLogicTest {
      * Limpia las tablas que estan en la prueba
      */
     private void clearData(){
-        System.out.println(temas.size() + "hola hola hola "+ data.size());
+        //System.out.println(temas.size() + "hola hola hola "+ data.size());
         em.createQuery("delete from CortoEntity").executeUpdate();
         em.createQuery("delete from TemaEntity").executeUpdate();
         
@@ -147,7 +147,7 @@ public class CortoTemaLogicTest {
     public void addTemaTest() throws BusinessLogicException{
 
         TemaEntity t = fabrica.manufacturePojo(TemaEntity.class);
-      
+        
         tl.createTema(t);
         TemaEntity n = ctl.addTema(t.getId(), data.get(0).getId());
         Assert.assertNotNull(n);
