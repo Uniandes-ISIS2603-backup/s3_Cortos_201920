@@ -6,31 +6,29 @@
 package co.edu.uniandes.csw.cortos.tests.postman;
 
 import co.edu.uniandes.csw.cortos.dtos.ClienteDTO;
+import co.edu.uniandes.csw.cortos.dtos.FacturaDTO;
 import co.edu.uniandes.csw.cortos.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.cortos.resources.ClienteResource;
-import co.edu.uniandes.csw.cortos.resources.RestConfig;
+import co.edu.uniandes.csw.cortos.resources.FacturaResource;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
 import java.io.File;
 import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  *
- * @author Arturo Rubio
+ * @author Estudiante
  */
-@RunWith(Arquillian.class)
-public class ClienteIT 
-{
+public class FacturaIT {
     
-    private static final String COLLECTION = "Cliente-Tests.postman_collection";
+    
+    private static final String COLLECTION = "FacturaResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
@@ -40,9 +38,9 @@ public class ClienteIT
                         .importRuntimeDependencies().resolve()
                         .withTransitivity().asFile())
                 // Se agregan los compilados de los paquetes de servicios
-                .addPackage(ClienteDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
+                .addPackage(FacturaDTO.class.getPackage()) //No importa cual dto usar, lo importante es agregar el paquete.
                 .addPackage(BusinessLogicExceptionMapper.class.getPackage())
-                .addPackage(ClienteResource.class.getPackage())
+                .addPackage(FacturaResource.class.getPackage())
                 
                 // El archivo que contiene la configuracion a la base de datos.
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
@@ -68,5 +66,4 @@ public class ClienteIT
         if(tp.getAssertions_failed()!=null)
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
-
 }

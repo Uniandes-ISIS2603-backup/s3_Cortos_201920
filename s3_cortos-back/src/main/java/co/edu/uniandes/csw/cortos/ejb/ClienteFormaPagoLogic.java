@@ -15,12 +15,14 @@ import co.edu.uniandes.csw.cortos.persistence.FormaDePagoPersistance;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
- * @author Estudiante
+ * @author Arturo Rubio
  */
+@Stateless
 public class ClienteFormaPagoLogic
 {
     private static final Logger LOGGER = Logger.getLogger(ClienteFormaPagoLogic.class.getName());
@@ -43,7 +45,7 @@ public class ClienteFormaPagoLogic
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle una calificacion al cliente con id = {0}", clienteId);
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);
         FormaDePagoEntity fPagoEntity = fPagoPersistence.find(formaPagoId);
-        //fPagoEntity.setCliente(clienteEntity);
+        fPagoEntity.setCliente(clienteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle una calificacion al cliente con id = {0}", clienteId);
         return fPagoEntity;
     }
@@ -92,11 +94,11 @@ public class ClienteFormaPagoLogic
         ClienteEntity clienteEntity = clientePersistence.find(clienteId);
         List<FormaDePagoEntity> formList = fPagoPersistence.findAll();
         for (FormaDePagoEntity form : formList) {
-            /* if (forms.contains(form)) {
+            if (forms.contains(form)) {
                 form.setCliente(clienteEntity);
             } else if (form.getCliente()!= null && form.getCliente().equals(clienteEntity)) {
                 form.setCliente(null);
-            }*/
+            }
         }
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la editorial con id = {0}", clienteId);
         return forms;

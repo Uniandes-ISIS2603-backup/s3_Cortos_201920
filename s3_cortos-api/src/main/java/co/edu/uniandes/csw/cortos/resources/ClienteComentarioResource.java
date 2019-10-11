@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Estudiante
+ * @author Arturo Rubio
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
