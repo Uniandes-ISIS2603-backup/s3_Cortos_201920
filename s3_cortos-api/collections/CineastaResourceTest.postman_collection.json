@@ -1,59 +1,12 @@
 {
 	"info": {
-		"_postman_id": "4b96b20d-0291-46db-9886-91b5924ea0d6",
-		"name": "CortoResourceTest",
+		"_postman_id": "c38d0756-2110-495b-8582-0d38b805d901",
+		"name": "CineastaResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Devuelve una lista con todos los cortos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
-						"exec": [
-							"tests[\"No genera error en el GET\"]=responseCode.code ==200"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_cortos-api",
-						"api",
-						"cortos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crea un nuevo corto",
+			"name": "Crea una nueva cineasta",
 			"event": [
 				{
 					"listen": "test",
@@ -74,13 +27,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":2,\n\t\"precio\":200,\n\t\"nombre\":\"Soy un test\",\n\t\"descripcion\":\"Soy un test\",\n\t\"calificacionpromedio\":300,\n\t\"fechaDePublicacion\":\"1927-03-03T00:00:00-05:00\"\n}",
+					"raw": " {\r\n        \"contrasenia\": \"seerhPHe7n\",\r\n        \"correo\": \"pepito@corre.com\",\r\n        \"direccion\": \"ijxah41ocJ\",\r\n        \"fechaNacimiento\": \"1998-03-21T05:00:00Z[UTC]\",\r\n        \"genero\": true,\r\n        \"nombre\": \"Ah9lñkPnB11W9\",\r\n        \"rol\": \"AFICIONADO\",\r\n        \"telefono\": \"FedtfjPWPr\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -88,7 +41,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -97,14 +50,14 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"cortos"
+						"cineasta"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtiene un  corto dado su id ",
+			"name": "Crea una nueva cineasta",
 			"event": [
 				{
 					"listen": "test",
@@ -140,7 +93,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/{{new_id_e}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -149,7 +102,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"cortos",
+						"cineasta",
 						"{{new_id_e}}"
 					]
 				}
@@ -157,15 +110,14 @@
 			"response": []
 		},
 		{
-			"name": "Actualiza un corto dado su id ",
+			"name": "Actualiza una cineasta",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
 						"exec": [
-							"var data =JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"",
 							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
 						],
 						"type": "text/javascript"
@@ -178,13 +130,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":2,\n\t\"precio\":200,\n\t\"nombre\":\"Soy un nuevo test\",\n\t\"descripcion\":\"Soy un nuevo test\",\n\t\"calificacionpromedio\":300,\n\t\"fechaDePublicacion\":\"1927-03-03T00:00:00-05:00\"\n}",
+					"raw": " {\r\n        \"contrasenia\": \"seerhPHe7n\",\r\n        \"correo\": \"pepito@cecto.com\",\r\n        \"direccion\": \"ijxah41ocJ\",\r\n        \"fechaNacimiento\": \"1998-03-21T05:00:00Z[UTC]\",\r\n        \"genero\": true,\r\n         \"nombre\": \"veas\",\r\n        \"rol\": \"AFICIONADO\",\r\n        \"telefono\": \"FedtfjPWPr\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -192,7 +144,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/{{new_id_e}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -201,7 +153,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"cortos",
+						"cineasta",
 						"{{new_id_e}}"
 					]
 				}
@@ -209,7 +161,61 @@
 			"response": []
 		},
 		{
-			"name": "Obtener un corto que no existe",
+			"name": "Obtener cineasta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data =JSON.parse(responseBody);",
+							"tests[\"No genera error en el GET ALL\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una cineasta que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -226,7 +232,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -235,7 +241,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"cortos",
+						"cineasta",
 						"-1"
 					]
 				}
@@ -243,7 +249,7 @@
 			"response": []
 		},
 		{
-			"name": "Editar corto que no existe",
+			"name": "Editar cineasta que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -276,7 +282,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -285,7 +291,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"cortos",
+						"cineasta",
 						"-1"
 					]
 				}

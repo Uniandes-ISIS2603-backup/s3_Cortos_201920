@@ -103,7 +103,6 @@ public class FacturaEntity extends BaseEntity implements Serializable
      * @deprecated (solo arregla code smell)
      */
     @Override
-    @Deprecated
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
@@ -115,7 +114,6 @@ public class FacturaEntity extends BaseEntity implements Serializable
      * @deprecated (solo arregla code smell)
      */
     @Override
-    @Deprecated
     public int hashCode() {
         return super.hashCode();
     }

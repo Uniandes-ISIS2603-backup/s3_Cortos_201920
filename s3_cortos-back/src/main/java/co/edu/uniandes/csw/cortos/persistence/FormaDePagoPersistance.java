@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.cortos.persistence;
 
 import co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,7 +20,6 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FormaDePagoPersistance {
     
-    private static final Logger LOGGER  = Logger.getLogger(FormaDePagoPersistance.class.getName());
     @PersistenceContext(unitName = "cortosPU")
     protected EntityManager em;
     

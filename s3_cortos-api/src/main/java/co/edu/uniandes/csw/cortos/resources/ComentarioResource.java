@@ -35,6 +35,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped  
 public class ComentarioResource {
+    
     private static final Logger LOGGER = Logger.getLogger(ComentarioResource.class.getName());
     @Inject 
     private ComentarioLogic comentarioLogic; 
@@ -58,9 +59,11 @@ public class ComentarioResource {
     
     @GET
     @Path("{comentariosId: \\d+}")
-    public ComentarioDTO getComentario(@PathParam("comentarioId") Long id)
+    public ComentarioDTO getComentario(@PathParam("comentariosId") Long id)
     {
         LOGGER.log(Level.INFO,"ComentarioResource getComentario :input:{0}", id);
+        if (id == null)
+              throw new WebApplicationException("El recurso /comentario/"+id+"si existe comentario1.",404);
         ComentarioEntity comentarioEntity = comentarioLogic.getComentario(id);
         if(comentarioEntity==null)
         {
@@ -72,7 +75,7 @@ public class ComentarioResource {
     
     @PUT
     @Path("{comentariosId:\\d+}")
-    public ComentarioDTO updateComentario(@PathParam("comentarioId") Long id,ComentarioDTO comentario)throws BusinessLogicException{
+    public ComentarioDTO updateComentario(@PathParam("comentariosId") Long id,ComentarioDTO comentario)throws BusinessLogicException{
         LOGGER.log(Level.INFO,"ComentarioResource updateComentario:input:id:{0},comentario:{1}",new Object[]{id,comentario});
         comentario.setId(id);
         if(comentarioLogic.getComentario(id)==null)
@@ -86,7 +89,7 @@ public class ComentarioResource {
     
     @DELETE
     @Path("{comentariosId:\\d+}")
-    public void deleteComentario(@PathParam("comentarioId") Long id) throws BusinessLogicException
+    public void deleteComentario(@PathParam("comentariosId") Long id) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"ComentarioResource deleteComentario:input:{0}", id);
         ComentarioEntity entity = comentarioLogic.getComentario(id);

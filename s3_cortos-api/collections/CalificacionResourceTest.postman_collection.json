@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "97a6a80f-feb8-4be2-b2aa-0d416b6bc5e6",
+		"_postman_id": "3d6c3731-4b50-483a-9180-2b7d16cbe632",
 		"name": "CalificacionResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -34,58 +34,6 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n \"id\":\"4\",\n \"puntaje\":2\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/calificaciones",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_cortos-api",
-						"api",
-						"calificaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crea una nueva calificacion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
-						"exec": [
-							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -154,6 +102,212 @@
 						"api",
 						"calificaciones",
 						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener calificaciones",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data =JSON.parse(responseBody);",
+							"tests[\"No genera error en el GET ALL\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/calificaciones",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"calificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una calificacion que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c752bba-210e-48c4-80e4-d04e8cd8d0c0",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/calificaciones/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"calificaciones",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar calificaciones que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "563e586d-bf8e-485d-a758-064e731bb908",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"raza\": \"Criollo2\",\n\t\"lugar\": \"Bogota2\",\n\t\"descripcion\": \"juan@bta.com\",\n\t\"especie\": 0,\n\t\"celular\": 3121232121,\n\t\"fechaEncontrada\": \"2019-09-10T00:00:00.000Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/calificaciones/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"calificaciones",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar calificacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb294798-9d4b-4f01-99cd-a1414a070bc4",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/calificaciones/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"calificaciones",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una calificaciona que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dfecfec5-4365-4626-b651-a478a4dc522b",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/calificaciones/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"calificaciones",
+						"-1"
 					]
 				}
 			},

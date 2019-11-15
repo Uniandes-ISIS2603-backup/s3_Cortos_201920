@@ -35,6 +35,7 @@ import javax.ws.rs.core.MediaType;
 public class ClienteCalificacionResource 
 {
     private static final Logger LOGGER = Logger.getLogger(ClienteCalificacionResource.class.getName());
+    private String NO = " no existe.";
     
     @Inject
     private ClienteCalificacionLogic clienteCalificacionLogic;
@@ -58,7 +59,7 @@ public class ClienteCalificacionResource
     public CalificacionDTO addCalificacion(@PathParam("clienteId") Long clienteId, @PathParam("calificacionId") Long califId) {
         LOGGER.log(Level.INFO, "EditorialBooksResource addBook: input: editorialsID: {0} , booksId: {1}", new Object[]{clienteId, califId});
         if (calificacionLogic.getCalificacion(califId) == null) {
-            throw new WebApplicationException("El recurso /calificacion/" + califId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /calificacion/" + califId + NO, 404);
         }
         CalificacionDTO califDTO = new CalificacionDTO(clienteCalificacionLogic.addCalificacion(califId, clienteId));
         LOGGER.log(Level.INFO, "ClienteCalificacionResource addCalificacion: output: {0}", califDTO);
@@ -100,7 +101,7 @@ public class ClienteCalificacionResource
     public CalificacionDTO getCalificacion(@PathParam("clienteId") Long clienteId, @PathParam("calificacionId") Long calificacionId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "EditorialBooksResource getBook: input: editorialsID: {0} , booksId: {1}", new Object[]{clienteId, calificacionId});
         if (calificacionLogic.getCalificacion(calificacionId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + clienteId + "/books/" + calificacionId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /editorials/" + clienteId + "/books/" + calificacionId + NO, 404);
         }
         CalificacionDTO calificacionDTO = new CalificacionDTO(clienteCalificacionLogic.getCalificacion(calificacionId, clienteId));
         LOGGER.log(Level.INFO, "EditorialBooksResource getBook: output: {0}", calificacionDTO);
@@ -124,7 +125,7 @@ public class ClienteCalificacionResource
         LOGGER.log(Level.INFO, "EditorialBooksResource replaceBooks: input: editorialsId: {0} , books: {1}", new Object[]{clienreId, calif});
         for (CalificacionDTO cali : calif) {
             if (calificacionLogic.getCalificacion(cali.getId()) == null) {
-                throw new WebApplicationException("El recurso /books/" + cali.getId() + " no existe.", 404);
+                throw new WebApplicationException("El recurso /books/" + cali.getId() + NO, 404);
             }
         }
         List<CalificacionDTO> listaDetailDTOs = calificacionListEntity2DTO(clienteCalificacionLogic.replaceCalificacion(clienreId, calificacionListDTO2Entity(calif)));

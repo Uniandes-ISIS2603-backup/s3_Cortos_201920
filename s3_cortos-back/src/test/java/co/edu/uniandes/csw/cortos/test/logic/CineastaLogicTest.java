@@ -86,6 +86,39 @@ public class CineastaLogicTest {
         CineastaEntity entity = em.find(CineastaEntity.class, result.getId());
         Assert.assertEquals(entity.getNombre(), result.getNombre());
     }
+    @Test
+    public void getCineasta() throws BusinessLogicException {
+        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
+        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
+        Assert.assertNotNull(result);
+        
+        result = cineastaLogic.getCineasta(newEntity.getId());
+        CineastaEntity entity = em.find(CineastaEntity.class, result.getId());
+        Assert.assertEquals(entity.getNombre(), result.getNombre());
+    }
+    
+    @Test
+    public void updateCineasta() throws BusinessLogicException {
+        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
+        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
+        CineastaEntity entity1 = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@corrfecto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
+        entity1.setId(newEntity.getId());
+        
+        
+        Assert.assertNotNull(result);
+        
+        result= cineastaLogic.updateCineasta (newEntity.getId(),entity1);
+        
+        CineastaEntity entity = em.find(CineastaEntity.class, result.getId());
+        Assert.assertEquals(entity.getNombre(), result.getNombre());
+    }
+
 
     @Test(expected = BusinessLogicException.class)
     public void createCineastaNombreNull() throws BusinessLogicException {

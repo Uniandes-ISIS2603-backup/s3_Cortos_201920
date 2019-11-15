@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.cortos.ejb;
 
-import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.entities.TemaEntity;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;

@@ -37,7 +37,6 @@ public class CortoTemaLogic {
      * @return tema aniadido
      */
     public TemaEntity addTema(long temaId, long cortoId){
-        //System.out.println(cortoId);
         TemaEntity agregar = tp.find(temaId);
         CortoEntity agregue = cp.find(cortoId);
         agregue.getTemas().add(agregar);

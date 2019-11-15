@@ -35,6 +35,9 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class CalificacionResource {
     private static final Logger LOGGER = Logger.getLogger(CalificacionResource.class.getName());
+    private String NO = " no existe.";
+    private String REC = "El recurso /calificacion/";
+    
     @Inject 
     private CalificacionLogic calificacionLogic; 
     @POST
@@ -62,20 +65,20 @@ public class CalificacionResource {
         CalificacionEntity calificacionEntity = calificacionLogic.getCalificacion(id);
         if(calificacionEntity ==null)
         {
-            throw new WebApplicationException("El recurso /calificacion/"+ id+"no existe.", 404);
+            throw new WebApplicationException(REC+ id+NO, 404);
         }
-        CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionEntity);
-        return calificacionDTO;
+        
+        return new CalificacionDTO(calificacionEntity);
     }
     
     @PUT
     @Path("{calificacionesId:\\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
+    public CalificacionDTO updateCalificacion(@PathParam("calificacionesId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
         LOGGER.log(Level.INFO,"CalificacionResource updateCalificacion:input:id:{0},calificacion:{1}",new Object[]{id,calificacion});
         calificacion.setId(id);
         if(calificacionLogic.getCalificacion(id)==null)
         {
-            throw new WebApplicationException("El recurso /calificacion/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionLogic.updateCalificacion(id,calificacion.toEntity()));
         LOGGER.log(Level.INFO,"CalificacionResource updateCalificacionResource:outpur:{0}",calificacionDTO);
@@ -83,13 +86,14 @@ public class CalificacionResource {
     }   
     @DELETE
     @Path("{calificacionesId:\\d+}")
-    public void deleteComentario(@PathParam("calificacionId") Long id ) throws BusinessLogicException
+    public void deleteComentario(@PathParam("calificacionesId") Long id ) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"ComentarioResource deleteComentario :input:{0}",id);
         CalificacionEntity entity = calificacionLogic.getCalificacion(id);
+        
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /calificacion/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         calificacionLogic.deleteCalificacion(id);
         LOGGER.info("ComentarioResorce deleteCalificacion:output:void");

@@ -70,7 +70,7 @@ public class ClienteLogic
         return clienteEntity;
     }
     
-    public ClienteEntity updateCliente (Long id ,ClienteEntity cliente) throws BusinessLogicException
+    public ClienteEntity updateCliente (Long id ,ClienteEntity cliente) 
     {
         LOGGER.log(Level.INFO,"Inicia   proceso de actualizar el cliente con id = {0}",id);
         ClienteEntity newEntity = persistence.update(cliente);
@@ -78,7 +78,7 @@ public class ClienteLogic
         return newEntity;
     }
     
-    public void deleteCliente(Long id ) throws BusinessLogicException {
+    public void deleteCliente(Long id )  {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", id );
         persistence.delete(id);
         LOGGER.log(Level.INFO,"Termine el proceso de borrar el cliente con id= {0}",id);
