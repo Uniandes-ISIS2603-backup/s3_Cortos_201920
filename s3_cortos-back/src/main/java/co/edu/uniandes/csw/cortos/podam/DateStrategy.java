@@ -37,9 +37,9 @@ public class DateStrategy implements AttributeStrategy<Date> {
     @Override
     public Date getValue() {
         Calendar c = Calendar.getInstance();
-        int max_year = 9999;
+        int MAX_YEAR = 9999;
         c.set(Calendar.YEAR, r.nextInt(
-                max_year - c.getActualMinimum(Calendar.YEAR) + 1)
+                MAX_YEAR - c.getActualMinimum(Calendar.YEAR) + 1)
                 + c.getActualMinimum(Calendar.YEAR));
         c.set(Calendar.DAY_OF_YEAR, r.nextInt(
                 c.getActualMaximum(Calendar.DAY_OF_YEAR) - c.getActualMinimum(Calendar.DAY_OF_YEAR) + 1)

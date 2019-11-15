@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.cortos.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -28,14 +28,14 @@ public class TemaEntity extends BaseEntity implements Serializable{
      */
     @PodamExclude
     @ManyToMany (mappedBy = "temas")
-    private ArrayList<CortoEntity> cortos = new ArrayList<CortoEntity> ();
+    private List<CortoEntity> cortos = new ArrayList<> ();
     /**
      * Relacion con los cineastas que tengan 
      */
     @PodamExclude
     @ManyToMany(mappedBy = "temas")
 
-    private ArrayList<CineastaEntity> cineasta = new ArrayList<CineastaEntity>();
+    private List<CineastaEntity> cineasta = new ArrayList<>();
      /**
      * @return the nombre
      */
@@ -52,28 +52,28 @@ public class TemaEntity extends BaseEntity implements Serializable{
     /**
      * @return the cortos
      */
-    public ArrayList<CortoEntity> getCortos() {
+    public List<CortoEntity> getCortos() {
         return cortos;
     }
 
     /**
      * @param cortos the cortos to set
      */
-    public void setCortos(ArrayList<CortoEntity> cortos) {
+    public void setCortos(List<CortoEntity> cortos) {
         this.cortos = cortos;
     }
 
     /**
      * @return the cineasta
      */
-    public ArrayList<CineastaEntity> getCineasta() {
+    public List<CineastaEntity> getCineasta() {
         return cineasta;
     }
 
     /**
      * @param cineasta the cineasta to set
      */
-    public void setCineasta(ArrayList<CineastaEntity> cineasta) {
+    public void setCineasta(List<CineastaEntity> cineasta) {
         this.cineasta = cineasta;
     }
 

@@ -5,13 +5,9 @@
  */
 package co.edu.uniandes.csw.cortos.resources;
 
-import co.edu.uniandes.csw.cortos.dtos.CalificacionDTO;
 import co.edu.uniandes.csw.cortos.dtos.ComentarioDTO;
-import co.edu.uniandes.csw.cortos.ejb.CalificacionLogic;
-import co.edu.uniandes.csw.cortos.ejb.ClienteCalificacionLogic;
 import co.edu.uniandes.csw.cortos.ejb.ClienteComentarioLogic;
 import co.edu.uniandes.csw.cortos.ejb.ComentarioLogic;
-import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import java.util.ArrayList;

@@ -36,6 +36,8 @@ import javax.ws.rs.WebApplicationException;
 public class CineastaResource {
     
     private static final Logger LOGGER = Logger.getLogger(ClienteResource.class.getName());
+    private String NO = " no existe.";
+    private String REC = "El recurso /cineasta/";
     
     @Inject
     private CineastaLogic cineastaLogic;
@@ -69,10 +71,9 @@ public class CineastaResource {
         CineastaEntity cineastaEntity = cineastaLogic.getCineasta(id);
         if(cineastaEntity ==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+ id+"no existe.", 404);
+            throw new WebApplicationException(REC+ id+NO, 404);
         }
-        CineastaDTO cineastaDTO = new CineastaDTO(cineastaEntity);
-        return cineastaDTO;
+        return  new CineastaDTO(cineastaEntity);
     }
     
     @PUT
@@ -82,7 +83,7 @@ public class CineastaResource {
         cineasta.setId(id);
         if(cineastaLogic.getCineasta(id)==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         CineastaDTO cineastaDTO = new CineastaDTO(cineastaLogic.updateCineasta(id,cineasta.toEntity()));
         LOGGER.log(Level.INFO,"CineastaResource updateCineastaResource:outpur:{0}",cineastaDTO);
@@ -97,7 +98,7 @@ public class CineastaResource {
         CineastaEntity entity = cineastaLogic.getCineasta(id);
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         cineastaLogic.deleteCineasta(id);
         LOGGER.info("CineastaResorce deleteCineasta:output:void");

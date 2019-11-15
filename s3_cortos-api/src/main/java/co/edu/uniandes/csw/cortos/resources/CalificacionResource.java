@@ -35,6 +35,9 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class CalificacionResource {
     private static final Logger LOGGER = Logger.getLogger(CalificacionResource.class.getName());
+    private String NO = " no existe.";
+    private String REC = "El recurso /calificacion/";
+    
     @Inject 
     private CalificacionLogic calificacionLogic; 
     @POST
@@ -62,10 +65,10 @@ public class CalificacionResource {
         CalificacionEntity calificacionEntity = calificacionLogic.getCalificacion(id);
         if(calificacionEntity ==null)
         {
-            throw new WebApplicationException("El recurso /calificacion/"+ id+"no existe.", 404);
+            throw new WebApplicationException(REC+ id+NO, 404);
         }
-        CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionEntity);
-        return calificacionDTO;
+        
+        return new CalificacionDTO(calificacionEntity);
     }
     
     @PUT
@@ -75,7 +78,7 @@ public class CalificacionResource {
         calificacion.setId(id);
         if(calificacionLogic.getCalificacion(id)==null)
         {
-            throw new WebApplicationException("El recurso /calificacion/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         CalificacionDTO calificacionDTO = new CalificacionDTO(calificacionLogic.updateCalificacion(id,calificacion.toEntity()));
         LOGGER.log(Level.INFO,"CalificacionResource updateCalificacionResource:outpur:{0}",calificacionDTO);
@@ -90,7 +93,7 @@ public class CalificacionResource {
         
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /calificacion/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         calificacionLogic.deleteCalificacion(id);
         LOGGER.info("ComentarioResorce deleteCalificacion:output:void");
