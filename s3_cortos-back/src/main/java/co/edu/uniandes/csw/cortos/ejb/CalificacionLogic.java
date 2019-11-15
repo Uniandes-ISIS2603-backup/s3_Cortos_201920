@@ -49,7 +49,7 @@ import javax.inject.Inject;
     {
         LOGGER.log(Level.INFO,"Inicia el proceso de consultar la calificacion con id = {0}", id);
         CalificacionEntity calificacionEntity= persistence.find(id);
-        if(calificacionEntity==null)
+        if(calificacionEntity==null || id == null)
         {
             LOGGER.log(Level.INFO,"El comentario con id ={0} no existe",id);
         }

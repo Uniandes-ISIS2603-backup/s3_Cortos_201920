@@ -42,27 +42,27 @@ public class CortoComentarioResource {
     
     /**
      * Servicio RESFTUL de aniadir un comentario a un corto
-     * @param cortoId identificacion del corto
+     * @param cortosId identificacion del corto
      * @param comentarioId identificacion del comentario
      * @return comentario que se aniade
      */
     @POST
-    @Path("{comentarioId : \\d+}")
-    public ComentarioDTO addComentario(@PathParam("cortoId") Long cortoId, @PathParam("comentarioId") Long comentarioId){
+    @Path("{comentariosId : \\d+}")
+    public ComentarioDTO addComentario(@PathParam("cortosId") Long cortosId, @PathParam("comentariosId") Long comentarioId){
         if(comentLogic.getComentario(comentarioId)== null){
             throw new WebApplicationException("El recurso /comentario/"+comentarioId+" no existe", 404);
         }
-        ComentarioDTO c = new ComentarioDTO(cortoComenLogic.addComentario(comentarioId, cortoId));
+        ComentarioDTO c = new ComentarioDTO(cortoComenLogic.addComentario(comentarioId, cortosId));
         return c;
     }
     /**
      * Lista de comentarios de un corto
-     * @param cortoId identificacion del corto
+     * @param cortosId identificacion del corto
      * @return Lista de comentarios de un corto
      */
     @GET
-    public List<ComentarioDTO> getComentarios(@PathParam("cortosId") Long cortoId){
-        return comentariosListEntity2DTO(cortoComenLogic.getComentarios(cortoId));
+    public List<ComentarioDTO> getComentarios(@PathParam("cortosId") Long cortosId){
+        return comentariosListEntity2DTO(cortoComenLogic.getComentarios(cortosId));
     }
     /**
      *Metodo auxiliar para transformar entidades a dtos
@@ -78,17 +78,17 @@ public class CortoComentarioResource {
     }
     /**
      * Comentario particular de un corto
-     * @param cortoId identificacion de corto
+     * @param cortosId identificacion de corto
      * @param comentarioId identificacion de comentarios
      * @return comentario de un corto
      * @throws BusinessLogicException el comentario no pertenece al corto
      */
     @GET
-    @Path("comentarioId: \\d+")
-    public ComentarioDTO getComentario(@PathParam("cortosId")Long cortoId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
+    @Path("{comentariosId: \\d+}")
+    public ComentarioDTO getComentario(@PathParam("cortosId")Long cortosId, @PathParam("comentariosId") Long comentarioId) throws BusinessLogicException{
         if((comentLogic.getComentario(comentarioId))== null)
-            throw new WebApplicationException("El recurso /cortos/"+ cortoId+"/comentarios/"+comentarioId+" no existe", 404);
-        ComentarioDTO comentario = new ComentarioDTO(cortoComenLogic.getComentario(comentarioId, cortoId));
+            throw new WebApplicationException("El recurso /cortos/"+ cortosId+"/comentarios/"+comentarioId+" no existe", 404);
+        ComentarioDTO comentario = new ComentarioDTO(cortoComenLogic.getComentario(comentarioId, cortosId));
         return comentario;
     }
 }

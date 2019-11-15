@@ -53,7 +53,7 @@ public class CalificacionPersistence {
      public CalificacionEntity find(Long rateId)
     {
        LOGGER.log(Level.INFO, "Consultando el calificacion con Id{0}",rateId);
-        return em.find(CalificacionEntity.class,rateId);
+        return em.find(CalificacionEntity.class, rateId);
     }
     /**
      * Actualiza una entidad 

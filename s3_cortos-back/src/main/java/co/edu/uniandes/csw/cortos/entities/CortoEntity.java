@@ -36,7 +36,7 @@ public class CortoEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @OneToMany(mappedBy = "corto")
-    private List<CalificacionEntity> calificaciones = new ArrayList<>();
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
     
     @PodamExclude
     @ManyToOne
@@ -60,7 +60,7 @@ public class CortoEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @OneToMany(mappedBy = "cortoCineastas")
-    private List<CineastaEntity> cineasta;
+    private List<CineastaEntity> cineasta = new ArrayList<>();
 
     /**
      * nombre del corto
