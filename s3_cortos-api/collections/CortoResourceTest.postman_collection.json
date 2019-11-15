@@ -37,7 +37,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/comentarios",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -46,7 +46,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"comentarios"
+						"cortos"
 					]
 				}
 			},
@@ -209,7 +209,7 @@
 			"response": []
 		},
 		{
-			"name": "Obtener una corto que no existe",
+			"name": "Obtener un corto que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -225,6 +225,56 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cortos",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar corto que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "563e586d-bf8e-485d-a758-064e731bb908",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"raza\": \"Criollo2\",\n\t\"lugar\": \"Bogota2\",\n\t\"descripcion\": \"juan@bta.com\",\n\t\"especie\": 0,\n\t\"celular\": 3121232121,\n\t\"fechaEncontrada\": \"2019-09-10T00:00:00.000Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
 					"protocol": "http",
