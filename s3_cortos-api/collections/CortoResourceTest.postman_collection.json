@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "da0a4a97-e9a1-49ae-b391-8ff8f8242a03",
+		"_postman_id": "4b96b20d-0291-46db-9886-91b5924ea0d6",
 		"name": "CortoResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -203,6 +203,40 @@
 						"api",
 						"cortos",
 						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una corto que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c752bba-210e-48c4-80e4-d04e8cd8d0c0",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cortos",
+						"-1"
 					]
 				}
 			},
