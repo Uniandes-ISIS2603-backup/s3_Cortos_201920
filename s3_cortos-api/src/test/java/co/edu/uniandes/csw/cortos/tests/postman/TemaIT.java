@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 public class TemaIT 
 {
     
-    private static final String COLLECTION = "CortoResourceTest.postman_collection";
+    private static final String COLLECTION = "TemaResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
