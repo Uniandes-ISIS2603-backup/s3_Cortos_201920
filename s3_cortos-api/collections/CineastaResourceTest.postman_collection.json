@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "c38d0756-2110-495b-8582-0d38b805d901",
+		"name": "CineastaResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea una nueva cineasta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"var data =JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"contrasenia\": \"seerhPHe7n\",\r\n        \"correo\": \"pepito@corre.com\",\r\n        \"direccion\": \"ijxah41ocJ\",\r\n        \"fechaNacimiento\": \"1998-03-21T05:00:00Z[UTC]\",\r\n        \"genero\": true,\r\n        \"nombre\": \"Ah9lñkPnB11W9\",\r\n        \"rol\": \"AFICIONADO\",\r\n        \"telefono\": \"FedtfjPWPr\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea una nueva cineasta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualiza una cineasta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"",
+							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"contrasenia\": \"seerhPHe7n\",\r\n        \"correo\": \"pepito@cecto.com\",\r\n        \"direccion\": \"ijxah41ocJ\",\r\n        \"fechaNacimiento\": \"1998-03-21T05:00:00Z[UTC]\",\r\n        \"genero\": true,\r\n         \"nombre\": \"veas\",\r\n        \"rol\": \"AFICIONADO\",\r\n        \"telefono\": \"FedtfjPWPr\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener cineasta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data =JSON.parse(responseBody);",
+							"tests[\"No genera error en el GET ALL\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una cineasta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c752bba-210e-48c4-80e4-d04e8cd8d0c0",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar cineasta que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "563e586d-bf8e-485d-a758-064e731bb908",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"raza\": \"Criollo2\",\n\t\"lugar\": \"Bogota2\",\n\t\"descripcion\": \"juan@bta.com\",\n\t\"especie\": 0,\n\t\"celular\": 3121232121,\n\t\"fechaEncontrada\": \"2019-09-10T00:00:00.000Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/-1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta",
+						"-1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

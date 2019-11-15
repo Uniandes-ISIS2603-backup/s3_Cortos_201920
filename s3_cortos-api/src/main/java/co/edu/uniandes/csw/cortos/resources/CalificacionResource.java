@@ -83,10 +83,11 @@ public class CalificacionResource {
     }   
     @DELETE
     @Path("{calificacionesId:\\d+}")
-    public void deleteComentario(@PathParam("calificacionId") Long id ) throws BusinessLogicException
+    public void deleteComentario(@PathParam("calificacionesId") Long id ) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"ComentarioResource deleteComentario :input:{0}",id);
         CalificacionEntity entity = calificacionLogic.getCalificacion(id);
+        
         if(entity ==null)
         {
             throw new WebApplicationException("El recurso /calificacion/"+id+"no existe.",404);

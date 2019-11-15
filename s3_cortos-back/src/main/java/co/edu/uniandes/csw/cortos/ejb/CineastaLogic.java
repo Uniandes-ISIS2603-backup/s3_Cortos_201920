@@ -123,7 +123,7 @@ public class CineastaLogic {
      * @return Colección de objetos de CineastaEntity.
      */
     public List<CineastaEntity> getCineastas() {
-
+       
         return persistence.findAll();
 
     }
