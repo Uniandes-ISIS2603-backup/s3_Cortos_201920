@@ -72,8 +72,7 @@ public class ComentarioLogic {
     public ComentarioEntity getComentario(Long id )
     {
         LOGGER.log(Level.INFO,"Inicia el proceso de consultar el comentario con id = {0}",id);
-        if (id == null)
-              throw new WebApplicationException("El recurso /comentario/"+id+"no existe.",404);
+    
         ComentarioEntity comentarioEntity= persistence.find(id);
         if(comentarioEntity==null || id == null)
         {
