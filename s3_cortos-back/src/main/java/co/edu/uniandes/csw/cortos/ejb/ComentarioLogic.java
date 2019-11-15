@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -44,7 +43,7 @@ public class ComentarioLogic {
     }
     private boolean validateComent(ComentarioEntity comentarioEntity)
     {
-        ArrayList<String> palabras = new ArrayList<String>();
+        ArrayList<String> palabras = new ArrayList<>();
         palabras.add("marica");
         palabras.add("chimba");
         palabras.add("webon");
@@ -82,7 +81,7 @@ public class ComentarioLogic {
         return comentarioEntity;
     }
     
-    public ComentarioEntity updateComentario (Long id ,ComentarioEntity comentario) throws BusinessLogicException
+    public ComentarioEntity updateComentario (Long id ,ComentarioEntity comentario) 
     {
         LOGGER.log(Level.INFO,"Inicia   proceso de actualizar el comentario con id = {0}",id);
         ComentarioEntity newEntity = persistence.update(comentario);

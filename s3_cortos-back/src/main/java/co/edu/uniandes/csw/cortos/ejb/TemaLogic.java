@@ -21,7 +21,7 @@ import javax.inject.Inject;
 @Stateless 
 public class TemaLogic {
     
-    private final static Logger LOGGER  = Logger.getLogger(TemaLogic.class.getName());
+    private static final  Logger LOGGER  = Logger.getLogger(TemaLogic.class.getName());
     
     @Inject 
     private TemaPersistence persistence;
@@ -64,7 +64,7 @@ public class TemaLogic {
         return temaEntity;
     }
     
-    public TemaEntity updateTema (Long id , TemaEntity tema) throws BusinessLogicException 
+    public TemaEntity updateTema (Long id , TemaEntity tema) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualzar el tema con id = {0}",id);
         TemaEntity newEntity = persistence.update(tema);
@@ -72,7 +72,7 @@ public class TemaLogic {
         return newEntity;
     }
     
-    public void deleteTema( Long id) throws BusinessLogicException 
+    public void deleteTema( Long id)
     {
         LOGGER.log(Level.INFO,"Inicia el proceso de borrar la calificacion con id  = {0}", id);
         persistence.delete (id);

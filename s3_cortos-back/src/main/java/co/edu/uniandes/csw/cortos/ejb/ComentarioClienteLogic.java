@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
 import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.persistence.ClientePersistence;
 import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
-//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -29,7 +28,7 @@ public class ComentarioClienteLogic {
     
     public ClienteEntity addCliente(Long clienteId, Long comentarioId )
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de asociar el comentario con id={0} al cliente con id= "+clienteId, comentarioId );
+        LOGGER.log(Level.INFO,String.format("Inicia proceso de asociar el comentario con id=%s al cliente con id %s ", comentarioId, clienteId)  );
         ClienteEntity cliente = clientePersistence.find(clienteId);
         ComentarioEntity comentario = comentarioPersistence.find(comentarioId);
         comentario.setCliente(cliente);

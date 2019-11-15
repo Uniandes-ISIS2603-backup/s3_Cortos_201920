@@ -53,8 +53,8 @@ public class CortoLogic {
             throw new BusinessLogicException("No hay ninguna descripcion");
         if(c.getPrecio() == null)
             throw new BusinessLogicException("No escribio ningun precio");
-        CortoEntity n = persistencia.update(c);
-        return n;
+       
+        return persistencia.update(c);
     }
     /**
      * Obtener un corto por id especifico
@@ -62,16 +62,15 @@ public class CortoLogic {
      * @return null si el corto no existe, la entidad encontrada
      */
     public CortoEntity getCorto(Long cId){
-        CortoEntity e = persistencia.find(cId);
-        return e;
+        return  persistencia.find(cId);
     }
     /**
      * Obtener todos los cortos en la base de datos
      * @return lista de los cortos de la base de datos
      */
     public List<CortoEntity> getCortos(){
-        List<CortoEntity> cs = persistencia.findAll();
-        return cs;
+
+        return persistencia.findAll();
     }
     /**
      * Elimina corto con id especificado

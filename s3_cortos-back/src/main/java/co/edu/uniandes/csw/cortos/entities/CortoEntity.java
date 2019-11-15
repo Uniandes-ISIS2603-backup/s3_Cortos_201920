@@ -25,25 +25,26 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class CortoEntity extends BaseEntity implements Serializable {
+
     /**
      * Relacion entre comentarios y corto
      */
     @PodamExclude
     @OneToMany(mappedBy = "corto")
-    private List<ComentarioEntity> comentarios = new ArrayList<>() ;
+    private List<ComentarioEntity> comentarios = new ArrayList<>();
     /**
      * Relacion entre calificaciones y cortos
      */
     @PodamExclude
     @OneToMany(mappedBy = "corto")
     private List<CalificacionEntity> calificaciones = new ArrayList<>();
-    
+
     @PodamExclude
     @ManyToOne
     private FacturaEntity factura;
-    
+
     @PodamExclude
-    @ManyToMany 
+    @ManyToMany
     private List<TemaEntity> temas = new ArrayList<>();
 
     /**
@@ -119,13 +120,6 @@ public class CortoEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return la descripcion del corto
-     */
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
      * Actualiza la descripcion del corto, con la descripcion recibida por
      * parametro
      *
@@ -143,19 +137,19 @@ public class CortoEntity extends BaseEntity implements Serializable {
     }
 
     /**
+     * @return la descripcion del corto
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
      * Actualiza el precio del corto, con el precio recibido por parametro
      *
      * @param nombre
      */
     public void setPrecio(Double precio) {
         this.precio = precio;
-    }
-
-    /**
-     * @return calificacion promedio del corto
-     */
-    public Double getCalificacionPromedio() {
-        return calificacionPromedio;
     }
 
     /**
@@ -166,6 +160,13 @@ public class CortoEntity extends BaseEntity implements Serializable {
      */
     public void setCalificacionPromedio(Double calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
+    }
+
+    /**
+     * @return calificacion promedio del corto
+     */
+    public Double getCalificacionPromedio() {
+        return calificacionPromedio;
     }
 
     /**
@@ -245,5 +246,5 @@ public class CortoEntity extends BaseEntity implements Serializable {
     public void setFactura(FacturaEntity factura) {
         this.factura = factura;
     }
-    
+
 }

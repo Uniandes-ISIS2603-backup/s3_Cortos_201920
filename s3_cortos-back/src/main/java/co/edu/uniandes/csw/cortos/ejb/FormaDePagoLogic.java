@@ -39,26 +39,26 @@ public class FormaDePagoLogic {
            throw new BusinessLogicException("La tarjeta está vencida \"");
         }
         
-        formaDePago = persistence.create(formaDePago);
-        return formaDePago;
+       
+        return persistence.create(formaDePago);
     }
     
     public List<FormaDePagoEntity > getFormasDePago()
     {
-        List<FormaDePagoEntity> formasDePago = persistence.findAll();
-        return formasDePago;
+        
+        return persistence.findAll();
     }
     
     public FormaDePagoEntity getFormaDePago(Long numero)
     {
-        FormaDePagoEntity formaDePagoEntity= persistence.find(numero);
-        return formaDePagoEntity;
+     
+        return persistence.find(numero);
     }
     
      public FormaDePagoEntity updateFormaDePago (Long id, FormaDePagoEntity formaDePago)throws BusinessLogicException
     {
-        FormaDePagoEntity newEntity = persistence.update(formaDePago);
-        return newEntity;
+       
+        return persistence.update(formaDePago);
     }
      
      public void deleteFormaDePago(Long numero ) throws BusinessLogicException

@@ -72,7 +72,7 @@ public class FacturaCortoLogic
      */
     public void removeCorto(Long facturaId, Long cortoId){
         CortoEntity eliminado = cortoP.find(cortoId);
-        FacturaEntity dueña = facturaP.find(facturaId);
-        dueña.getCortos().remove(eliminado);
+        FacturaEntity duena = facturaP.find(facturaId);
+        duena.getCortos().remove(eliminado);
     }
 }

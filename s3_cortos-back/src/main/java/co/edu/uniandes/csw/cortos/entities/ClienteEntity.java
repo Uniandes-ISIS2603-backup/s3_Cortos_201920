@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.cortos.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,10 +27,10 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private String contrasenia;
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @PodamExclude
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @PodamExclude
-    private List<ComentarioEntity> comentarios = new ArrayList<ComentarioEntity>();
+    private List<ComentarioEntity> comentarios = new ArrayList<>();
 
     @OneToMany(mappedBy="cliente",fetch = FetchType.LAZY)
     @PodamExclude
