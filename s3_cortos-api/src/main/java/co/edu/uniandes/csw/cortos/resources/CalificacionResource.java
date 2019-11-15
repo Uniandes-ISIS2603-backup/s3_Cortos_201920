@@ -70,7 +70,7 @@ public class CalificacionResource {
     
     @PUT
     @Path("{calificacionesId:\\d+}")
-    public CalificacionDTO updateCalificacion(@PathParam("calificacionId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
+    public CalificacionDTO updateCalificacion(@PathParam("calificacionesId") Long id, CalificacionDTO calificacion) throws BusinessLogicException{
         LOGGER.log(Level.INFO,"CalificacionResource updateCalificacion:input:id:{0},calificacion:{1}",new Object[]{id,calificacion});
         calificacion.setId(id);
         if(calificacionLogic.getCalificacion(id)==null)

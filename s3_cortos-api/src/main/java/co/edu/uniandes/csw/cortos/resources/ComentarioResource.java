@@ -35,6 +35,7 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped  
 public class ComentarioResource {
+    
     private static final Logger LOGGER = Logger.getLogger(ComentarioResource.class.getName());
     @Inject 
     private ComentarioLogic comentarioLogic; 

@@ -67,7 +67,7 @@
 						"exec": [
 							"console.log(responseBody);",
 							"var data =JSON.parse(responseBody);",
-							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
+							"tests[\"No genera error en el GET ALL\"]=responseCode.code ==200;"
 						],
 						"type": "text/javascript"
 					}
