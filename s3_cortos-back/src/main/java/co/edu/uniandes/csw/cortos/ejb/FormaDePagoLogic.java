@@ -55,13 +55,13 @@ public class FormaDePagoLogic {
         return persistence.find(numero);
     }
     
-     public FormaDePagoEntity updateFormaDePago (Long id, FormaDePagoEntity formaDePago)throws BusinessLogicException
+     public FormaDePagoEntity updateFormaDePago (Long id, FormaDePagoEntity formaDePago)
     {
        
         return persistence.update(formaDePago);
     }
      
-     public void deleteFormaDePago(Long numero ) throws BusinessLogicException
+     public void deleteFormaDePago(Long numero ) 
     {
         persistence.delete(numero);
     }

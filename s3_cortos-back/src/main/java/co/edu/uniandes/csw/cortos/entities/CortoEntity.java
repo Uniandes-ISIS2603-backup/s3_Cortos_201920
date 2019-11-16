@@ -38,7 +38,7 @@ public class CortoEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "corto")
 
-    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+    private List<CalificacionEntity> calificaciones = new ArrayList<>();
     
 
 
