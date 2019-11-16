@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.TemaDTO;
+import co.edu.uniandes.csw.cortos.dtos.TemaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.TemaLogic;
 import co.edu.uniandes.csw.cortos.entities.TemaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
@@ -49,10 +50,10 @@ public class TemaResource {
         return nuevoTemaDTO;
     }
     @GET
-    public List<TemaDTO> getTemas()
+    public List<TemaDetailDTO> getTemas()
     {
         LOGGER.info("TemaResource getTemas : input : void");
-        List<TemaDTO> listaTemas = listEntity2DTO (temaLogic.getTemas());
+        List<TemaDetailDTO> listaTemas = listEntity2DTO (temaLogic.getTemas());
         LOGGER.log(Level.INFO, "TemaResource getTEmas : output {0}", listaTemas);
         return listaTemas;
     }
@@ -100,12 +101,12 @@ public class TemaResource {
         LOGGER.info("TemaResource deleteTema:output:void");
     }
     
-    private List<TemaDTO> listEntity2DTO (List<TemaEntity> entityList)
+    private List<TemaDetailDTO> listEntity2DTO (List<TemaEntity> entityList)
     {
-        List<TemaDTO> list = new ArrayList<>();
+        List<TemaDetailDTO> list = new ArrayList<>();
         for(TemaEntity entity :entityList)
         {
-            list.add(new TemaDTO(entity));
+            list.add(new TemaDetailDTO(entity));
         }
         return list;
     }

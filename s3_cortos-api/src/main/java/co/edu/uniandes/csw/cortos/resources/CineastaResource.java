@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.CineastaDTO;
+import co.edu.uniandes.csw.cortos.dtos.CineastaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.CineastaLogic;
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
@@ -55,17 +56,17 @@ public class CineastaResource {
     }
     
     @GET
-    public List<CineastaDTO> getCineastas()
+    public List<CineastaDetailDTO> getCineastas()
     {
         LOGGER.info("CineastaResource getCineastas :input : void");
-        List<CineastaDTO> listaCineastas = listEntity2DTO(cineastaLogic.getCineastas());
+        List<CineastaDetailDTO> listaCineastas = listEntity2DTO(cineastaLogic.getCineastas());
         LOGGER.log(Level.INFO,"CineastaResource getCineastas :output{0}", listaCineastas);
         return listaCineastas;
     }
     
     @GET
     @Path("{cineastaId:\\d+}")
-    public CineastaDTO getCliente(@PathParam("cineastaId") long id )
+    public CineastaDetailDTO getCliente(@PathParam("cineastaId") long id )
     {
         LOGGER.log(Level.INFO,"CineastaResource getCineastas :input : {0}",id);
         CineastaEntity cineastaEntity = cineastaLogic.getCineasta(id);
@@ -73,7 +74,7 @@ public class CineastaResource {
         {
             throw new WebApplicationException(REC+ id+NO, 404);
         }
-        return  new CineastaDTO(cineastaEntity);
+        return  new CineastaDetailDTO(cineastaEntity);
     }
     
     @PUT
@@ -104,11 +105,11 @@ public class CineastaResource {
         LOGGER.info("CineastaResorce deleteCineasta:output:void");
     }
     
-    private List<CineastaDTO> listEntity2DTO(List<CineastaEntity> entityList)
+    private List<CineastaDetailDTO> listEntity2DTO(List<CineastaEntity> entityList)
     {
-        List<CineastaDTO> list = new ArrayList<>();
+        List<CineastaDetailDTO> list = new ArrayList<>();
         for(CineastaEntity entity:entityList){
-            list.add(new CineastaDTO(entity));
+            list.add(new CineastaDetailDTO(entity));
         }
         return list;
     }

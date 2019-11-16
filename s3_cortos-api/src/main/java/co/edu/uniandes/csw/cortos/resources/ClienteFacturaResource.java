@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.FacturaDTO;
+import co.edu.uniandes.csw.cortos.dtos.FacturaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.ClienteFacturasLogic;
 import co.edu.uniandes.csw.cortos.ejb.FacturaLogic;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
@@ -74,9 +75,9 @@ public class ClienteFacturaResource
      * editorial. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<FacturaDTO> getFacturas(@PathParam("clienteId") Long clienteId) {
+    public List<FacturaDetailDTO> getFacturas(@PathParam("clienteId") Long clienteId) {
         LOGGER.log(Level.INFO, "ClienteCalificacionResorce geicacion: input: {0}", clienteId);
-        List<FacturaDTO> listaDetailDTOs = facturaListEntity2DTO(clienteFacturaLogic.getFacturas(clienteId));
+        List<FacturaDetailDTO> listaDetailDTOs = facturaListEntity2DTO(clienteFacturaLogic.getFacturas(clienteId));
         LOGGER.log(Level.INFO, "EditorialBooksResource getBooks: output: {0}", listaDetailDTOs);
         return listaDetailDTOs;
     }
@@ -97,12 +98,12 @@ public class ClienteFacturaResource
      */
     @GET
     @Path("{calificacionId: \\d+}")
-    public FacturaDTO getFactura(@PathParam("clienteId") Long clienteId, @PathParam("facturaId") Long facturaId) throws BusinessLogicException {
+    public FacturaDetailDTO getFactura(@PathParam("clienteId") Long clienteId, @PathParam("facturaId") Long facturaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "EditorialBooksResource getBook: input: editorialsID: {0} , booksId: {1}", new Object[]{clienteId, facturaId});
         if (facturaLogic.getFactura(facturaId) == null) {
             throw new WebApplicationException("El recurso /editorials/" + clienteId + "/books/" + facturaId + NO, 404);
         }
-        FacturaDTO facturaDTO = new FacturaDTO(clienteFacturaLogic.getFactura(facturaId, clienteId));
+        FacturaDetailDTO facturaDTO = new FacturaDetailDTO(clienteFacturaLogic.getFactura(facturaId, clienteId));
         LOGGER.log(Level.INFO, "EditorialBooksResource getBook: output: {0}", facturaDTO);
         return facturaDTO;
     }
@@ -120,14 +121,14 @@ public class ClienteFacturaResource
      * Error de lógica que se genera cuando no se encuentra el libro.
      */
     @PUT
-    public List<FacturaDTO> replaceFactura(@PathParam("clienteId") Long clienreId, List<FacturaDTO> factures) {
+    public List<FacturaDetailDTO> replaceFactura(@PathParam("clienteId") Long clienreId, List<FacturaDTO> factures) {
         LOGGER.log(Level.INFO, "EditorialBooksResource replaceBooks: input: editorialsId: {0} , books: {1}", new Object[]{clienreId, factures});
         for (FacturaDTO fact : factures) {
             if (facturaLogic.getFactura(fact.getId()) == null) {
                 throw new WebApplicationException(REC + fact.getId() + " no existe.", 404);
             }
         }
-        List<FacturaDTO> listaDetailDTOs = facturaListEntity2DTO(clienteFacturaLogic.replaceFactura(clienreId, facturaListDTO2Entity(factures)));
+        List<FacturaDetailDTO> listaDetailDTOs = facturaListEntity2DTO(clienteFacturaLogic.replaceFactura(clienreId, facturaListDTO2Entity(factures)));
         LOGGER.log(Level.INFO, "EditorialBooksResource replaceBooks: output: {0}", listaDetailDTOs);
         return listaDetailDTOs;
     }
@@ -138,10 +139,10 @@ public class ClienteFacturaResource
      * @param entityList Lista de BookEntity a convertir.
      * @return Lista de BookDTO convertida.
      */
-    private List<FacturaDTO> facturaListEntity2DTO(List<FacturaEntity> entityList) {
-        List<FacturaDTO> list = new ArrayList<>();
+    private List<FacturaDetailDTO> facturaListEntity2DTO(List<FacturaEntity> entityList) {
+        List<FacturaDetailDTO> list = new ArrayList<>();
         for (FacturaEntity entity : entityList) {
-            list.add(new FacturaDTO(entity));
+            list.add(new FacturaDetailDTO(entity));
         }
         return list;
     }

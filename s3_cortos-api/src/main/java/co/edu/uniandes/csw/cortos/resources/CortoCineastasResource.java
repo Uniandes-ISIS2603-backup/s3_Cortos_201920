@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.CineastaDTO;
+import co.edu.uniandes.csw.cortos.dtos.CineastaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.CineastaLogic;
 import co.edu.uniandes.csw.cortos.ejb.CortoCineastasLogic;
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
@@ -61,7 +62,7 @@ public class CortoCineastasResource {
      * @return Lista de cineastas de un corto
      */
     @GET
-    public List<CineastaDTO> getCineastas(@PathParam("cortosId") Long cortoId){
+    public List<CineastaDetailDTO> getCineastas(@PathParam("cortosId") Long cortoId){
         return cineastasListEntity2DTO(cortoCineastasLogic.getCineastas(cortoId));
     }
     /**
@@ -69,10 +70,10 @@ public class CortoCineastasResource {
      * @param lista lista de entidades de cineastas
      * @return lista de cineasta dto
      */
-    public List<CineastaDTO> cineastasListEntity2DTO(List<CineastaEntity> lista){
-        List<CineastaDTO> list= new ArrayList<>();
+    public List<CineastaDetailDTO> cineastasListEntity2DTO(List<CineastaEntity> lista){
+        List<CineastaDetailDTO> list= new ArrayList<>();
         for(CineastaEntity c : lista){
-            list.add(new CineastaDTO(c));
+            list.add(new CineastaDetailDTO(c));
         }
         return list;
     }
@@ -85,10 +86,10 @@ public class CortoCineastasResource {
      */
     @GET
     @Path("cineastaId: \\d+")
-    public CineastaDTO getCineasta(@PathParam("cortosId")Long cortoId, @PathParam("cineastaId") Long cineastaId) throws BusinessLogicException{
+    public CineastaDetailDTO getCineasta(@PathParam("cortosId")Long cortoId, @PathParam("cineastaId") Long cineastaId) throws BusinessLogicException{
         if((cineastaLogic.getCineasta(cineastaId))== null)
             throw new WebApplicationException("El recurso /cortos/"+ cortoId+"/cineastas/"+cineastaId+" no existe", 404);
-        CineastaDTO cineasta = new CineastaDTO(cortoCineastasLogic.getCineasta(cineastaId, cortoId));
+        CineastaDetailDTO cineasta = new CineastaDetailDTO(cortoCineastasLogic.getCineasta(cineastaId, cortoId));
         return cineasta;
     }
 }
