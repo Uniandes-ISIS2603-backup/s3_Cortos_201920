@@ -152,5 +152,12 @@ public class CortoResource {
         }
         return CortoCalificacionResource.class;
     }
+    @Path("{cortosId: \\d+}/cineastas")
+    public Class<CortoCineastasResource> getCortoCineastasResource(@PathParam("cortosId") Long cortosId){
+        if(cl.getCorto(cortosId)==null){
+            throw new WebApplicationException("el recurso /cortos/" + cortosId + " no existe", 404);
+        }
+        return CortoCineastasResource.class;
+    }
 }
 
