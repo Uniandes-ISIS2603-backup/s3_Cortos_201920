@@ -38,6 +38,8 @@ import javax.ws.rs.WebApplicationException;
 public class CortoResource {
     
     private static final Logger LOGGER = Logger.getLogger(CortoResource.class.getName());
+    private  static final String NO = " no existe";
+    private  static final String REC = "el recurso /cortos/";
     /**
      * Referencia de logica de corto
      */
@@ -76,7 +78,7 @@ public class CortoResource {
     public CortoDetailDTO getCorto(@PathParam("cortosId") Long cortosId){
         CortoEntity c = cl.getCorto(cortosId);
         if(c == null)
-            throw new WebApplicationException("el recurso /cortos/" + cortosId + " no existe", 404);
+            throw new WebApplicationException(REC + cortosId + NO, 404);
         CortoDetailDTO n = new CortoDetailDTO(c);
         return n;
     }
@@ -92,7 +94,7 @@ public class CortoResource {
     public CortoDetailDTO updateCorto(@PathParam("cortosId") Long cortosId, CortoDetailDTO c) throws BusinessLogicException{
         c.setId(cortosId);
         if(cl.getCorto(cortosId)== null)
-            throw new WebApplicationException("el recurso /cortos/" + cortosId + " no existe", 404);
+            throw new WebApplicationException(REC + cortosId + NO, 404);
         CortoDetailDTO n = new CortoDetailDTO(cl.updateCorto(cortosId, c.toEntity()));
         return n;
     }
@@ -138,7 +140,7 @@ public class CortoResource {
         
         
         if(cl.getCorto(cortosId)==null){
-            throw new WebApplicationException("el recurso /cortos/" + cortosId + " no existe", 404);
+            throw new WebApplicationException(REC + cortosId + NO, 404);
         }
         return CortoComentarioResource.class;
     }
@@ -148,7 +150,7 @@ public class CortoResource {
         
         
         if(cl.getCorto(cortosId)==null){
-            throw new WebApplicationException("el recurso /cortos/" + cortosId + " no existe", 404);
+            throw new WebApplicationException(REC + cortosId + NO, 404);
         }
         return CortoCalificacionResource.class;
     }

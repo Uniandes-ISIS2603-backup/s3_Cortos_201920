@@ -6,11 +6,9 @@
 package co.edu.uniandes.csw.cortos.ejb;
 
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
-import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.entities.FacturaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.ClientePersistence;
-import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
 import co.edu.uniandes.csw.cortos.persistence.FacturaPersistence;
 import java.util.List;
 import java.util.logging.Level;
@@ -71,11 +69,11 @@ public class ClienteFacturasLogic
      * editorial
      */
     public FacturaEntity getFactura(Long clienteId, Long facturaId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la editorial con id = " + clienteId, facturaId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la editorial con id = {1}" ,new Object[]{ facturaId, clienteId});
         List<FacturaEntity> coment = clientePersistence.find(clienteId).getFacturas();
         FacturaEntity facturaEntity = facturasPersistence.find(facturaId);
         int index = coment.indexOf(facturaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la editorial con id = " + clienteId, facturaId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la editorial con id = {1} ",new Object[]{ facturaId, clienteId});
         if (index >= 0) {
             return coment.get(index);
         }
