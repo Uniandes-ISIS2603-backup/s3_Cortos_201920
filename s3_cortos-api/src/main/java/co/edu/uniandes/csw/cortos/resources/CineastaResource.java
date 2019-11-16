@@ -36,8 +36,8 @@ import javax.ws.rs.WebApplicationException;
 public class CineastaResource {
     
     private static final Logger LOGGER = Logger.getLogger(ClienteResource.class.getName());
-    private String NO = " no existe.";
-    private String REC = "El recurso /cineasta/";
+    private  static final String NO = " no existe.";
+    private  static final String REC = "El recurso /cineasta/";
     
     @Inject
     private CineastaLogic cineastaLogic;

@@ -35,8 +35,8 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class CalificacionResource {
     private static final Logger LOGGER = Logger.getLogger(CalificacionResource.class.getName());
-    private String NO = " no existe.";
-    private String REC = "El recurso /calificacion/";
+    private static final String NO = " no existe.";
+    private  static final String REC = "El recurso /calificacion/";
     
     @Inject 
     private CalificacionLogic calificacionLogic; 

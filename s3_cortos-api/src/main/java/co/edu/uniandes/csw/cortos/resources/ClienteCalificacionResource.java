@@ -35,7 +35,7 @@ import javax.ws.rs.core.MediaType;
 public class ClienteCalificacionResource 
 {
     private static final Logger LOGGER = Logger.getLogger(ClienteCalificacionResource.class.getName());
-    private String NO = " no existe.";
+    private  static final String NO = " no existe.";
     
     @Inject
     private ClienteCalificacionLogic clienteCalificacionLogic;

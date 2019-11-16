@@ -37,6 +37,8 @@ import javax.ws.rs.WebApplicationException;
 public class ClienteResource 
 {
     private static final Logger LOGGER = Logger.getLogger(ClienteResource.class.getName());
+    private  static final String NO = " no existe.";
+    private  static final String REC = "El recurso /cliente/";
     
     @Inject
     private ClienteLogic clienteLogic;
@@ -70,7 +72,7 @@ public class ClienteResource
         ClienteEntity clienteEntity = clienteLogic.getCliente(id);
         if(clienteEntity ==null)
         {
-            throw new WebApplicationException("El recurso /cliente/"+ id+"no existe.", 404);
+            throw new WebApplicationException(REC+ id+NO, 404);
         }
         ClienteDetailDTO clienteDTO = new ClienteDetailDTO(clienteEntity);
         return clienteDTO;
@@ -83,7 +85,7 @@ public class ClienteResource
         cliente.setId(id);
         if(clienteLogic.getCliente(id)==null)
         {
-            throw new WebApplicationException("El recurso /cliente/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         ClienteDTO clienteDTO = new ClienteDTO(clienteLogic.updateCliente(id,cliente.toEntity()));
         LOGGER.log(Level.INFO,"ClienteResource updateClienteResource:outpur:{0}",clienteDTO);
@@ -98,7 +100,7 @@ public class ClienteResource
         ClienteEntity entity = clienteLogic.getCliente(id);
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /cliente/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         clienteLogic.deleteCliente(id);
         LOGGER.info("ClienteResorce deleteCliente:output:void");
@@ -121,7 +123,7 @@ public class ClienteResource
     @Path("{clienteId: \\d+}/calificaciones")
     public Class<ClienteCalificacionResource> getClienteCalificacionResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+            throw new WebApplicationException(REC + clienteId + NO, 404);
         }
         return ClienteCalificacionResource.class;
     }
@@ -143,7 +145,7 @@ public class ClienteResource
     @Path("{clienteId: \\d+}/comentarios")
     public Class<ClienteComentarioResource> getClienteComentarioResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+            throw new WebApplicationException(REC + clienteId + NO, 404);
         }
         return ClienteComentarioResource.class;
     }
@@ -165,7 +167,7 @@ public class ClienteResource
     @Path("{clienteId: \\d+}/facturas")
     public Class<ClienteFacturaResource> getClienteFacturaResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+            throw new WebApplicationException(REC+ clienteId + NO, 404);
         }
         return ClienteFacturaResource.class;
     }
@@ -187,7 +189,7 @@ public class ClienteResource
     @Path("{clienteId: \\d+}/formasDePago")
     public Class<ClienteFormaPagoResource> getClienteFormaPagoResource(@PathParam("clienteId") Long clienteId) {
         if (clienteLogic.getCliente(clienteId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + clienteId + " no existe.", 404);
+            throw new WebApplicationException(REC+ clienteId +NO, 404);
         }
         return ClienteFormaPagoResource.class;
     }

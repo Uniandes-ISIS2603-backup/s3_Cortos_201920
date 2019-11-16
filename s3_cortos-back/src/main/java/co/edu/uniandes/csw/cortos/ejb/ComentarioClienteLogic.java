@@ -28,7 +28,7 @@ public class ComentarioClienteLogic {
     
     public ClienteEntity addCliente(Long clienteId, Long comentarioId )
     {
-        LOGGER.log(Level.INFO,String.format("Inicia proceso de asociar el comentario con id=%s al cliente con id %s ", comentarioId, clienteId)  );
+        LOGGER.log(Level.INFO,String.format("Inicia proceso de asociar el comentario con id= %s al cliente con id %s ", comentarioId, clienteId)  );
         ClienteEntity cliente = clientePersistence.find(clienteId);
         ComentarioEntity comentario = comentarioPersistence.find(comentarioId);
         comentario.setCliente(cliente);
