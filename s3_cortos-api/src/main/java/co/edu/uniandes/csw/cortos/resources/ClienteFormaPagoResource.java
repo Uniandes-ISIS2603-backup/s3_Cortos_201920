@@ -6,13 +6,13 @@
 
 package co.edu.uniandes.csw.cortos.resources;
 
-import co.edu.uniandes.csw.cortos.dtos.ComentarioDTO;
+
 import co.edu.uniandes.csw.cortos.dtos.FormaDePagoDTO;
-import co.edu.uniandes.csw.cortos.ejb.ClienteComentarioLogic;
+
 import co.edu.uniandes.csw.cortos.ejb.ClienteFormaPagoLogic;
-import co.edu.uniandes.csw.cortos.ejb.ComentarioLogic;
+
 import co.edu.uniandes.csw.cortos.ejb.FormaDePagoLogic;
-import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
+
 import co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -44,6 +44,9 @@ public class ClienteFormaPagoResource
     @Inject
     private FormaDePagoLogic formaPagoLogic;
     
+    private static final String NO  = " no existe";
+    private static final String REC = "El recurso formaDePago/";
+    
     /**
      * Guarda un libro dentro de una editorial con la informacion que recibe el
      * la URL. Se devuelve el libro que se guarda en la editorial.
@@ -61,7 +64,7 @@ public class ClienteFormaPagoResource
     public FormaDePagoDTO addFormaPago(@PathParam("clienteId") Long clienteId, @PathParam("comentarioId") Long fPagoId) {
         LOGGER.log(Level.INFO, "EditorialBooksResource addBook: input: editorialsID: {0} , booksId: {1}", new Object[]{clienteId, fPagoId});
         if (formaPagoLogic.getFormaDePago(fPagoId) == null) {
-            throw new WebApplicationException("El recurso /calificacion/" + fPagoId + " no existe.", 404);
+            throw new WebApplicationException(REC + fPagoId + NO, 404);
         }
         FormaDePagoDTO fPagoDTO = new FormaDePagoDTO(clienteFormaPagoLogic.addFormaPago(fPagoId, clienteId));
         LOGGER.log(Level.INFO, "ClienteCalificacionResource addCalificacion: output: {0}", fPagoDTO);
@@ -103,7 +106,7 @@ public class ClienteFormaPagoResource
     public FormaDePagoDTO getFormaPago(@PathParam("clienteId") Long clienteId, @PathParam("comentarioId") Long fPagoId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "EditorialBooksResource getBook: input: editorialsID: {0} , booksId: {1}", new Object[]{clienteId, fPagoId});
         if (formaPagoLogic.getFormaDePago(fPagoId) == null) {
-            throw new WebApplicationException("El recurso /editorials/" + clienteId + "/books/" + fPagoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /cliente/" + clienteId + "/formadepago/" + fPagoId + NO, 404);
         }
         FormaDePagoDTO fPagoDTO = new FormaDePagoDTO(clienteFormaPagoLogic.getFormaPago(fPagoId, clienteId));
         LOGGER.log(Level.INFO, "EditorialBooksResource getBook: output: {0}", fPagoDTO);
@@ -127,7 +130,7 @@ public class ClienteFormaPagoResource
         LOGGER.log(Level.INFO, "EditorialBooksResource replaceBooks: input: editorialsId: {0} , books: {1}", new Object[]{clienreId, fPagos});
         for (FormaDePagoDTO fPago : fPagos) {
             if (formaPagoLogic.getFormaDePago(fPago.getNumero()) == null) {
-                throw new WebApplicationException("El recurso /books/" + fPago.getCcv() + " no existe.", 404);
+                throw new WebApplicationException(REC + fPago.getCcv() + NO, 404);
             }
         }
         List<FormaDePagoDTO> listaDetailDTOs = fPagoListEntity2DTO(clienteFormaPagoLogic.replaceFormaPago(clienreId, fPagoListDTO2Entity(fPagos)));
