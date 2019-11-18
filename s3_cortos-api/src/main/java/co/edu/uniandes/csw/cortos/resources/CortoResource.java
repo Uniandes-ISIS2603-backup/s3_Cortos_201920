@@ -15,7 +15,7 @@ import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -37,7 +37,7 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class CortoResource {
     
-    private static final Logger LOGGER = Logger.getLogger(CortoResource.class.getName());
+    
     private  static final String NO = " no existe";
     private  static final String REC = "el recurso /cortos/";
     /**
@@ -55,8 +55,7 @@ public class CortoResource {
      */
     @POST
     public CortoDTO createCorto(CortoDTO c) throws BusinessLogicException{
-        CortoDTO nuevo = new CortoDTO(cl.createCorto(c.toEntity()));
-        return nuevo;
+        return new CortoDTO(cl.createCorto(c.toEntity()));
     }
     /**
      * lista de todos los cortos
@@ -64,9 +63,7 @@ public class CortoResource {
      */
     @GET
     public List<CortoDetailDTO> getCortos(){
-
-        List<CortoDetailDTO> lista = listEntity2Entity(cl.getCortos());
-        return lista;
+        return listEntity2Entity(cl.getCortos());
     }
     /**
      * Corto con el id por parametro
@@ -79,8 +76,7 @@ public class CortoResource {
         CortoEntity c = cl.getCorto(cortosId);
         if(c == null)
             throw new WebApplicationException(REC + cortosId + NO, 404);
-        CortoDetailDTO n = new CortoDetailDTO(c);
-        return n;
+        return new CortoDetailDTO(c);
     }
     /**
      * Modifica el corto con id por parametro
@@ -95,8 +91,8 @@ public class CortoResource {
         c.setId(cortosId);
         if(cl.getCorto(cortosId)== null)
             throw new WebApplicationException(REC + cortosId + NO, 404);
-        CortoDetailDTO n = new CortoDetailDTO(cl.updateCorto(cortosId, c.toEntity()));
-        return n;
+        return new CortoDetailDTO(cl.updateCorto(cortosId, c.toEntity()));
+        
     }
     
     
@@ -111,29 +107,7 @@ public class CortoResource {
             lista.add(new CortoDetailDTO(c));
         return lista;
     }
-    
-   
-     /**
-     * Retorna lista de calificaciones de un corto
-     * @param cortosId identificacion del corto
-     * @return lista de calificaciones de un corto
-     */
-//    @Path("{cortosId: \\d+}/calificaciones")
-//    @GET
-//    public List<CalificacionDTO> getCalificaciones(@PathParam("cortosId")Long cortosId){
-//        return calificacionesListEntity2DTO(cortoCaliLogic.getCalificaciones(cortosId));
-//    }
-    /**
-     * Metodo auxiliar para transformar las entidades a dto
-     * @param entities lista de entidades
-     * @return lista de dtos de las entidades pasadas por parametro
-     */
-    private List<CalificacionDTO> calificacionesListEntity2DTO(List<CalificacionEntity> entities){
-        List<CalificacionDTO> list = new ArrayList<>();
-        for(CalificacionEntity c : entities)
-            list.add(new CalificacionDTO(c));
-        return list;
-    }
+
     
     @Path("{cortosId: \\d+}/comentarios")
     public Class<CortoComentarioResource> getCortoComentarioResource(@PathParam("cortosId") Long cortosId){
@@ -157,7 +131,7 @@ public class CortoResource {
     @Path("{cortosId: \\d+}/cineastas")
     public Class<CortoCineastasResource> getCortoCineastasResource(@PathParam("cortosId") Long cortosId){
         if(cl.getCorto(cortosId)==null){
-            throw new WebApplicationException("el recurso /cortos/" + cortosId + " no existe", 404);
+            throw new WebApplicationException(REC + cortosId + NO, 404);
         }
         return CortoCineastasResource.class;
     }
@@ -166,14 +140,14 @@ public class CortoResource {
     @Path("{cortosId: \\d+}/facturas")
     public Class<CortoFacturaResource> getCortoFacturasResource(@PathParam("cortosId") Long cortosId){
         if(cl.getCorto(cortosId)==null)
-            throw new WebApplicationException("el recurso /cortos/"+cortosId+" no existe", 404);
+            throw new WebApplicationException(REC+cortosId+NO, 404);
         return CortoFacturaResource.class;
     }
     
     @Path("{cortosId: \\d+}/temas")
     public Class<CortoTemaResource> getCortoTemaResource(@PathParam("cortosId") Long cortosId){
         if(cl.getCorto(cortosId)==null)
-            throw new WebApplicationException("el recurso /cortos/"+cortosId+" no existe", 404);
+            throw new WebApplicationException(REC+cortosId+NO, 404);
         
         return CortoTemaResource.class;
     }
@@ -181,7 +155,7 @@ public class CortoResource {
     @Path("{cortosId: \\d+}/productor")
     public Class<CortoCineastaProductorResource> getCortoProductorResource(@PathParam("cortosId") Long cortosId){
         if(cl.getCorto(cortosId)==null){
-            throw new WebApplicationException("el recurso /cortos/"+cortosId+" no existe", 404);
+            throw new WebApplicationException(REC+cortosId+NO, 404);
         }
         return CortoCineastaProductorResource.class;
     }
