@@ -14,7 +14,7 @@ import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 
 import java.util.List;
-import java.util.logging.Level;
+
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -43,7 +43,8 @@ public class FacturaResource
 {
     @Inject
     FacturaLogic facturaLogic;
-    
+    private static final String NO = " no existe";
+    private static final String REC = "el recurso factura/";
     /**
      * Crea una factura
      * @param c DTO de factura
@@ -52,8 +53,8 @@ public class FacturaResource
      */
     @POST
     public FacturaDTO createFactura(FacturaDTO c) throws BusinessLogicException{
-        FacturaDTO nuevo = new FacturaDTO(facturaLogic.createFactura(c.toEntity()));
-        return nuevo;
+        return new FacturaDTO(facturaLogic.createFactura(c.toEntity()));
+        
     }
     /**
      * lista de todas las facturas
@@ -61,8 +62,8 @@ public class FacturaResource
      */
     @GET
     public List<FacturaDetailDTO> getFacturas(){
-        List<FacturaDetailDTO> lista = listEntity2Entity(facturaLogic.getFacturas());
-        return lista;
+        return listEntity2Entity(facturaLogic.getFacturas());
+        
     }
     /**
      * Factura con el id por parametro
@@ -74,9 +75,8 @@ public class FacturaResource
     public FacturaDetailDTO getFactura(@PathParam("facturaId") Long facturaId){
         FacturaEntity c = facturaLogic.getFactura(facturaId);
         if(c == null)
-            throw new WebApplicationException("el recurso /factura/" + facturaId + " no existe", 404);
-        FacturaDetailDTO n = new FacturaDetailDTO(c);
-        return n;
+            throw new WebApplicationException(REC + facturaId + NO, 404);
+        return new FacturaDetailDTO(c);
     }
     /**
      * Modifica el factura con id por parametro
@@ -90,9 +90,9 @@ public class FacturaResource
     public FacturaDetailDTO updateFactura(@PathParam("facturasId") Long facturaId, FacturaDetailDTO c) throws BusinessLogicException{
         c.setId(facturaId);
         if(facturaLogic.getFactura(facturaId)== null)
-            throw new WebApplicationException("el recurso /books/" + facturaId + " no existe", 404);
-        FacturaDetailDTO n = new FacturaDetailDTO(facturaLogic.updateFactura(facturaId, c.toEntity()));
-        return n;
+            throw new WebApplicationException(REC + facturaId + NO, 404);
+        return new FacturaDetailDTO(facturaLogic.updateFactura(facturaId, c.toEntity()));
+        
     }
     @DELETE
     @Path("{facturaId:\\d+}")
@@ -101,7 +101,7 @@ public class FacturaResource
         FacturaEntity entity = facturaLogic.getFactura(id);
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /factura/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         facturaLogic.deleteFactura(id, entity);
     }
@@ -121,7 +121,7 @@ public class FacturaResource
     @Path("{facturaId: \\+d}/cortos")
     public Class<FacturaCortoResource> getFacturaCortoResource(@PathParam("facturaId") Long facturaId){
         if(facturaLogic.getFactura(facturaId)== null){
-            throw new WebApplicationException("El recurso factura/"+facturaId+" no existe", 404);
+            throw new WebApplicationException(REC+facturaId+NO, 404);
         }
         return FacturaCortoResource.class;
     }
