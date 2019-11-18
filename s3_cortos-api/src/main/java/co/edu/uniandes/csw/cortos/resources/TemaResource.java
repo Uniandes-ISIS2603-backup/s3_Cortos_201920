@@ -59,7 +59,7 @@ public class TemaResource {
     }
     @GET
     @Path ("{temaId:\\d+}")
-    public TemaDTO getTema(@PathParam("temaId") long id )
+    public TemaDetailDTO getTema(@PathParam("temaId") long id )
     {
         LOGGER.log(Level.INFO, "TemaResource getTema: input : {0}", id);
         TemaEntity temaEntity = temaLogic.getTema(id);
@@ -68,7 +68,7 @@ public class TemaResource {
             throw new WebApplicationException("El recurso /tema/"+ id+"no existe.", 404);       
         }
         
-        TemaDTO temaDTO = new TemaDTO(temaEntity);
+        TemaDetailDTO temaDTO = new TemaDetailDTO(temaEntity);
         return temaDTO;
     }
     

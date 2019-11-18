@@ -118,4 +118,11 @@ public class FacturaResource
         return lista;
     }
     
+    @Path("{facturaId: \\+d}/cortos")
+    public Class<FacturaCortoResource> getFacturaCortoResource(@PathParam("facturaId") Long facturaId){
+        if(facturaLogic.getFactura(facturaId)== null){
+            throw new WebApplicationException("El recurso factura/"+facturaId+" no existe", 404);
+        }
+        return FacturaCortoResource.class;
+    }
 }

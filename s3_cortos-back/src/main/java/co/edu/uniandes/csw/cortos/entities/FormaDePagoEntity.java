@@ -78,7 +78,7 @@ public class FormaDePagoEntity extends BaseEntity implements Serializable {
         this.fechaDeVencimiento = pFechaDeVencimiento;
     }
     
-    public void setCcv(int pCcv)
+    public void setCcv(Integer pCcv)
     {
         this.ccv = pCcv;
     }

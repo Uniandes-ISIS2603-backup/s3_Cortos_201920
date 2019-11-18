@@ -161,5 +161,36 @@ public class CortoResource {
         }
         return CortoCineastasResource.class;
     }
+    
+    @Path("{cortosId: \\d+}/comentarios")
+    public Class<CortoComentarioResource> getCortoComentariosResource(@PathParam("cortosId") Long cortosId){
+        if(cl.getCorto(cortosId)== null){
+            throw new WebApplicationException ("el recurso /cortos/"+cortosId+" no existe",404);
+        }
+        return CortoComentarioResource.class;
+    }
+    
+    @Path("{cortosId: \\d+}/facturas")
+    public Class<CortoFacturaResource> getCortoFacturasResource(@PathParam("cortosId") Long cortosId){
+        if(cl.getCorto(cortosId)==null)
+            throw new WebApplicationException("el recurso /cortos/"+cortosId+" no existe", 404);
+        return CortoFacturaResource.class;
+    }
+    
+    @Path("{cortosId: \\d+}/temas")
+    public Class<CortoTemaResource> getCortoTemaResource(@PathParam("cortosId") Long cortosId){
+        if(cl.getCorto(cortosId)==null)
+            throw new WebApplicationException("el recurso /cortos/"+cortosId+" no existe", 404);
+        
+        return CortoTemaResource.class;
+    }
+    
+    @Path("{cortosId: \\d+}/productor")
+    public Class<CortoCineastaProductorResource> getCortoProductorResource(@PathParam("cortosId") Long cortosId){
+        if(cl.getCorto(cortosId)==null){
+            throw new WebApplicationException("el recurso /cortos/"+cortosId+" no existe", 404);
+        }
+        return CortoCineastaProductorResource.class;
+    }
 }
 
