@@ -161,14 +161,7 @@ public class CortoResource {
         }
         return CortoCineastasResource.class;
     }
-    
-    @Path("{cortosId: \\d+}/comentarios")
-    public Class<CortoComentarioResource> getCortoComentariosResource(@PathParam("cortosId") Long cortosId){
-        if(cl.getCorto(cortosId)== null){
-            throw new WebApplicationException ("el recurso /cortos/"+cortosId+" no existe",404);
-        }
-        return CortoComentarioResource.class;
-    }
+  
     
     @Path("{cortosId: \\d+}/facturas")
     public Class<CortoFacturaResource> getCortoFacturasResource(@PathParam("cortosId") Long cortosId){
