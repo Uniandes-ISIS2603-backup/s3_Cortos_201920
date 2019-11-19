@@ -159,7 +159,12 @@ public class CineastaTemasLogicTest {
         
         Assert.assertEquals(2,lista.size());
         for(int i = 0 ; i < 2; ++i){
-            Assert.assertEquals(lista.get(i), temas.get(i));
+            boolean encontro = false;
+            for(int j = 0; j<2; ++j){
+                if(lista.get(i).equals(temas.get(j)))
+                    encontro = true;
+            }
+            Assert.assertTrue(encontro);
         }
     }
     /**
