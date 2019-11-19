@@ -119,7 +119,17 @@ public class CineastaLogicTest {
         Assert.assertEquals(entity.getNombre(), result.getNombre());
     }
 
-
+    @Test
+    public void deleteCineasta() throws BusinessLogicException{
+        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
+        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
+        Long id = newEntity.getId();
+        cineastaLogic.deleteCineasta(id);
+        Assert.assertNull(cineastaLogic.getCineasta(id));
+        
+    }
 
 
     @Test(expected = BusinessLogicException.class)
