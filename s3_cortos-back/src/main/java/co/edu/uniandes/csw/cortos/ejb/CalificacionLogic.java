@@ -20,7 +20,7 @@ import javax.inject.Inject;
  */
     @Stateless
     public class CalificacionLogic {
-         private final static Logger LOGGER = Logger.getLogger(CalificacionLogic.class.getName());
+         private static final Logger LOGGER = Logger.getLogger(CalificacionLogic.class.getName());
 
     @Inject
     private CalificacionPersistence persistence;
@@ -59,13 +59,18 @@ import javax.inject.Inject;
     public CalificacionEntity updateCalificacion (Long id, CalificacionEntity calificacion)throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"Inicia proceso de acutalizar el calificacion con id ={0}",id);
+        if(calificacion.getId()==null||calificacion.getPuntaje()<0|| calificacion.getPuntaje()>5)
+        {
+            throw new BusinessLogicException("La calificacion es invalida");
+        }
         CalificacionEntity newEntity = persistence.update(calificacion);
         LOGGER.log(Level.INFO,"Termina proceso de actualizar el calificacion con id={0}", id);
         return newEntity;
     }
-    public void deleteCalificacion(Long id ) throws BusinessLogicException
+    public void deleteCalificacion(Long id ) 
     {
         LOGGER.log(Level.INFO,"Inicia proceso de borrar la calificacion con id = {0}", id);
+       
         persistence.delete(id);
         LOGGER.log(Level.INFO,"Termina el proceso de borrar la calificacion con id ={0} ", id );
     }

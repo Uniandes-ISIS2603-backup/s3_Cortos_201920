@@ -150,7 +150,7 @@ public class CalificacionLogicTest {
     @Test
     public void updateCalificacionTest() throws BusinessLogicException{
         CalificacionEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
+        
         CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
 
         newEntity.setId(entity.getId());
@@ -159,9 +159,42 @@ public class CalificacionLogicTest {
 
         CalificacionEntity resp = em.find(CalificacionEntity.class, entity.getId());
        Assert.assertEquals(newEntity.getId(), resp.getId());
-       
     }
-     @Test
+    @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionCalificacionIdNula()throws BusinessLogicException{
+        CalificacionEntity entity = data.get(0);
+        
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+        newEntity.setId(null);
+        calificacionLogic.updateCalificacion(entity.getId(),newEntity);
+
+        
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionCalificacionMenor()throws BusinessLogicException{
+        CalificacionEntity entity = data.get(0);
+        
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+
+        newEntity.setId(entity.getId());
+        newEntity.setPuntaje(-1);
+        calificacionLogic.updateCalificacion(entity.getId(),newEntity);
+
+        
+    }
+    @Test(expected = BusinessLogicException.class)
+    public void updateCalificacionCalificacionMayor()throws BusinessLogicException{
+        CalificacionEntity entity = data.get(0);
+        
+        CalificacionEntity newEntity = factory.manufacturePojo(CalificacionEntity.class);
+
+        newEntity.setId(entity.getId());
+        newEntity.setPuntaje(6);
+        calificacionLogic.updateCalificacion(entity.getId(),newEntity);
+
+        
+    }
+    @Test
     public void findCalificacionTest(){
         CalificacionEntity c = data.get(0);
         CalificacionEntity entity = calificacionLogic.getCalificacion(c.getId());
