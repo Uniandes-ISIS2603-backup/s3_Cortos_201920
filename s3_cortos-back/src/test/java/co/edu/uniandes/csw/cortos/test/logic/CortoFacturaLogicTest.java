@@ -115,9 +115,14 @@ public class CortoFacturaLogicTest {
     @Test
     public void replaceFacturaTest(){
         CortoEntity c = data.get(0);
+       
         cfl.replaceFactura(c.getId(), facturas.get(1).getId());
         c = cl.getCorto(c.getId());
-        Assert.assertEquals(c.getFactura(), facturas.get(1));
+        
+        Assert.assertEquals(c.getFactura().getFecha(), facturas.get(1).getFecha());
+        Assert.assertEquals(c.getFactura().getCostoTotal(), facturas.get(1).getCostoTotal());
+        Assert.assertEquals(c.getFactura().getNumeroFactura(), facturas.get(1).getNumeroFactura());  
+        Assert.assertEquals(c.getFactura().getId(), facturas.get(1).getId());
     }
     /**
      * Quitar factura de un corto

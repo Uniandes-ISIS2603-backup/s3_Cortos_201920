@@ -36,8 +36,9 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class TemaResource {
-    private static Logger LOGGER = Logger.getLogger(TemaResource.class.getName ());
-    
+    private static final Logger LOGGER = Logger.getLogger(TemaResource.class.getName ());
+    private static final String NO = " no existe";
+    private static final String REC = " el recurso /temas/";
     @Inject 
     private TemaLogic temaLogic;
     
@@ -65,11 +66,11 @@ public class TemaResource {
         TemaEntity temaEntity = temaLogic.getTema(id);
         if (temaEntity ==null)
         {
-            throw new WebApplicationException("El recurso /tema/"+ id+"no existe.", 404);       
+            throw new WebApplicationException(REC+ id+NO, 404);       
         }
         
-        TemaDetailDTO temaDTO = new TemaDetailDTO(temaEntity);
-        return temaDTO;
+       return new TemaDetailDTO(temaEntity);
+        
     }
     
     @PUT
@@ -80,7 +81,7 @@ public class TemaResource {
         tema.setId(id);
         if(temaLogic.getTema(id)==null)
         {
-             throw new WebApplicationException("El recurso /tema/"+id+"no existe.",404);
+             throw new WebApplicationException(REC+id+NO,404);
         }
         TemaDTO temaDTO = new TemaDTO (temaLogic.updateTema(id, tema.toEntity()));
         LOGGER.log(Level.INFO, "TemaResource updateTemaResource:output:{0}", temaDTO);
@@ -95,7 +96,7 @@ public class TemaResource {
         TemaEntity entity = temaLogic.getTema(id);
         if(entity==null)
         {
-            throw new WebApplicationException("El recurso /tema/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         temaLogic.deleteTema(id);
         LOGGER.info("TemaResource deleteTema:output:void");
