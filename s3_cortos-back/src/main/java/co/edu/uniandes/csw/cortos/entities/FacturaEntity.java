@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.cortos.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -94,29 +95,50 @@ public class FacturaEntity extends BaseEntity implements Serializable
   public void setCortos(List<CortoEntity> cortos) {
       this.cortos = cortos;
   }
-  
-    /**
-     * Metodo no usado
-     *
-     * @param obj Object que se compara.
-     * @return despreciado.
-     * @deprecated (solo arregla code smell)
-     */
+
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FacturaEntity other = (FacturaEntity) obj;
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        if (!Objects.equals(this.cortos, other.cortos)) {
+            return false;
+        }
+        if (!Objects.equals(this.numeroFactura, other.numeroFactura)) {
+            return false;
+        }
+        if (!Objects.equals(this.costoTotal, other.costoTotal)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        return true;
     }
-
-    /**
-     * Metodo no usado
-     *
-     * @return nada.
-     * @deprecated (solo arregla code smell)
-     */
+  
+  
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.cliente);
+        hash = 59 * hash + Objects.hashCode(this.cortos);
+        hash = 59 * hash + Objects.hashCode(this.numeroFactura);
+        hash = 59 * hash + Objects.hashCode(this.costoTotal);
+        hash = 59 * hash + Objects.hashCode(this.fecha);
+        return hash;
     }
+
+  
 
 
     public ClienteEntity getCliente() {
