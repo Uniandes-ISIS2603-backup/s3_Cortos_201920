@@ -125,6 +125,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaNombreVacio() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setNombre("");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -132,6 +134,7 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaCorreoNoValido()throws BusinessLogicException{
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setCorreo("asdfasdfasefd");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -139,6 +142,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaContraseniaVacio() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setContrasenia("");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -148,6 +153,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaCorreoVacio() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setCorreo("");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -158,6 +165,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaTelefonoVacio() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setTelefono("");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -167,6 +176,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaDireccionVacio() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setDireccion("");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -174,6 +185,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaRolNull() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setRol(null);
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -182,6 +195,8 @@ public class CineastaLogicTest {
      public void createCineastaGeneroNull()throws BusinessLogicException
      {
          CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+         newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
          newEntity.setGenero(null);
          CineastaEntity result = cineastaLogic.createCineasta(newEntity);
      }
@@ -189,7 +204,10 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaCorreoRepetido() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("hola@hola.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         CineastaEntity newEntity2 = factory.manufacturePojo(CineastaEntity.class);
+        newEntity2.setCorreo("hola@hola.com");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
         newEntity.setCorreo(result.getCorreo());
         CineastaEntity result2 = cineastaLogic.createCineasta(newEntity2);
@@ -198,6 +216,8 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaFechaNacimientoNull() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
+        newEntity.setCorreo("pepito@correcto.com");
+        newEntity.setFechaNacimiento(new Date(98,2,21));
         newEntity.setFechaNacimiento(null);
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
@@ -205,7 +225,10 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaFechaNacimientoMenorA13() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        newEntity.setFechaNacimiento(null);
+        newEntity.setCorreo("pepito@correcto.com");
+        
+        Date anios = new Date(116,0,1);
+        newEntity.setFechaNacimiento(anios);
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
     
@@ -213,7 +236,7 @@ public class CineastaLogicTest {
     public void createCineastaFechaNacimientoMayorA120() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
         Date anios = new Date(0, 0, 1);//Aun no esta lafecha mirar el API de date
-        newEntity.setFechaNacimiento(null);
+        newEntity.setFechaNacimiento(anios);
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
 }
