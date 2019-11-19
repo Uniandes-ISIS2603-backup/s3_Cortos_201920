@@ -200,4 +200,5 @@ public class CalificacionLogicTest {
         CalificacionEntity entity = calificacionLogic.getCalificacion(c.getId());
         Assert.assertEquals(c.getPuntaje(), entity.getPuntaje());
     }
+   
 }
