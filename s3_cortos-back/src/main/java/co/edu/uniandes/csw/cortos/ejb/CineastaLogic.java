@@ -67,7 +67,7 @@ public class CineastaLogic {
 
         //Calculate the days
         if (now.get(Calendar.DATE) < birthDay.get(Calendar.DATE)) {
-            int today = now.get(Calendar.DAY_OF_MONTH);
+            
             now.add(Calendar.MONTH, -1);
         } else if (months == 12) {
             years++;
@@ -77,22 +77,20 @@ public class CineastaLogic {
 
     public CineastaEntity createCineasta(CineastaEntity cineasta) throws BusinessLogicException {
 
-        if (cineasta.getNombre() == null || cineasta.getNombre().equals("")) {
+        if ( cineasta.getNombre().equals("")) {
             throw new BusinessLogicException("El nombre no puede ser null ni vacio \"");
         }
-        if (cineasta.getCorreo() == null || cineasta.getCorreo().equals("")) {
+        if (cineasta.getCorreo().equals("")) {
             throw new BusinessLogicException("El correo no puede ser null ni vacio \"");
         }
-        if (persistence.findByName(cineasta.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe un cineasta con el nombre \"" + cineasta.getNombre() + "\"");
-        }
+
         if (!correoValido(cineasta.getCorreo())) {
             throw new BusinessLogicException("El correo no esta bien escrito \"");
         }
         if (persistence.findByCorreo(cineasta.getCorreo()) != null) {
             throw new BusinessLogicException("Ya existe un cineasta con el correo \"" + cineasta.getCorreo() + "\"");
         }
-        if (cineasta.getContrasenia() == null || cineasta.getContrasenia().equals("")) {
+        if ( cineasta.getContrasenia().equals("")) {
             throw new BusinessLogicException("La contraseña no puede ser null ni vacio \"");
         }
         if (cineasta.getFechaNacimiento() == null) {
@@ -101,10 +99,10 @@ public class CineastaLogic {
         if (getEdad(cineasta.getFechaNacimiento()) < 13 || getEdad(cineasta.getFechaNacimiento()) > 120) {
             throw new BusinessLogicException("El cineasta no tiene la edad suficiente para realizar el registro  \"");
         }
-        if (cineasta.getTelefono().equals("") || cineasta.getTelefono() == null) {
+        if (cineasta.getTelefono().equals("") ) {
             throw new BusinessLogicException("El telefono no puede ser vacio ni null \"");
         }
-        if (cineasta.getDireccion().equals("") || cineasta.getDireccion() == null) {
+        if (cineasta.getDireccion().equals("")) {
             throw new BusinessLogicException("La dirección no puede ser vacio ni null \"");
         }
         if (cineasta.getRol() == null) {

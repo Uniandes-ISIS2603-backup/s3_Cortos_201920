@@ -120,12 +120,7 @@ public class CineastaLogicTest {
     }
 
 
-    @Test(expected = BusinessLogicException.class)
-    public void createCineastaNombreNull() throws BusinessLogicException {
-        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        newEntity.setNombre(null);
-        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
-    }
+
 
     @Test(expected = BusinessLogicException.class)
     public void createCineastaNombreVacio() throws BusinessLogicException {
@@ -135,9 +130,9 @@ public class CineastaLogicTest {
     }
 
     @Test(expected = BusinessLogicException.class)
-    public void createCineastaContraseniaNull() throws BusinessLogicException {
+    public void createCineastaCorreoNoValido()throws BusinessLogicException{
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        newEntity.setContrasenia(null);
+        newEntity.setCorreo("asdfasdfasefd");
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
 
@@ -148,12 +143,7 @@ public class CineastaLogicTest {
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
 
-    @Test(expected = BusinessLogicException.class)
-    public void createCineastaCorreoNull() throws BusinessLogicException {
-        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        newEntity.setCorreo(null);
-        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
-    }
+
 
     @Test(expected = BusinessLogicException.class)
     public void createCineastaCorreoVacio() throws BusinessLogicException {
@@ -162,21 +152,8 @@ public class CineastaLogicTest {
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
 
-    @Test(expected = BusinessLogicException.class)
-    public void createCineastaNombreRepetido() throws BusinessLogicException {
-        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        CineastaEntity newEntity2 = factory.manufacturePojo(CineastaEntity.class);
-        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
-        newEntity.setNombre(result.getNombre());
-        CineastaEntity result2 = cineastaLogic.createCineasta(newEntity2);
-    }
 
-    @Test(expected = BusinessLogicException.class)
-    public void createCineastaTelefonoNull() throws BusinessLogicException {
-        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        newEntity.setTelefono(null);
-        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
-    }
+
 
     @Test(expected = BusinessLogicException.class)
     public void createCineastaTelefonoVacio() throws BusinessLogicException {
@@ -185,12 +162,7 @@ public class CineastaLogicTest {
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
 
-    @Test(expected = BusinessLogicException.class)
-    public void createCineastaDireccionNull() throws BusinessLogicException {
-        CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        newEntity.setDireccion(null);
-        CineastaEntity result = cineastaLogic.createCineasta(newEntity);
-    }
+
 
     @Test(expected = BusinessLogicException.class)
     public void createCineastaDireccionVacio() throws BusinessLogicException {
