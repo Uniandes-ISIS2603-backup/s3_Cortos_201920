@@ -10,9 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -40,7 +39,8 @@ public class CineastaEntity extends BaseEntity implements Serializable {
      * cineasta.
      */
     @PodamExclude
-    @OneToMany
+
+    @ManyToMany 
     private List<TemaEntity> temas;
 
     /**
@@ -50,7 +50,7 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany(
             mappedBy = "productor")
-    private List<CortoEntity> cortos = new ArrayList<CortoEntity>();
+    private List<CortoEntity> cortos = new ArrayList<>();
 
     /**
      * Asociación con la clase CineastaEntity, describe el corto asociado a los
@@ -103,19 +103,26 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     private Tipo rol;
 
     /**
-     * @return nombre del cineasta
-     */
-    public String getNombre() {
-        return nombre;
-    }
-
-    /**
      * @param nombre nombre por el que se va a cambiar
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
+/**
+     * @return nombre del cineasta
+     */
+    public String getNombre() {
+        return nombre;
+    }
+    
+    /**
+     * @param correo correo por el que se va a cambiar
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    
     /**
      * @return correo del cineasta
      */
@@ -124,12 +131,12 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @param correo correo por el que se va a cambiar
+     * @param contrasenia contrasenia nueva
      */
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
-
+    
     /**
      * @return contrasenia del correo del cineasta
      */
@@ -138,12 +145,13 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @param contrasenia contrasenia nueva
+     * @param fechaNacimiento fecha de nacimiento nueva
      */
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
-
+    
+    
     /**
      * @return fecha de nacimiento del cineasta
      */
@@ -152,31 +160,16 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @param fechaNacimiento fecha de nacimiento nueva
-     */
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    /**
-     * @return telefono del cineasta
-     */
-    public String getTelefono() {
-        return telefono;
-    }
-
-    /**
      * @param telefono telefono nuevo
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
     /**
-     * @return direccion del cineasta
+     * @return telefono del cineasta
      */
-    public String getDireccion() {
-        return direccion;
+    public String getTelefono() {
+        return telefono;
     }
 
     /**
@@ -187,17 +180,24 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return genero
+     * @return direccion del cineasta
      */
-    public Boolean getGenero() {
-        return genero;
+    public String getDireccion() {
+        return direccion;
     }
-
-    /**
+    
+     /**
      * @param genero genero por el que va a ser cambiado
      */
     public void setGenero(Boolean genero) {
         this.genero = genero;
+    }
+
+    /**
+     * @return genero
+     */
+    public Boolean getGenero() {
+        return genero;
     }
 
     /**

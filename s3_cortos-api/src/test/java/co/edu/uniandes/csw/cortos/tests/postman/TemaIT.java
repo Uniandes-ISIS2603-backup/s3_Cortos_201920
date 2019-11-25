@@ -26,10 +26,10 @@ import org.junit.runner.RunWith;
  * @author Sebastian Gomez
  */
 @RunWith(Arquillian.class)
-public class ComentarioIT 
+public class TemaIT 
 {
     
-    private static final String COLLECTION = "ComentarioResourceTest.postman_collection";
+    private static final String COLLECTION = "TemaResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {

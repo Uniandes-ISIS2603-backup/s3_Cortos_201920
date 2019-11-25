@@ -45,7 +45,7 @@ public class ClienteLogicTest
     @Inject
     UserTransaction utx;
     
-    private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
+    private List<ClienteEntity> data = new ArrayList<>();
     
     @Before
     public void configTest() {

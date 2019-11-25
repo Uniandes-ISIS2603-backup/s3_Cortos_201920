@@ -5,14 +5,12 @@
  */
 package co.edu.uniandes.csw.cortos.test.logic;
 
-import co.edu.uniandes.csw.cortos.ejb.CortoLogic;
+import co.edu.uniandes.csw.cortos.ejb.TemaCineastaLogic;
 import co.edu.uniandes.csw.cortos.ejb.TemaCortoLogic;
 import co.edu.uniandes.csw.cortos.ejb.TemaLogic;
-import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
+import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.entities.TemaEntity;
-import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.TemaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +31,15 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Santiago Vargas Vega
+ * @author Santiago Vargas Vega 
  */
+
 @RunWith(Arquillian.class)
-public class TemaCortoLogicTest {
+public class TemaCineastaLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
     
     @Inject
-    private TemaCortoLogic temaCortoLogic; 
+    private TemaCineastaLogic temaCineastaLogic; 
     
     @Inject
     private TemaLogic temaLogic;
@@ -53,7 +52,7 @@ public class TemaCortoLogicTest {
     
     private List<TemaEntity> data = new ArrayList<>();
     
-    private List<CortoEntity> cortos = new ArrayList<>();
+    private List<CineastaEntity> cineastas = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -84,7 +83,9 @@ public class TemaCortoLogicTest {
     
     private void clearData() {
         em.createQuery("delete from TemaEntity").executeUpdate();
-        em.createQuery("delete from CortoEntity").executeUpdate();
+        em.createQuery("delete from CineastaEntity").executeUpdate();
+     
+       
     }
 
     private void insertData() {
@@ -94,34 +95,38 @@ public class TemaCortoLogicTest {
             data.add(c);
         }
          for (int i = 0; i < 3; i++) {
-            CortoEntity c= factory.manufacturePojoWithFullData(CortoEntity.class);
+            CineastaEntity c= factory.manufacturePojoWithFullData(CineastaEntity.class);
             c.setTemas(new ArrayList<>());
             c.getTemas().add(data.get(0));
             em.persist(c);
-            cortos.add(c);
+            cineastas.add(c);
         }
     }
     
-   @Test
-   public void addTemaCortoLogicTest()
-   {
-       TemaEntity tema = data.get(0);
-       CortoEntity corto = cortos.get(1);
-       CortoEntity resp = temaCortoLogic.addCorto(tema.getId(),corto.getId());
-       Assert.assertNotNull(resp);
-       Assert.assertEquals(resp.getDescripcion(),corto.getDescripcion());
-       Assert.assertEquals(resp.getId(),corto.getId()); 
-       Assert.assertEquals(resp.getNombre(),corto.getNombre()); 
-       Assert.assertEquals(resp.getPrecio(),corto.getPrecio());
-   }
-   
-   @Test
-   public void getCortoTest()
-   {
-       TemaEntity tema = data.get(0);
-       CortoEntity corto = cortos.get(1);
-       CortoEntity resp = temaCortoLogic.addCorto(tema.getId(),corto.getId());
-       List<CortoEntity> prueba= temaCortoLogic.getCorto(data.get(0).getId());
-       Assert.assertNotNull(prueba);
-   }
+    @Test
+    public void addTemaCineastaLogicTest()
+    {
+        TemaEntity tema = data.get(0);
+        CineastaEntity cineasta = cineastas.get(1);
+        CineastaEntity resp = temaCineastaLogic.addCineasta(tema.getId(), cineasta.getId());
+        Assert.assertNotNull(resp);
+        Assert.assertEquals(resp.getId(),cineasta.getId());
+        Assert.assertEquals(resp.getNombre(),cineasta.getNombre());
+        Assert.assertEquals(resp.getDireccion(),cineasta.getDireccion());
+        Assert.assertEquals(resp.getFechaNacimiento(),cineasta.getFechaNacimiento());
+        Assert.assertEquals(resp.getCorreo(),cineasta.getCorreo());
+        Assert.assertEquals(resp.getContrasenia(),cineasta.getContrasenia());
+    }
+    
+    @Test
+    public void getCineastaTest()
+    {
+        
+        TemaEntity tema = data.get(0);
+        CineastaEntity cineasta = cineastas.get(1);
+        CineastaEntity resp = temaCineastaLogic.addCineasta(tema.getId(), cineasta.getId());
+        List<CineastaEntity> prueba= temaCineastaLogic.getCineasta(data.get(0).getId());
+        Assert.assertNotNull(prueba);
+    }
+    
 }

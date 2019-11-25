@@ -49,9 +49,9 @@ public class TemaDetailDTO extends TemaDTO implements Serializable{
             }
         }
         if(cortos!=null){
-            List<CortoEntity> cortos = new ArrayList<>();
+            List<CortoEntity> cortosEntity = new ArrayList<>();
             for(CortoDTO c : getCortos()){
-             cortos.add(c.toEntity());
+             cortosEntity.add(c.toEntity());
             }
         }
         return t;

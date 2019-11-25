@@ -66,7 +66,7 @@ public class FormaDePagoDTO implements Serializable {
     /**
      * @param ccv the ccv to set
      */
-    public void setCcv(int ccv) {
+    public void setCcv(Integer ccv) {
         this.ccv = ccv;
     }
 

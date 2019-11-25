@@ -21,7 +21,7 @@ import javax.inject.Inject;
 @Stateless
 public class ClienteLogic 
 {
-    private final static Logger LOGGER = Logger.getLogger(ClienteLogic.class.getName());
+    private static final  Logger LOGGER = Logger.getLogger(ClienteLogic.class.getName());
     
     @Inject
     private ClientePersistence persistence;
@@ -70,6 +70,7 @@ public class ClienteLogic
         return clienteEntity;
     }
     
+
     public ClienteEntity getClienteNombre(String name )
     {
         LOGGER.log(Level.INFO,"Inicia el proceso de consultar el cliente con name = {0}",name);
@@ -114,7 +115,7 @@ public class ClienteLogic
         return newEntity;
     }
     
-    public void deleteCliente(Long id ) throws BusinessLogicException {
+    public void deleteCliente(Long id )  {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el cliente con id = {0}", id );
         persistence.delete(id);
         LOGGER.log(Level.INFO,"Termine el proceso de borrar el cliente con id= {0}",id);

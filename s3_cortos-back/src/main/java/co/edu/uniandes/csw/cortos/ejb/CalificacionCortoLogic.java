@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.cortos.ejb;
 
 import co.edu.uniandes.csw.cortos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
+
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
@@ -29,7 +29,7 @@ public class CalificacionCortoLogic {
   
   public CortoEntity addCorto (Long cortoId, Long calificacionId)
   {
-       LOGGER.log(Level.INFO, "Se inicia proceso de asosiacion de la  calificacion con id ={0} con el corto con id = "+ cortoId,calificacionId);
+       LOGGER.log(Level.INFO, "Se inicia proceso de asosiacion de la  calificacion con id ={0} con el corto con id = {1} ",new Object[]{ cortoId,calificacionId});
         CortoEntity corto = cortoPersistence.find(cortoId);
         CalificacionEntity calificacion = calificacionPersistence.find(calificacionId);
         calificacion.setCorto(corto);

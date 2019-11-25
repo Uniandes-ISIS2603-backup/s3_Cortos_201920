@@ -30,7 +30,7 @@ public class CalificacionEntity extends BaseEntity implements Serializable{
      * Relacion con la entidad corto 
      */
     @PodamExclude
-    @ManyToOne (fetch=FetchType.EAGER)
+    @ManyToOne 
     private CortoEntity corto;
     /**
      * Variable que representa el puntaje 

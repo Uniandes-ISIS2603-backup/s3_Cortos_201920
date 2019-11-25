@@ -1,20 +1,19 @@
 {
 	"info": {
-		"_postman_id": "ff38c34b-630e-4ce3-a383-eb895179c2ce",
-		"name": "FacturaResourceTest",
+		"_postman_id": "4b96b20d-0291-46db-9886-91b5924ea0d6",
+		"name": "CortoResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Obtener todsa las facturas de la base de datos",
+			"name": "Devuelve una lista con todos los cortos",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "1404ccb3-f507-4a54-a2ff-18d5cd153431",
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
 						"exec": [
-							"",
-							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
+							"tests[\"No genera error en el GET\"]=responseCode.code ==200"
 						],
 						"type": "text/javascript"
 					}
@@ -35,15 +34,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -52,14 +46,14 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura"
+						"cortos"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Crear una nueva factura",
+			"name": "Crea un nuevo corto",
 			"event": [
 				{
 					"listen": "test",
@@ -86,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":2,\n\t\"numeroFactura\":123,\n\t\"costoTotal\":100,\n\t\"fecha\":\"1927-03-03T00:00:00-05:00\"\n}",
+					"raw": "{\n\t\"id\":2,\n\t\"precio\":200,\n\t\"nombre\":\"Soy un test\",\n\t\"descripcion\":\"Soy un test\",\n\t\"calificacionpromedio\":300,\n\t\"fechaDePublicacion\":\"1927-03-03T00:00:00-05:00\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,7 +88,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -103,14 +97,14 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura"
+						"cortos"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtiene una factura dada su id ",
+			"name": "Obtiene un  corto dado su id ",
 			"event": [
 				{
 					"listen": "test",
@@ -146,7 +140,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/{{new_id_e}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -155,7 +149,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
+						"cortos",
 						"{{new_id_e}}"
 					]
 				}
@@ -163,7 +157,7 @@
 			"response": []
 		},
 		{
-			"name": "Actualiza una factura dado su id",
+			"name": "Actualiza un corto dado su id ",
 			"event": [
 				{
 					"listen": "test",
@@ -190,7 +184,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":2,\n\t\"numeroFactura\":444,\n\t\"costoTotal\":300,\n\t\"fecha\":\"1927-03-03T00:00:00-05:00\"\n}",
+					"raw": "{\n\t\"id\":2,\n\t\"precio\":200,\n\t\"nombre\":\"Soy un nuevo test\",\n\t\"descripcion\":\"Soy un nuevo test\",\n\t\"calificacionpromedio\":300,\n\t\"fechaDePublicacion\":\"1927-03-03T00:00:00-05:00\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -198,7 +192,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/{{new_id_e}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -207,7 +201,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
+						"cortos",
 						"{{new_id_e}}"
 					]
 				}
@@ -215,7 +209,7 @@
 			"response": []
 		},
 		{
-			"name": "Obtener una factura que no existe",
+			"name": "Obtener un corto que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -232,7 +226,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -241,7 +235,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
+						"cortos",
 						"-1"
 					]
 				}
@@ -249,7 +243,7 @@
 			"response": []
 		},
 		{
-			"name": "Editar factura que no existe",
+			"name": "Editar corto que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -282,7 +276,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cortos/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -291,41 +285,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
-						"-1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar una factura que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "dfecfec5-4365-4626-b651-a478a4dc522b",
-						"exec": [
-							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/-1",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_cortos-api",
-						"api",
-						"factura",
+						"cortos",
 						"-1"
 					]
 				}

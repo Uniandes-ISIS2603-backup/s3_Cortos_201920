@@ -3,9 +3,16 @@
   <persistence-unit name="cortosPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
-    
+    <class>co.edu.uniandes.csw.cortos.entities.CalificacionEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.CineastaEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.ClienteEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.ComentarioEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.CortoEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.FacturaEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity</class>
+    <class>co.edu.uniandes.csw.cortos.entities.TemaEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
- <shared-cache-mode>NONE</shared-cache-mode>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
       <property name="eclipselink.target-database" value="Derby"/>

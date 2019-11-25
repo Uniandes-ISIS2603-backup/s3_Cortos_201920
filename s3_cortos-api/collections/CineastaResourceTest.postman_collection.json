@@ -1,65 +1,12 @@
 {
 	"info": {
-		"_postman_id": "ff38c34b-630e-4ce3-a383-eb895179c2ce",
-		"name": "FacturaResourceTest",
+		"_postman_id": "c38d0756-2110-495b-8582-0d38b805d901",
+		"name": "CineastaResourceTest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Obtener todsa las facturas de la base de datos",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1404ccb3-f507-4a54-a2ff-18d5cd153431",
-						"exec": [
-							"",
-							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_cortos-api",
-						"api",
-						"factura"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear una nueva factura",
+			"name": "Crea una nueva cineasta",
 			"event": [
 				{
 					"listen": "test",
@@ -80,13 +27,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":2,\n\t\"numeroFactura\":123,\n\t\"costoTotal\":100,\n\t\"fecha\":\"1927-03-03T00:00:00-05:00\"\n}",
+					"raw": " {\r\n        \"contrasenia\": \"seerhPHe7n\",\r\n        \"correo\": \"pepito@corre.com\",\r\n        \"direccion\": \"ijxah41ocJ\",\r\n        \"fechaNacimiento\": \"1998-03-21T05:00:00Z[UTC]\",\r\n        \"genero\": true,\r\n        \"nombre\": \"Ah9lñkPnB11W9\",\r\n        \"rol\": \"AFICIONADO\",\r\n        \"telefono\": \"FedtfjPWPr\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,7 +41,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -103,14 +50,14 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura"
+						"cineasta"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Obtiene una factura dada su id ",
+			"name": "Crea una nueva cineasta",
 			"event": [
 				{
 					"listen": "test",
@@ -146,7 +93,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/{{new_id_e}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -155,7 +102,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
+						"cineasta",
 						"{{new_id_e}}"
 					]
 				}
@@ -163,15 +110,14 @@
 			"response": []
 		},
 		{
-			"name": "Actualiza una factura dado su id",
+			"name": "Actualiza una cineasta",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
 						"exec": [
-							"var data =JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"",
 							"tests[\"No genera error en el GET\"]=responseCode.code ==200;"
 						],
 						"type": "text/javascript"
@@ -184,13 +130,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":2,\n\t\"numeroFactura\":444,\n\t\"costoTotal\":300,\n\t\"fecha\":\"1927-03-03T00:00:00-05:00\"\n}",
+					"raw": " {\r\n        \"contrasenia\": \"seerhPHe7n\",\r\n        \"correo\": \"pepito@cecto.com\",\r\n        \"direccion\": \"ijxah41ocJ\",\r\n        \"fechaNacimiento\": \"1998-03-21T05:00:00Z[UTC]\",\r\n        \"genero\": true,\r\n         \"nombre\": \"veas\",\r\n        \"rol\": \"AFICIONADO\",\r\n        \"telefono\": \"FedtfjPWPr\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -198,7 +144,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/{{new_id_e}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -207,7 +153,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
+						"cineasta",
 						"{{new_id_e}}"
 					]
 				}
@@ -215,7 +161,61 @@
 			"response": []
 		},
 		{
-			"name": "Obtener una factura que no existe",
+			"name": "Obtener cineasta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "597848ac-8b5e-41e8-8186-fcc576f30d4d",
+						"exec": [
+							"console.log(responseBody);",
+							"var data =JSON.parse(responseBody);",
+							"tests[\"No genera error en el GET ALL\"]=responseCode.code ==200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_cortos-api",
+						"api",
+						"cineasta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una cineasta que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -232,7 +232,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -241,7 +241,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
+						"cineasta",
 						"-1"
 					]
 				}
@@ -249,7 +249,7 @@
 			"response": []
 		},
 		{
-			"name": "Editar factura que no existe",
+			"name": "Editar cineasta que no existe",
 			"event": [
 				{
 					"listen": "test",
@@ -282,7 +282,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/-1",
+					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/cineasta/-1",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -291,41 +291,7 @@
 					"path": [
 						"s3_cortos-api",
 						"api",
-						"factura",
-						"-1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Borrar una factura que no existe",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "dfecfec5-4365-4626-b651-a478a4dc522b",
-						"exec": [
-							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_cortos-api/api/factura/-1",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_cortos-api",
-						"api",
-						"factura",
+						"cineasta",
 						"-1"
 					]
 				}

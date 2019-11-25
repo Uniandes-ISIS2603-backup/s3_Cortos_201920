@@ -48,6 +48,7 @@ public class CortoCalificacionLogic {
      * @return calificaciones de un corto
      */
     public List<CalificacionEntity> getCalificaciones(long cortoId){
+        
         return cp.find(cortoId).getCalificaciones();
     }
     /**
@@ -58,12 +59,12 @@ public class CortoCalificacionLogic {
      * @throws BusinessLogicException si la calificacion no se encuentra dentro de las calificaciones del corto
      */
     public CalificacionEntity getCalificacion(long calificacionId, long cortoId) throws BusinessLogicException{
-        List<CalificacionEntity> comentarios =getCalificaciones(cortoId);
-        CalificacionEntity comentario = califP.find(calificacionId);
-        int index = comentarios.indexOf(comentario);
+        List<CalificacionEntity>calificaciones =getCalificaciones(cortoId);
+        CalificacionEntity calificacion = califP.find(calificacionId);
+        int index = calificaciones.indexOf(calificacion);
         if(index >= 0){
-            return comentario;
+            return calificacion;
         }
-        throw new BusinessLogicException("No se encuentra el comentario en este corto");
+        throw new BusinessLogicException("No se encuentra la calificacion en este corto");
     }
 }

@@ -28,7 +28,7 @@ public class CalificacionClienteLogic {
     
     public ClienteEntity addCliente(Long calificacionId, Long clienteId)
     {
-        LOGGER.log(Level.INFO, "Se inicia proceso de asosiacion de la  calificacion con id ={0} con el cliente con id = "+ clienteId,calificacionId);
+        LOGGER.log(Level.INFO, "Se inicia proceso de asosiacion de la  calificacion con id ={0} con el cliente con id ={1} ", new Object[]{clienteId,calificacionId} );
         ClienteEntity cliente = clientePersistence.find(clienteId);
         CalificacionEntity calificacion = calificacionPersistence.find(calificacionId);
         calificacion.setCliente(cliente);

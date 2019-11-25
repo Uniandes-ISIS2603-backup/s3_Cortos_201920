@@ -6,11 +6,9 @@
 package co.edu.uniandes.csw.cortos.ejb;
 
 import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
-import co.edu.uniandes.csw.cortos.entities.ComentarioEntity;
 import co.edu.uniandes.csw.cortos.entities.FormaDePagoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.ClientePersistence;
-import co.edu.uniandes.csw.cortos.persistence.ComentarioPersistence;
 import co.edu.uniandes.csw.cortos.persistence.FormaDePagoPersistance;
 import java.util.List;
 import java.util.logging.Level;
@@ -71,11 +69,11 @@ public class ClienteFormaPagoLogic
      * editorial
      */
     public FormaDePagoEntity getFormaPago(Long clienteId, Long fPagoId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la editorial con id = " + clienteId, fPagoId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la editorial con id = {1}",new Object[]{  fPagoId, clienteId } );
         List<FormaDePagoEntity> coment = clientePersistence.find(clienteId).getFormasPago();
         FormaDePagoEntity fPagoEntity = fPagoPersistence.find(fPagoId);
         int index = coment.indexOf(fPagoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la editorial con id = " + clienteId, fPagoId);
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la editorial con id = {1}",new Object[]{  fPagoId, clienteId } );
         if (index >= 0) {
             return coment.get(index);
         }

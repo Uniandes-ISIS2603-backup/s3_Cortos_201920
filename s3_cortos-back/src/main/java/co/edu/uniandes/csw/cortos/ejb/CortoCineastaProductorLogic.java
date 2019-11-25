@@ -31,11 +31,11 @@ public class CortoCineastaProductorLogic {
     /**
      * Modifica al productor de un corto
      * @param cortoId identificacion del corto
-     * @param CineastaId identificacion del cineasta con el que se modificara el productor
+     * @param cineastaId identificacion del cineasta con el que se modificara el productor
      * @return retorna el cineasta que sera el nuevo productor
      */
-    public CortoEntity replaceProductor(Long cortoId, Long CineastaId){
-        CineastaEntity agregueme = cineP.find(CineastaId);
+    public CortoEntity replaceProductor(Long cortoId, Long cineastaId){
+        CineastaEntity agregueme = cineP.find(cineastaId);
         CortoEntity metalo = cp.find(cortoId);
         metalo.setProductor(agregueme);
         return metalo;

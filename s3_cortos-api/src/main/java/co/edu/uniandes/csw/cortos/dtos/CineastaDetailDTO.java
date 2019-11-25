@@ -34,7 +34,7 @@ public class CineastaDetailDTO extends CineastaDTO implements Serializable{
      * Asociación con la clase CineastaEntity, describe el corto asociado a los
      * cineastas "directores".
      */
-    private CortoEntity cortoCineastas;//Mirar que onda con esto
+    
     
      public CineastaDetailDTO()
     {
@@ -101,20 +101,6 @@ public class CineastaDetailDTO extends CineastaDTO implements Serializable{
      */
     public void setCortos(List<CortoDTO> cortos) {
         this.cortos = cortos;
-    }
-
-    /**
-     * @return the cortoCineastas
-     */
-    public CortoEntity getCortoCineastas() {
-        return cortoCineastas;
-    }
-
-    /**
-     * @param cortoCineastas the cortoCineastas to set
-     */
-    public void setCortoCineastas(CortoEntity cortoCineastas) {
-        this.cortoCineastas = cortoCineastas;
     }
 
     

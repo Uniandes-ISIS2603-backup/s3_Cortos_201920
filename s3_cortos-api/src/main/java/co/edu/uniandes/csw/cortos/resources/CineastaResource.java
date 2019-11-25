@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.CineastaDTO;
+import co.edu.uniandes.csw.cortos.dtos.CineastaDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.CineastaLogic;
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
@@ -36,6 +37,8 @@ import javax.ws.rs.WebApplicationException;
 public class CineastaResource {
     
     private static final Logger LOGGER = Logger.getLogger(ClienteResource.class.getName());
+    private  static final String NO = " no existe.";
+    private  static final String REC = "El recurso /cineasta/";
     
     @Inject
     private CineastaLogic cineastaLogic;
@@ -53,26 +56,25 @@ public class CineastaResource {
     }
     
     @GET
-    public List<CineastaDTO> getCineastas()
+    public List<CineastaDetailDTO> getCineastas()
     {
         LOGGER.info("CineastaResource getCineastas :input : void");
-        List<CineastaDTO> listaCineastas = listEntity2DTO(cineastaLogic.getCineastas());
+        List<CineastaDetailDTO> listaCineastas = listEntity2DTO(cineastaLogic.getCineastas());
         LOGGER.log(Level.INFO,"CineastaResource getCineastas :output{0}", listaCineastas);
         return listaCineastas;
     }
     
     @GET
     @Path("{cineastaId:\\d+}")
-    public CineastaDTO getCliente(@PathParam("cineastaId") long id )
+    public CineastaDetailDTO getCliente(@PathParam("cineastaId") long id )
     {
         LOGGER.log(Level.INFO,"CineastaResource getCineastas :input : {0}",id);
         CineastaEntity cineastaEntity = cineastaLogic.getCineasta(id);
         if(cineastaEntity ==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+ id+"no existe.", 404);
+            throw new WebApplicationException(REC+ id+NO, 404);
         }
-        CineastaDTO cineastaDTO = new CineastaDTO(cineastaEntity);
-        return cineastaDTO;
+        return  new CineastaDetailDTO(cineastaEntity);
     }
     
     @PUT
@@ -82,7 +84,7 @@ public class CineastaResource {
         cineasta.setId(id);
         if(cineastaLogic.getCineasta(id)==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         CineastaDTO cineastaDTO = new CineastaDTO(cineastaLogic.updateCineasta(id,cineasta.toEntity()));
         LOGGER.log(Level.INFO,"CineastaResource updateCineastaResource:outpur:{0}",cineastaDTO);
@@ -97,17 +99,17 @@ public class CineastaResource {
         CineastaEntity entity = cineastaLogic.getCineasta(id);
         if(entity ==null)
         {
-            throw new WebApplicationException("El recurso /cineasta/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         cineastaLogic.deleteCineasta(id);
         LOGGER.info("CineastaResorce deleteCineasta:output:void");
     }
     
-    private List<CineastaDTO> listEntity2DTO(List<CineastaEntity> entityList)
+    private List<CineastaDetailDTO> listEntity2DTO(List<CineastaEntity> entityList)
     {
-        List<CineastaDTO> list = new ArrayList<>();
+        List<CineastaDetailDTO> list = new ArrayList<>();
         for(CineastaEntity entity:entityList){
-            list.add(new CineastaDTO(entity));
+            list.add(new CineastaDetailDTO(entity));
         }
         return list;
     }

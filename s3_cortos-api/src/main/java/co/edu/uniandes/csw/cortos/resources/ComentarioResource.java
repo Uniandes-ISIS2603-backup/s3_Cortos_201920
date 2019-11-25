@@ -35,7 +35,10 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped  
 public class ComentarioResource {
+    
     private static final Logger LOGGER = Logger.getLogger(ComentarioResource.class.getName());
+    private  static final String NO = " no existe.";
+    private  static final String REC ="El recurso /comentario/";
     @Inject 
     private ComentarioLogic comentarioLogic; 
     @POST
@@ -58,13 +61,15 @@ public class ComentarioResource {
     
     @GET
     @Path("{comentariosId: \\d+}")
-    public ComentarioDTO getComentario(@PathParam("comentarioId") Long id)
+    public ComentarioDTO getComentario(@PathParam("comentariosId") Long id)
     {
         LOGGER.log(Level.INFO,"ComentarioResource getComentario :input:{0}", id);
+        if (id == null)
+              throw new WebApplicationException(REC+id+"si existe comentario1.",404);
         ComentarioEntity comentarioEntity = comentarioLogic.getComentario(id);
         if(comentarioEntity==null)
         {
-            throw new WebApplicationException("El recurso /comentario/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         ComentarioDTO comentarioDTO= new ComentarioDTO(comentarioEntity);
         return comentarioDTO;
@@ -72,12 +77,12 @@ public class ComentarioResource {
     
     @PUT
     @Path("{comentariosId:\\d+}")
-    public ComentarioDTO updateComentario(@PathParam("comentarioId") Long id,ComentarioDTO comentario)throws BusinessLogicException{
+    public ComentarioDTO updateComentario(@PathParam("comentariosId") Long id,ComentarioDTO comentario)throws BusinessLogicException{
         LOGGER.log(Level.INFO,"ComentarioResource updateComentario:input:id:{0},comentario:{1}",new Object[]{id,comentario});
         comentario.setId(id);
         if(comentarioLogic.getComentario(id)==null)
         {
-            throw new WebApplicationException("El recurso /comentario/"+id+"no existe.",404);
+            throw new WebApplicationException(REC+id+NO,404);
         }
         ComentarioDTO comentarioDTO= new ComentarioDTO(comentarioLogic.updateComentario(id, comentario.toEntity()));
         LOGGER.log(Level.INFO,"ComentarioResorce updateComentario:output:{0}",comentarioDTO);
@@ -86,12 +91,12 @@ public class ComentarioResource {
     
     @DELETE
     @Path("{comentariosId:\\d+}")
-    public void deleteComentario(@PathParam("comentarioId") Long id) throws BusinessLogicException
+    public void deleteComentario(@PathParam("comentariosId") Long id) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"ComentarioResource deleteComentario:input:{0}", id);
         ComentarioEntity entity = comentarioLogic.getComentario(id);
         if(entity==null){
-            throw new WebApplicationException("El recurso /comentario/ "+ id + "no existe.",404);
+            throw new WebApplicationException("El recurso /comentario/ "+ id + NO,404);
         }
         comentarioLogic.deleteComentario(id);
         LOGGER.info("ComentarioResorce deleteComentario :output:void");

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.cortos.resources;
 
 import co.edu.uniandes.csw.cortos.dtos.CortoDTO;
+import co.edu.uniandes.csw.cortos.dtos.CortoDetailDTO;
 import co.edu.uniandes.csw.cortos.ejb.CortoLogic;
 import co.edu.uniandes.csw.cortos.ejb.FacturaCortoLogic;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
@@ -62,7 +63,7 @@ public class FacturaCortoResource
      * @return lista de cortos de una factura
      */
     @GET
-    public List<CortoDTO> getCalificaciones(@PathParam("facturaId")Long facturaId){
+    public List<CortoDetailDTO> getCalificaciones(@PathParam("facturaId")Long facturaId){
         return cortosListEntity2DTO(fcLogic.getCortos(facturaId));
     }
     /**
@@ -70,10 +71,10 @@ public class FacturaCortoResource
      * @param entities lista de entidades
      * @return lista de dtos de las entidades pasadas por parametro
      */
-    private List<CortoDTO> cortosListEntity2DTO(List<CortoEntity> entities){
-        List<CortoDTO> list = new ArrayList<>();
+    private List<CortoDetailDTO> cortosListEntity2DTO(List<CortoEntity> entities){
+        List<CortoDetailDTO> list = new ArrayList<>();
         for(CortoEntity c : entities)
-            list.add(new CortoDTO(c));
+            list.add(new CortoDetailDTO(c));
         return list;
     }
     /**
@@ -85,10 +86,10 @@ public class FacturaCortoResource
      */
     @GET
     @PathParam("cortoId: \\ d+")
-    public CortoDTO getCorto(@PathParam("facturaId") Long facturaId, @PathParam("cortoId")Long cortoId) throws BusinessLogicException{
+    public CortoDetailDTO getCorto(@PathParam("facturaId") Long facturaId, @PathParam("cortoId")Long cortoId) throws BusinessLogicException{
         if(cortoLogic.getCorto(cortoId)== null){
             throw new WebApplicationException("El recurso /factura/"+facturaId+"/corto/"+cortoId+" no existe", 404);
         }
-        return new CortoDTO(fcLogic.getCorto(facturaId, cortoId));
+        return new CortoDetailDTO(fcLogic.getCorto(facturaId, cortoId));
     }
 }

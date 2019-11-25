@@ -37,8 +37,8 @@ public class FacturaCortoLogic
      * @return corto agregado
      */
     public CortoEntity addCorto(Long facturaId, Long cortoId){
-        CortoEntity agregar = cortoP.find(facturaId);
-        FacturaEntity agreguemeCosas = facturaP.find(cortoId);
+        CortoEntity agregar = cortoP.find(cortoId);
+        FacturaEntity agreguemeCosas = facturaP.find(facturaId);
         agreguemeCosas.getCortos().add(agregar);
         return agregar;
     }
@@ -72,7 +72,7 @@ public class FacturaCortoLogic
      */
     public void removeCorto(Long facturaId, Long cortoId){
         CortoEntity eliminado = cortoP.find(cortoId);
-        FacturaEntity dueña = facturaP.find(facturaId);
-        dueña.getCortos().remove(eliminado);
+        FacturaEntity duena = facturaP.find(facturaId);
+        duena.getCortos().remove(eliminado);
     }
 }
