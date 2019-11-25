@@ -93,7 +93,7 @@ public class ClienteResource
     }
     
     @GET
-    @Path("/search-{ClienteFind: [a-zA-Z][a-zA-Z]*}")
+    @Path("search-{ClienteFind: [a-zA-Z][a-zA-Z]*}")
     public List<ClienteDetailDTO> getClienteNombreLike(@PathParam("ClienteFind") String name )
     {
         LOGGER.log(Level.INFO,"ClienteReosurce getClientName :input : {0}",name);
