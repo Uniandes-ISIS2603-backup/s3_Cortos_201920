@@ -70,6 +70,15 @@ public class ClientePersistence
         return result;
     }
     
+    public List<ClienteEntity> findByNameLike(String name) {
+        String q = "'%"+ name +"%'";
+        TypedQuery<ClienteEntity> query = em.createQuery("select e from ClienteEntity e where e.nombre like " + q, ClienteEntity.class);
+
+        List<ClienteEntity> sameName = query.getResultList();
+
+        return sameName;
+    }
+    
     public ClienteEntity findByCorreo(String correo) {
         TypedQuery<ClienteEntity> query = em.createQuery("select e from ClienteEntity e where e.correo = :correo ", ClienteEntity.class);
         query = query.setParameter("correo", correo);

@@ -76,6 +76,34 @@ public class ClienteResource
         return clienteDTO;
     }
     
+    @GET
+    @Path("{ClienteFind: [a-zA-Z][a-zA-Z]*}")
+    public ClienteDetailDTO getClienteNombre(@PathParam("ClienteFind") String name )
+    {
+        LOGGER.log(Level.INFO,"ClienteReosurce getClientName :input : {0}",name);
+        ClienteEntity clienteEntity = clienteLogic.getClienteNombre(name);
+        if(clienteEntity ==null)
+        {
+            throw new WebApplicationException("El recurso /cliente/"+ name+"no existe.", 404);
+        }
+        ClienteDetailDTO clienteDTO = new ClienteDetailDTO(clienteEntity);
+        return clienteDTO;
+    }
+    
+    @GET
+    @Path("/search-{ClienteFind: [a-zA-Z][a-zA-Z]*}")
+    public List<ClienteDetailDTO> getClienteNombreLike(@PathParam("ClienteFind") String name )
+    {
+        LOGGER.log(Level.INFO,"ClienteReosurce getClientName :input : {0}",name);
+        List<ClienteEntity> clienteEntity = clienteLogic.getClienteNombreLike(name);
+        if(clienteEntity ==null)
+        {
+            throw new WebApplicationException("El recurso /cliente/"+ name+"no existe.", 404);
+        }
+        List<ClienteDetailDTO> clienteDTO = listEntity2DTO(clienteEntity);
+        return clienteDTO;
+    }
+    
     @PUT
     @Path("{clienteId:\\d+}")
     public ClienteDTO updateCliente(@PathParam("clienteId") Long id, ClienteDTO cliente) throws BusinessLogicException{

@@ -42,16 +42,16 @@ public class ClienteCalificacionResource
     private CalificacionLogic calificacionLogic;
     
     /**
-     * Guarda un libro dentro de una editorial con la informacion que recibe el
-     * la URL. Se devuelve el libro que se guarda en la editorial.
+     * Guarda una calificacion dentro de un cliente con la informacion que recibe el
+     * la URL. Se devuelve la calificacion que se guarda el cliente.
      *
-     * @param clienteId Identificador de la editorial que se esta
+     * @param clienteId Identificador del cliente que se esta
      * actualizando. Este debe ser una cadena de dígitos.
-     * @param califId Identificador del libro que se desea guardar. Este debe
+     * @param califId Identificador de la calificacion que se desea guardar. Este debe
      * ser una cadena de dígitos.
-     * @return JSON {@link BookDTO} - El libro guardado en la editorial.
+     * @return JSON {@link BookDTO} - La calificacion guardada en el cliente.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
+     * Error de lógica que se genera cuando no se encuentra la calificacion.
      */
     @POST
     @Path("{calificacionId: \\d+}")

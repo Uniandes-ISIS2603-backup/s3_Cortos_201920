@@ -70,6 +70,42 @@ public class ClienteLogic
         return clienteEntity;
     }
     
+    public ClienteEntity getClienteNombre(String name )
+    {
+        LOGGER.log(Level.INFO,"Inicia el proceso de consultar el cliente con name = {0}",name);
+        ClienteEntity clienteEntity= persistence.findByName(name);
+        if(clienteEntity==null || name == null)
+        {
+            LOGGER.log(Level.INFO,"El cliente con name ={0} no existe",name);
+        }
+        LOGGER.log(Level.INFO,"Termina el proceso de consultar el cliente con name = {0}", name );
+        return clienteEntity;
+    }
+    
+    public List<ClienteEntity> getClienteNombreLike(String name )
+    {
+        LOGGER.log(Level.INFO,"Inicia el proceso de consultar clientes con name = {0}",name);
+        List<ClienteEntity> clienteEntity= persistence.findByNameLike(name);
+        if(clienteEntity==null || name == null)
+        {
+            LOGGER.log(Level.INFO,"El cliente con name ={0} no existe",name);
+        }
+        LOGGER.log(Level.INFO,"Termina el proceso de consultar el clientes con name = {0}", name );
+        return clienteEntity;
+    }
+    
+    public ClienteEntity getClienteCorreo(String correo )
+    {
+        LOGGER.log(Level.INFO,"Inicia el proceso de consultar el cliente con name = {0}",correo);
+        ClienteEntity clienteEntity= persistence.findByName(correo);
+        if(clienteEntity==null || correo == null)
+        {
+            LOGGER.log(Level.INFO,"El cliente con name ={0} no existe",correo);
+        }
+        LOGGER.log(Level.INFO,"Termina el proceso de consultar el cliente con name = {0}", correo );
+        return clienteEntity;
+    }
+    
     public ClienteEntity updateCliente (Long id ,ClienteEntity cliente) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"Inicia   proceso de actualizar el cliente con id = {0}",id);

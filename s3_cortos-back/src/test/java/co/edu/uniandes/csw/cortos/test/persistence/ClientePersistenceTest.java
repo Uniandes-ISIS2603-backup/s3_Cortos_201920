@@ -145,6 +145,55 @@ public class ClientePersistenceTest
         ClienteEntity deleted = em.find(ClienteEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+
+    @Test
+    public void getClienteNombreTest() {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = cp.findByName(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getContrasenia(), entity.getContrasenia());
+        Assert.assertEquals(entity.getCorreo(), entity.getCorreo());    
+    }
     
+    @Test
+    public void getClienteNombreLikeTest() {
+        
+         try {
+            utx.begin();
+            em.joinTransaction();                
+            ClienteEntity c1 = data.get(0);
+            c1.setNombre("Carlos Gonzal");
+            em.persist(c1);
+            ClienteEntity c2 = data.get(1);
+            c2.setNombre("Carlos Andres");
+            em.persist(c2);
+            ClienteEntity c3 = data.get(2);
+            c3.setNombre("Carlos Marado");
+            em.persist(c3);
+            List<ClienteEntity> entity = new ArrayList<>();
+            entity = cp.findByNameLike("Car");
+            Assert.assertNotNull(entity);
+            Assert.assertEquals(entity.size(), 3);
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    @Test
+    public void getClienteCorreoTest() {
+        ClienteEntity entity = data.get(0);
+        ClienteEntity newEntity = cp.findByCorreo(entity.getCorreo());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getContrasenia(), entity.getContrasenia());
+        Assert.assertEquals(entity.getCorreo(), entity.getCorreo());    
+    }
     
 }
