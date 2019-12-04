@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.cortos.entities.ClienteEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -62,6 +63,18 @@ public class ClienteResource
         List<ClienteDetailDTO> listaClientes = listEntity2DTO(clienteLogic.getClientes());
         LOGGER.log(Level.INFO,"ComentarioResource getCalificaciones :output{0}", listaClientes);
         return listaClientes;
+    }
+    
+    @GET
+    @Path("random")
+    public ClienteDetailDTO getRandomClient(@PathParam("random")String name)
+    {
+        LOGGER.info("ClienteResource getClientes :input : void");
+        List<ClienteDetailDTO> listaClientes = listEntity2DTO(clienteLogic.getClientes());
+        LOGGER.log(Level.INFO,"ComentarioResource getCalificaciones :output{0}", listaClientes);
+        Random r = new Random();
+        int rand = r.nextInt(listaClientes.size());
+        return listaClientes.get(rand);
     }
     
     @GET
