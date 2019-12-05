@@ -21,15 +21,17 @@ import javax.inject.Inject;
 @Stateless
 public class CineastaCortoLogic {
     @Inject
-    CineastaPersistence cineastaPersistence;
-    
-    @Inject
     CortoPersistence cortoPersistence;
     
+    @Inject
+    CineastaPersistence cineastaPersistence;
+    
+    
     public CortoEntity addCorto(Long cineastaId, Long cortoId){
-        CortoEntity add = cortoPersistence.find(cortoId);
         CineastaEntity addTo = cineastaPersistence.find(cineastaId);
-        addTo.getCortoCineastas().add(add);
+        CortoEntity add = cortoPersistence.find(cortoId);
+        
+        add.getCineasta().add(addTo);
         return add;
     }
     

@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -62,5 +63,12 @@ public class CortoPersistence {
         Query q = em.createQuery("select u from CortoEntity u");
         return q.getResultList();
     }
-    
+        public List<CortoEntity> findByNameLike(String name) {
+        String q = "'%"+ name +"%'";
+        TypedQuery<CortoEntity> query = em.createQuery("select e from ClienteEntity e where e.nombre like " + q, CortoEntity.class);
+
+        List<CortoEntity> sameName = query.getResultList();
+
+        return sameName;
+    }
 }

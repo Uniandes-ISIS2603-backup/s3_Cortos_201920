@@ -79,5 +79,12 @@ public class CortoLogic {
    public void deleteCorto(Long cId){
        persistencia.delete(cId);
    } 
-   
+       public List<CortoEntity> getCortoNombreLike(String name )
+    {
+        
+        List<CortoEntity> cortoEntity= persistencia.findByNameLike(name);
+        
+        
+        return cortoEntity;
+    }
 }

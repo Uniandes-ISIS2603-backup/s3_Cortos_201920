@@ -152,6 +152,26 @@ public class CortoResource {
         return CortoTemaResource.class;
     }
     
-
+    @GET
+    @Path("search-{CortoFind: [a-zA-Z][a-zA-Z]*}")
+    public List<CortoDetailDTO> getCortoNombreLike(@PathParam("CortoFind") String name )
+    {
+       
+        List<CortoEntity> cortoEntity = cl.getCortoNombreLike(name);
+        if(cortoEntity ==null)
+        {
+            throw new WebApplicationException("El recurso /cliente/"+ name+"no existe.", 404);
+        }
+        List<CortoDetailDTO> clienteDTO = listEntity2DTO(cortoEntity);
+        return clienteDTO;
+    }
+    private List<CortoDetailDTO> listEntity2DTO(List<CortoEntity> entityList)
+    {
+        List<CortoDetailDTO> list = new ArrayList<>();
+        for(CortoEntity entity:entityList){
+            list.add(new CortoDetailDTO(entity));
+        }
+        return list;
+    }
 }
 

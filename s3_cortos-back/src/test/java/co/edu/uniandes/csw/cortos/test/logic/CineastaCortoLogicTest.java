@@ -140,7 +140,7 @@ public class CineastaCortoLogicTest {
         
         
     }
-//    
+    
 //    /**
 //     * Prueba para obtener toda la lista de cineastas de un corto
 //     */
@@ -151,5 +151,5 @@ public class CineastaCortoLogicTest {
 //        
 //        Assert.assertEquals(1,lista.size());
 //    }
-  
+//  
 }
