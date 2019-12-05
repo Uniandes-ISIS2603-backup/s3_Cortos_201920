@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.cortos.persistence.CineastaPersistence;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -76,7 +77,7 @@ public class CineastaLogic {
     }
 
     public CineastaEntity createCineasta(CineastaEntity cineasta) throws BusinessLogicException {
-
+       
         if ( cineasta.getNombre().equals("")) {
             throw new BusinessLogicException("El nombre no puede ser null ni vacio \"");
         }
@@ -163,8 +164,8 @@ public class CineastaLogic {
      */
     public void deleteCineasta(Long cineastaId) throws BusinessLogicException {
 
-        List<CortoEntity> cortos = getCineasta(cineastaId).getCortos();
-        if (cortos != null && !cortos.isEmpty()) {
+        List<CortoEntity> cortos = getCineasta(cineastaId).getCortoCineastas();
+        if (cortos != null && cortos.size()!=0) {
             throw new BusinessLogicException("No se puede borrar el cineasta con id = " + cineastaId + " porque tiene cortos asociados");
         }
         persistence.delete(cineastaId);//pregunta sobre la asociacion de cineastacorto

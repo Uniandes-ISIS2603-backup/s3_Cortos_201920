@@ -91,8 +91,8 @@ public class CortoCineastasLogicTest {
             CortoEntity c = fabrica.manufacturePojo(CortoEntity.class);
             em.persist(c);
             data.add(c);
-            if(i == 0)
-                cineastas.get(i).setCortoCineastas(c);
+           if(i==0)
+               c.getCineasta().add(cineastas.get(0));
             
         }
     }
@@ -121,10 +121,13 @@ public class CortoCineastasLogicTest {
      * Prueba asociar Cineasta con Corto
      */
     @Test
-    public void addCineastaTest(){
+    public void addCineastaTest() throws BusinessLogicException{
         CortoEntity corto = data.get(0);
+        //System.out.println("hola?");
+        
         CineastaEntity cineasta = cineastas.get(1);
         CineastaEntity resp = ccl.addCineasta(corto.getId(),cineasta.getId());
+        
         Assert.assertNotNull(resp);
         Assert.assertEquals(cineasta.getContrasenia(),resp.getContrasenia());
         Assert.assertEquals(cineasta.getNombre(),resp.getNombre());
@@ -133,6 +136,11 @@ public class CortoCineastasLogicTest {
         Assert.assertEquals(cineasta.getFechaNacimiento(),resp.getFechaNacimiento());
         Assert.assertEquals(cineasta.getTelefono(),resp.getTelefono());
         Assert.assertEquals(cineasta.getDireccion(),resp.getDireccion());
+        CineastaEntity verify = ccl.getCineasta(corto.getId(),cineasta.getId());
+        Assert.assertNotNull(verify);
+        Assert.assertEquals(verify.getId(), resp.getId());
+        
+        Assert.assertTrue(ccl.getCineastas(corto.getId()).size()==2);
     }
     
     /**
@@ -140,6 +148,7 @@ public class CortoCineastasLogicTest {
      */
     @Test
     public void getCineastasTest(){
+        
         List<CineastaEntity> lista = ccl.getCineastas(data.get(0).getId());
         
         Assert.assertEquals(1,lista.size());

@@ -51,20 +51,14 @@ public class CortoEntity extends BaseEntity implements Serializable {
     @ManyToMany
     private List<TemaEntity> temas = new ArrayList<>();
 
-    /**
-     * Asociación con la clase CineastaEntity,que describe el cineasta productor
-     * del corto.
-     */
-    @PodamExclude
-    @ManyToOne
-    private CineastaEntity productor;
+
 
     /**
      * Asociación con la clase CineastaEntity,que describe los cineastas
      * asociados del corto.
      */
     @PodamExclude
-    @OneToMany(mappedBy = "cortoCineastas")
+    @ManyToMany 
     private List<CineastaEntity> cineasta = new ArrayList<>();
 
     /**
@@ -215,19 +209,6 @@ public class CortoEntity extends BaseEntity implements Serializable {
         this.temas = temas;
     }
 
-    /**
-     * @return the productor
-     */
-    public CineastaEntity getProductor() {
-        return productor;
-    }
-
-    /**
-     * @param productor the productor to set
-     */
-    public void setProductor(CineastaEntity productor) {
-        this.productor = productor;
-    }
 
     /**
      * @return the cineasta

@@ -124,7 +124,7 @@ public class CortoCalificacionLogicTest {
         CalificacionEntity resp = ccl.addCalificacion(calificacion.getId(), corto.getId());
         Assert.assertNotNull(resp);
         Assert.assertEquals(resp.getPuntaje(), calificacion.getPuntaje());
-        Assert.assertEquals(resp.getId(), calificacion.getId());
+        Assert.assertEquals(resp.getId(), calificacion.getId());  
     }
     
     /**

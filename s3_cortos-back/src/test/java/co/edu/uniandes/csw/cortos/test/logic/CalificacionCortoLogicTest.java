@@ -111,16 +111,13 @@ public class CalificacionCortoLogicTest {
     }
     
     @Test
-    public void addCalificacionCortoTest()
+    public void replaceCortoTest()
     {
         CalificacionEntity calificacion = data.get(0);
         CortoEntity corto = cortos.get(1);
-        CortoEntity resp = calificacionCortoLogic.addCorto(corto.getId(), calificacion.getId());
+        CalificacionEntity resp = calificacionCortoLogic.replaceCorto(corto.getId(), calificacion.getId());
         Assert.assertNotNull(resp);
-        Assert.assertEquals(resp.getId(),corto.getId());
-        Assert.assertEquals(resp.getDescripcion() ,corto.getDescripcion());
-        Assert.assertEquals(resp.getPrecio(),corto.getPrecio());
-        Assert.assertEquals(resp.getNombre(),corto.getNombre());
+        Assert.assertEquals(resp.getCorto().getId(), corto.getId());
     }
     
     @Test
@@ -128,8 +125,9 @@ public class CalificacionCortoLogicTest {
     {
         CalificacionEntity calificacion= data.get(0);
         CortoEntity corto = cortos.get(1);
-        CortoEntity resp = calificacionCortoLogic.addCorto(corto.getId(), calificacion.getId());
+       calificacionCortoLogic.replaceCorto(corto.getId(), calificacion.getId());
         CortoEntity prueba = calificacionCortoLogic.getCorto(data.get(0).getId());
         Assert.assertNotNull(prueba);
+        Assert.assertEquals(prueba.getId(), corto.getId());
     }
 }

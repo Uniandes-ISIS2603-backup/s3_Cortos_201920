@@ -152,12 +152,6 @@ public class CortoResource {
         return CortoTemaResource.class;
     }
     
-    @Path("{cortosId: \\d+}/productor")
-    public Class<CortoCineastaProductorResource> getCortoProductorResource(@PathParam("cortosId") Long cortosId){
-        if(cl.getCorto(cortosId)==null){
-            throw new WebApplicationException(REC+cortosId+NO, 404);
-        }
-        return CortoCineastaProductorResource.class;
-    }
+
 }
 

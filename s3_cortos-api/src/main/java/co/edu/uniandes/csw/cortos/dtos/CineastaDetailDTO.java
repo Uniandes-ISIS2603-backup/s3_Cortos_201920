@@ -49,9 +49,9 @@ public class CineastaDetailDTO extends CineastaDTO implements Serializable{
                 temas.add(new TemaDTO(tema));
             }
         }
-        if (c.getCortos() != null) {
+        if (c.getCortoCineastas() != null) {
             cortos = new ArrayList<>();
-            for (CortoEntity corto : c.getCortos()) {
+            for (CortoEntity corto : c.getCortoCineastas()) {
                 cortos.add(new CortoDTO(corto));
             }
         }
@@ -70,7 +70,7 @@ public class CineastaDetailDTO extends CineastaDTO implements Serializable{
             List<CortoEntity> cortEnt = new ArrayList<>();
             for( CortoDTO cort : getCortos() )
                 cortEnt.add(cort.toEntity());
-            c.setCortos(cortEnt);
+            c.setCortoCineastas(cortEnt);
         }
         return c;
     }

@@ -40,7 +40,7 @@ public class TemaCortoLogic {
         
     }
     
-    public List<CortoEntity> getCorto(Long temaId)
+public List<CortoEntity> getCorto(Long temaId)
     {
         LOGGER.log(Level.INFO, "Se inicia el proceso de consulta de los cineastas"
                 + "asociados con el tema con id={0}", temaId);

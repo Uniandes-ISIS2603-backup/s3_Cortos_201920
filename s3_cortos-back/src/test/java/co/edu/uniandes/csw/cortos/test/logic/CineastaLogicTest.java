@@ -7,10 +7,13 @@ package co.edu.uniandes.csw.cortos.test.logic;
 
 import co.edu.uniandes.csw.cortos.ejb.CineastaLogic;
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
+import co.edu.uniandes.csw.cortos.entities.CortoEntity;
 import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CineastaPersistence;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -126,6 +129,7 @@ public class CineastaLogicTest {
         newEntity.setFechaNacimiento(new Date(98,2,21));
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
         Long id = newEntity.getId();
+        
         cineastaLogic.deleteCineasta(id);
         Assert.assertNull(cineastaLogic.getCineasta(id));
         
@@ -245,8 +249,11 @@ public class CineastaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void createCineastaFechaNacimientoMayorA120() throws BusinessLogicException {
         CineastaEntity newEntity = factory.manufacturePojo(CineastaEntity.class);
-        Date anios = new Date(0, 0, 1);//Aun no esta lafecha mirar el API de date
+        newEntity.setCorreo("pepito@correcto.com");
+        Date anios = new Date(-2,0,1);//Aun no esta lafecha mirar el API de date
         newEntity.setFechaNacimiento(anios);
         CineastaEntity result = cineastaLogic.createCineasta(newEntity);
     }
+    
+    
 }

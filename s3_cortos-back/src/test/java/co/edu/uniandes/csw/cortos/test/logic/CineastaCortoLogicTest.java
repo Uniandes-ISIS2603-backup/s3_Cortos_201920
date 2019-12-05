@@ -5,12 +5,16 @@
  */
 package co.edu.uniandes.csw.cortos.test.logic;
 
-import co.edu.uniandes.csw.cortos.ejb.CortoCineastaProductorLogic;
-import co.edu.uniandes.csw.cortos.ejb.CortoLogic;
+import co.edu.uniandes.csw.cortos.ejb.CineastaCortoLogic;
+import co.edu.uniandes.csw.cortos.ejb.CineastaLogic;
+import co.edu.uniandes.csw.cortos.ejb.CortoCineastasLogic;
+
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
+import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -32,101 +36,120 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Juan Sebastian Gomez
  */
 @RunWith(Arquillian.class)
-public class CortoCineastaProductorTest {
-    private PodamFactory factory = new PodamFactoryImpl();
+public class CineastaCortoLogicTest {
+        private PodamFactory fabrica = new PodamFactoryImpl();
     
     @Inject
-    private CortoLogic cl;
+    private CineastaLogic cl;
     
     @Inject
-    private CortoCineastaProductorLogic ccl;
+    private CineastaCortoLogic ccl;
     
     @PersistenceContext
     EntityManager em;
     
     @Inject
-    UserTransaction utx;
+    private UserTransaction utx;
     
     private List<CortoEntity> data = new ArrayList<>();
     
-    private List<CineastaEntity> productores = new ArrayList<>();
+    private List<CineastaEntity> cineastas = new ArrayList<>();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
      */
-     @Deployment
+    @Deployment
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(CortoEntity.class.getPackage())
-                .addPackage(CortoLogic.class.getPackage())
+                .addPackage(CineastaLogic.class.getPackage())
                 .addPackage(CortoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
+    
     /**
-     * Limpia datos antes de un test
+     * Limpia las tablas que estan en la prueba
      */
     private void clearData(){
-        em.createQuery("delete from CortoEntity").executeUpdate();
         em.createQuery("delete from CineastaEntity").executeUpdate();
-        
+        em.createQuery("delete from CortoEntity").executeUpdate();
     }
+    
     /**
-     * aniade datos antes de un test
+     * Inserta datos iniciales para las pruebas
      */
     private void insertData(){
-        for(int i = 0; i < 3; i++){
-            CortoEntity c = factory.manufacturePojo(CortoEntity.class);
+         for(int i = 0 ; i < 3 ; ++ i){
+            CortoEntity c = fabrica.manufacturePojo(CortoEntity.class);
             em.persist(c);
             data.add(c);
+            
         }
-        for(int i = 0; i < 3; i++){
-            CineastaEntity f = factory.manufacturePojo(CineastaEntity.class);
-            em.persist(f);
-            productores.add(f);
+        for(int i = 0; i < 3; ++i){
+            CineastaEntity c = fabrica.manufacturePojo(CineastaEntity.class);
+            c.setCorreo("pepito@correcto.com");
+            c.setFechaNacimiento(new Date(98,2,21));
+            c.setCortoCineastas(new ArrayList());
+            em.persist(c);
+            cineastas.add(c);
             if(i==0)
-                data.get(i).setProductor(f);
+               c.getCortoCineastas().add(data.get(0));
+            
         }
+       
     }
+    
     /**
-     * configuracion de test
+     * Configuracion inicial de la prueba
      */
     @Before
-    public void configTest() {
-        try {
+    public void configTest(){
+        try{
             utx.begin();
             clearData();
             insertData();
             utx.commit();
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
-            try {
+            try{
                 utx.rollback();
-            } catch (Exception e1) {
+            }catch(Exception e1){
                 e1.printStackTrace();
             }
         }
     }
+    
     /**
-     * Test para reemplazar productor
+     * Prueba asociar Cineasta con Corto
      */
     @Test
-    public void replaceProductorTest(){
-        CortoEntity c = data.get(0);
-        ccl.replaceProductor(c.getId(), productores.get(1).getId());
-        c = cl.getCorto(c.getId());
-        Assert.assertEquals(c.getProductor(), productores.get(1));
-    }
-    /**
-     * Quitar productor de un corto
-     */
-    @Test
-    public void removeProductorTest(){
+    public void addCineastaTest() throws BusinessLogicException{
+        CortoEntity corto = data.get(1);
+        //System.out.println("hola?");
         
-        ccl.removeProductor(data.get(0).getId());
-        CortoEntity c = cl.getCorto(data.get(0).getId());
-        Assert.assertNull(c.getFactura());
+        CineastaEntity cineasta = cineastas.get(0);
+        CortoEntity resp = ccl.addCorto(cineasta.getId(),corto.getId());
+        
+        Assert.assertNotNull(resp);
+        
+        
+        
+        
+        
     }
+//    
+//    /**
+//     * Prueba para obtener toda la lista de cineastas de un corto
+//     */
+//    @Test
+//    public void getCineastasTest(){
+//        
+//        List<CortoEntity> lista = ccl.getCortos(cineastas.get(0).getId());
+//        
+//        Assert.assertEquals(1,lista.size());
+//    }
+  
 }

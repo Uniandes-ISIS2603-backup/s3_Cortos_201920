@@ -5,55 +5,35 @@
  */
 package co.edu.uniandes.csw.cortos.ejb;
 
+
 import co.edu.uniandes.csw.cortos.entities.CineastaEntity;
 import co.edu.uniandes.csw.cortos.entities.CortoEntity;
-import co.edu.uniandes.csw.cortos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cortos.persistence.CineastaPersistence;
 import co.edu.uniandes.csw.cortos.persistence.CortoPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
- * @corto Pedro Callejas
+ * @author Pedro Luis Callejas
  */
 @Stateless
 public class CineastaCortoLogic {
-
     @Inject
-    private CineastaPersistence cineastaPersistence;
-
+    CineastaPersistence cineastaPersistence;
+    
     @Inject
-    private CortoPersistence cortoPersistence;
-
-    /**
-     * Remplazar el corto de un cineasta.
-     *
-     * @param cineastaId id del cineasta que se quiere actualizar.
-     * @param cortoId El id de la corto que se será del cineasta.
-     * @return el nuevo cineasta.
-     */
-    public CineastaEntity replaceCorto(Long cineastaId, Long cortoId) {
-       
-        CortoEntity cortoEntity = cortoPersistence.find(cortoId);
-        CineastaEntity cineastaEntity = cineastaPersistence.find(cineastaId);
-        cineastaEntity.setCortoCineastas(cortoEntity);
-       
-        return cineastaEntity;
+    CortoPersistence cortoPersistence;
+    
+    public CortoEntity addCorto(Long cineastaId, Long cortoId){
+        CortoEntity add = cortoPersistence.find(cortoId);
+        CineastaEntity addTo = cineastaPersistence.find(cineastaId);
+        addTo.getCortoCineastas().add(add);
+        return add;
     }
-
-    /**
-     * Borrar un cineasta de un corto. Este metodo se utiliza para borrar la
-     * relacion de un cineasta.
-     *
-     * @param cortoId El cineasta que se desea borrar del corto.
-     */
-    public void removeCorto(Long cortoId) {
-        
-        CineastaEntity cineastaEntity = cineastaPersistence.find(cortoId);
-        CortoEntity cortoEntity = cortoPersistence.find(cineastaEntity.getCortoCineastas().getId());
-        cineastaEntity.setCortoCineastas(null);
-        cortoEntity.getCineasta().remove(cineastaEntity);
-       
+    
+    public List<CortoEntity> getCortos(Long cineastaId){
+        return cineastaPersistence.find(cineastaId).getCortoCineastas();
     }
 }

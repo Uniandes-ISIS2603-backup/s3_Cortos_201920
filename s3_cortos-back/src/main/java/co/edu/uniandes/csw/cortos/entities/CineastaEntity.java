@@ -39,26 +39,18 @@ public class CineastaEntity extends BaseEntity implements Serializable {
      * cineasta.
      */
     @PodamExclude
-
     @ManyToMany 
     private List<TemaEntity> temas;
 
-    /**
-     * Asociación con la clase CortosEntity, que describe el corto producido por
-     * el cineasta.
-     */
-    @PodamExclude
-    @OneToMany(
-            mappedBy = "productor")
-    private List<CortoEntity> cortos = new ArrayList<>();
+
 
     /**
      * Asociación con la clase CineastaEntity, describe el corto asociado a los
      * cineastas "directores".
      */
     @PodamExclude
-    @ManyToOne
-    private CortoEntity cortoCineastas;
+        @ManyToMany (mappedBy = "cineasta")
+    private List<CortoEntity> cortoCineastas = new ArrayList();
 
     /**
      * nombre cineasta
@@ -231,29 +223,17 @@ public class CineastaEntity extends BaseEntity implements Serializable {
     /**
      * @return the cortoCineastas
      */
-    public CortoEntity getCortoCineastas() {
+    public List<CortoEntity> getCortoCineastas() {
         return cortoCineastas;
     }
 
     /**
      * @param cortoCineastas the cortoCineastas to set
      */
-    public void setCortoCineastas(CortoEntity cortoCineastas) {
+    public void setCortoCineastas(List<CortoEntity> cortoCineastas) {
         this.cortoCineastas = cortoCineastas;
     }
 
-    /**
-     * @return the cortos
-     */
-    public List<CortoEntity> getCortos() {
-        return cortos;
-    }
 
-    /**
-     * @param cortos the cortos to set
-     */
-    public void setCortos(List<CortoEntity> cortos) {
-        this.cortos = cortos;
-    }
 
 }

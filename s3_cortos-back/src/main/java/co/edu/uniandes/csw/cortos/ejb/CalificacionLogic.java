@@ -28,7 +28,15 @@ import javax.inject.Inject;
     public CalificacionEntity createCalificacion(CalificacionEntity calificacionEntity) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"Iniciando proceso de creacion de calificacion");
-        if(calificacionEntity.getId()==null||calificacionEntity.getPuntaje()<0|| calificacionEntity.getPuntaje()>5)
+        if(calificacionEntity.getId()==null)
+        {
+            throw new BusinessLogicException("La calificacion es invalida");
+        }
+        else if(calificacionEntity.getPuntaje()<0)
+        {
+            throw new BusinessLogicException("La calificacion es invalida");
+        }
+        else if( calificacionEntity.getPuntaje()>5)
         {
             throw new BusinessLogicException("La calificacion es invalida");
         }
@@ -56,21 +64,29 @@ import javax.inject.Inject;
         LOGGER.log(Level.INFO,"Termina el proceso con id={0}",id);
         return calificacionEntity;
     }
-    public CalificacionEntity updateCalificacion (Long id, CalificacionEntity calificacion)throws BusinessLogicException
+    public CalificacionEntity updateCalificacion (Long id, CalificacionEntity calificacionEntity)throws BusinessLogicException
     {
         LOGGER.log(Level.INFO,"Inicia proceso de acutalizar el calificacion con id ={0}",id);
-        if(calificacion.getId()==null||calificacion.getPuntaje()<0|| calificacion.getPuntaje()>5)
+        if(calificacionEntity.getId()==null)
         {
             throw new BusinessLogicException("La calificacion es invalida");
         }
-        CalificacionEntity newEntity = persistence.update(calificacion);
+        else if(calificacionEntity.getPuntaje()<0)
+        {
+            throw new BusinessLogicException("La calificacion es invalida");
+        }
+        else if( calificacionEntity.getPuntaje()>5)
+        {
+            throw new BusinessLogicException("La calificacion es invalida");
+        }
+        CalificacionEntity newEntity = persistence.update(calificacionEntity);
         LOGGER.log(Level.INFO,"Termina proceso de actualizar el calificacion con id={0}", id);
         return newEntity;
     }
     public void deleteCalificacion(Long id ) 
     {
         LOGGER.log(Level.INFO,"Inicia proceso de borrar la calificacion con id = {0}", id);
-       
+        
         persistence.delete(id);
         LOGGER.log(Level.INFO,"Termina el proceso de borrar la calificacion con id ={0} ", id );
     }
